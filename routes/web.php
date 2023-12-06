@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::redirect('/', '/posts');
 
-Route::resource('/posts', App\Http\Controllers\PostController::class);
+Route::resource('posts', App\Http\Controllers\PostController::class);
 
 // other option to do the same thing
 

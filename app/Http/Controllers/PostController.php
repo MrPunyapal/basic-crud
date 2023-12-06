@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
-use Facades\App\Support\Settings;
+use App\Support\Settings;
 
 class PostController extends Controller
 {
@@ -39,7 +39,7 @@ class PostController extends Controller
     {
         Post::create($request->validated());
 
-        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
+        return to_route('posts.index')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -73,7 +73,7 @@ class PostController extends Controller
     {
         $post->update($request->validated());
 
-        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
+       return to_route('posts.index')->with('success', 'Post updated successfully.');
     }
 
     /**
@@ -83,6 +83,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
+        return to_route('posts.index')->with('success', 'Post deleted successfully.');
     }
 }

@@ -84,8 +84,6 @@
     @endif
 </div>
 
-{{-- need to add rich editor for body --}}
-
 <div class="form-group mt-2">
     <label for="body">Body</label>
     <input id="body" type="hidden" name="body" value="{{ old('body', $post->body ?? null) }}">
@@ -116,8 +114,5 @@
                 .replace(/^-+/, '') // Trim - from start of text
                 .replace(/-+$/, ''); // Trim - from end of text
         }
-
-
-
     </Script>
 @endpush

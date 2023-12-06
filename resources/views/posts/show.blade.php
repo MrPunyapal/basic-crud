@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="card">
-            <img src="{{ $post->image }}" class="card-img-top" alt="{{ $post->title }}">
+            <img src="{{ $post->image }}" class="card-img-top" alt="{{ $post->title }}" height="400">
             <div class="card-body">
                 <h5 class="card-title">
                     {{ $post->title }}
@@ -18,7 +18,7 @@
                 <h6 class="card-subtitle mb-2 text-muted ">
                     {{ $categories[$post->category] }}
                 </h6>
-                <p class="card-text">
+                <p class="card-text trix-content">
                     {!! $post->body !!}
                 </p>
             </div>

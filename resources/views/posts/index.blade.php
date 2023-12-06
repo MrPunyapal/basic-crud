@@ -31,7 +31,7 @@
                                 <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
                             </td>
                             <td>{{ $post->created_at->format('d/m/Y H:i:s') }}</td>
-                            <td>{{ $post->updated_at->format('d/m/Y H:i:s') }}</td>
+                            <td>{{ $post->updated_at->since() }}</td>
                             <td>
                                 <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-primary">Edit</a>
                                 <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"

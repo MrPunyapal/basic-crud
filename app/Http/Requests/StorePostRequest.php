@@ -38,11 +38,4 @@ class StorePostRequest extends FormRequest
             'is_featured' => ['boolean'],
         ];
     }
-
-    public function prepareForValidation(): void
-    {
-        $this->merge([
-            'body' => 'my default body',
-        ]);
-    }
 }

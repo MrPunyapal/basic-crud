@@ -19,7 +19,7 @@
                     {{ $categories[$post->category] }}
                 </h6>
                 <p class="card-text">
-                    {{ $post->body }}
+                    {!! $post->body !!}
                 </p>
             </div>
         </div>

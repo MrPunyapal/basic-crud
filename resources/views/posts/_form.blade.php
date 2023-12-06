@@ -47,12 +47,12 @@
     <label for="is_featured">Is Featured</label>
     <div class="form-check mt-2">
         <input id="is_featured_yes" class="form-check-input" type="radio" name="is_featured" value="1"
-        @checked(old('is_featured', $post->is_featured ?? null) == 1)>
+            @checked(old('is_featured', $post->is_featured ?? null) == 1)>
         <label for="is_featured_yes">Yes</label>
     </div>
     <div class="form-check mt-2">
         <input id="is_featured_no" class="form-check-input" type="radio" name="is_featured" value="0"
-        @checked(old('is_featured', $post->is_featured ?? null) == 0)>
+            @checked(old('is_featured', $post->is_featured ?? null) == 0)>
         <label for="is_featured_no">No</label>
     </div>
 </div>
@@ -83,3 +83,41 @@
         </div>
     @endif
 </div>
+
+{{-- need to add rich editor for body --}}
+
+<div class="form-group mt-2">
+    <label for="body">Body</label>
+    <input id="body" type="hidden" name="body" value="{{ old('body', $post->body ?? null) }}">
+    <trix-editor input="body"></trix-editor>
+    @error('body')
+        <div class="text-danger strong">{{ $message }}</div>
+    @enderror
+</div>
+
+@push('styles')
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+@endpush
+
+@push('scripts')
+<script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+    <Script>
+        $(function() {
+            $('#title').on('blur', function() {
+                $('#slug').val(slugify($(this).val()));
+            });
+        });
+
+        function slugify(text) {
+            return text.toString().toLowerCase().trim()
+                .replace(/\s+/g, '-') // Replace spaces with -
+                .replace(/[^\w-]+/g, '') // Remove all non-word chars
+                .replace(/--+/g, '-') // Replace multiple - with single -
+                .replace(/^-+/, '') // Trim - from start of text
+                .replace(/-+$/, ''); // Trim - from end of text
+        }
+
+
+
+    </Script>
+@endpush

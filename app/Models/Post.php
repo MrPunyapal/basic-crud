@@ -33,6 +33,7 @@ class Post extends Model
 
     protected $casts = [
         'tags' => 'array',
+        'category' => 'array',
         'published_at' => 'datetime',
         'is_featured' => 'boolean',
         'body' => CleanHtmlInput::class,

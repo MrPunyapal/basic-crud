@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'slug' => $this->faker->slug,
             'description' => $this->faker->sentence,
             'image' => $this->faker->imageUrl(),
-            'body' => $this->faker->paragraphs(5, true),
+            'body' => $this->faker->randomHtml(),
             'published_at' => $this->faker->dateTimeBetween('-1 month', '+3 months'),
             'category' => $this->faker->numberBetween(0, 7),
             'tags' => $this->faker->randomElements([0, 1, 2, 3, 4, 5, 6, 7], $this->faker->numberBetween(1, 3)),

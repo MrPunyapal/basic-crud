@@ -5,13 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Facades\App\Support\Settings;
 
 class PostController extends Controller
 {
-    private $categories = ['Laravel', 'PHP', 'JavaScript', 'Vue.js', 'React.js', 'Angular.js','Java','C#'];
-
-    private $tags = ['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'];
-
     /**
      * Display a listing of the resource.
      */
@@ -19,8 +16,8 @@ class PostController extends Controller
     {
         return view('posts.index', [
             'posts' => Post::paginate(10),
-            'categories' => $this->categories,
-            'tags' => $this->tags,
+            'categories' => Settings::getCategories(),
+            'tags' => Settings::getTags(),
         ]);
     }
 
@@ -30,8 +27,8 @@ class PostController extends Controller
     public function create()
     {
         return view('posts.create', [
-            'categories' => $this->categories,
-            'tags' => $this->tags,
+            'categories' => Settings::getCategories(),
+            'tags' => Settings::getTags(),
         ]);
     }
 
@@ -52,8 +49,8 @@ class PostController extends Controller
     {
         return view('posts.show', [
             'post' => $post,
-            'categories' => $this->categories,
-            'tags' => $this->tags,
+            'categories' => Settings::getCategories(),
+            'tags' => Settings::getTags(),
         ]);
     }
 
@@ -64,8 +61,8 @@ class PostController extends Controller
     {
         return view('posts.edit', [
             'post' => $post,
-            'categories' => $this->categories,
-            'tags' => $this->tags,
+            'categories' => Settings::getCategories(),
+            'tags' => Settings::getTags(),
         ]);
     }
 

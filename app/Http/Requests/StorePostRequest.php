@@ -23,12 +23,16 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:100'],
-            'slug' => ['required', 'max:120', 'unique:posts', 'alpha_dash'],
+            'slug' => ['required', 'max:120', 'unique:posts'],
             'description' => ['required'],
             'image' => ['required', 'image'],
             'body' => ['required'],
             'published_at' => ['nullable', 'date'],
-            'category' => ['required', 'array'],
+            'category' => [
+                'required',
+                'integer',
+                // 'between:1,3'
+            ],
             'tags' => ['nullable', 'array', 'max:3'],
             'tags.*' => ['string', 'max:20'],
             'is_featured' => ['boolean'],

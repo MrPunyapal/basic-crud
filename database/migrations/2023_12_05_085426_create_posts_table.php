@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('body');
             $table->boolean('published')->default(false);
-            $table->unsignedTinyInteger('category');
+            $table->json('category');
             $table->json('tags')->nullable();
             $table->unsignedTinyInteger('is_featured')->default(0);
             $table->softDeletes();

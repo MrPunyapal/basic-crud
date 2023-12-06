@@ -1,8 +1,8 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Example of crud operations best practices for beginner",
+    "keywords": ["laravel", "basic crud"],
     "license": "MIT",
     "require": {
         "php": "^8.1",

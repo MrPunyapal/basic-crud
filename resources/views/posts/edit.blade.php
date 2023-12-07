@@ -9,7 +9,7 @@
                 @csrf
                 @method('PUT')
                 @include('posts._form', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <button type="submit" class="btn btn-success">Edit Post</button>
                     <a href="{{ route('posts.index') }}" class="btn btn-secondary">Cancel</a>
                 </div>

@@ -2,6 +2,9 @@
 @section('title', $post->title)
 @section('content')
     <div class="row g-0 vh-100 p-0 m-0">
+        <div class="col-12 text-end mt-2">
+            <a href="{{ route('posts.index') }}" class="btn btn-secondary">View All</a>
+        </div>
         <div class="card col-8 m-auto">
             <img src="{{ $post->image }}" class="card-img-top" alt="{{ $post->title }}" height="400">
             <div class="card-body">
@@ -16,7 +19,7 @@
                     </form>
                 </h5>
                 <h6 class="card-subtitle mb-2 text-muted ">
-                    {{ $categories[$post->category] }}
+                    {{ $categories[$post->category] }} {{ $post->published_at?->format('M d, Y h:i a') }}
                 </h6>
                 <p class="card-text trix-content">
                     {!! $post->body !!}

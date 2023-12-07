@@ -18,6 +18,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Title</th>
+                        <th>Category</th>
                         <th>Created At</th>
                         <th>Updated At</th>
                         <th>Actions</th>
@@ -30,6 +31,7 @@
                             <td>
                                 <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
                             </td>
+                            <td>{{ $categories[$post->category] }}</td>
                             <td>{{ $post->created_at->format('d/m/Y H:i:s') }}</td>
                             <td>{{ $post->updated_at->since() }}</td>
                             <td>

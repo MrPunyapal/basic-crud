@@ -24,7 +24,6 @@ test('can see posts', function () {
         ->assertViewHasAll([
             'categories',
             'posts',
-            'tags',
         ]);
 });
 
@@ -80,7 +79,6 @@ test('can see post page', function () {
         ->assertViewHasAll([
             'categories',
             'post',
-            'tags',
         ]);
 });
 

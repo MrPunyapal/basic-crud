@@ -59,13 +59,20 @@
 
 <div class="form-group mt-2">
     <label for="tags">Tags</label>
-    @foreach ($tags as $key => $tag)
-        <div class="form-check">
-            <input id="tag_{{ $key }}" class="form-check-input" type="checkbox" name="tags[]"
-                value="{{ $tag }}" @checked(in_array($tag, old('tags', $post->tags ?? [])))>
-            <label for="tag_{{ $key }}">{{ $tag }}</label>
-        </div>
-    @endforeach
+    <select class="form-select" name="tags[]" id="tags" multiple>
+        @foreach ($tags as $tag)
+            <option value="{{ $tag }}" @selected(in_array($tag, old('tags', $post->tags ?? [])))>
+                {{ $tag }}
+            </option>
+        @endforeach
+        @foreach (old('tags', $post->tags ?? []) as $tag)
+            @if (!in_array($tag, $tags))
+                <option value="{{ $tag }}" selected>
+                    {{ $tag }}
+                </option>
+            @endif
+        @endforeach
+    </select>
     @error('tags')
         <div class="text-danger strong">{{ $message }}</div>
     @enderror
@@ -94,15 +101,20 @@
 </div>
 
 @push('styles')
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @push('scripts')
-<script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <Script>
-        $(function() {
+        $(document).ready(function() {
             $('#title').on('blur', function() {
                 $('#slug').val(slugify($(this).val()));
+            });
+            $('#tags').select2({
+                tags: true,
             });
         });
 

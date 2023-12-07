@@ -8,7 +8,7 @@
             <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @include('posts._form', ['categories' => $categories, 'tags' => $tags])
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <button type="submit" class="btn btn-success">Create Post</button>
                     <a href="{{ route('posts.index') }}" class="btn btn-secondary">Cancel</a>
                 </div>

@@ -19,7 +19,6 @@ class PostController extends Controller
         return view('posts.index', [
             'posts' => Post::latest()->paginate(10),
             'categories' => Settings::getCategories(),
-            'tags' => Settings::getTags(),
         ]);
     }
 
@@ -52,7 +51,6 @@ class PostController extends Controller
         return view('posts.show', [
             'post' => $post,
             'categories' => Settings::getCategories(),
-            'tags' => Settings::getTags(),
         ]);
     }
 

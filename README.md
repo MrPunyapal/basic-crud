@@ -24,7 +24,7 @@ Clone the repository
 
 ```bash
 
-git clone
+git clone https://github.com/mr-punyapal/basic-crud.git
 
 ```
 

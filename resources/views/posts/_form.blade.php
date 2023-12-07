@@ -25,7 +25,7 @@
 
 <div class="form-group mt-2">
     <label for="published_at">Published At</label>
-    <input id="published_at" class="form-control" type="date" name="published_at"
+    <input id="published_at" class="form-control" type="datetime-local" name="published_at"
         value="{{ old('published_at', $post->published_at ?? null) }}">
 </div>
 

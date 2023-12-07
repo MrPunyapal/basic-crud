@@ -68,6 +68,24 @@ php artisan serve
 
 ```
 
+## How to test the application
+
+- copy .env.testing.example to .env.testing
+
+- change the database configuration as per your local environment
+
+- create a new database for testing
+
+- run the following command
+
+
+```bash
+php artisan key:generate --env=testing
+```
+```bash
+./vendor/bin/pest --parallel
+```
+
 ### give me feedback on  [@MrPunyapal](https://x.com/MrPunyapal)
 
 ### contribute if have any idea to improve this project

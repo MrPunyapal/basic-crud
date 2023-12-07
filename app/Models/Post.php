@@ -45,4 +45,9 @@ class Post extends Model
             set: fn ($value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value : $value->store('posts', 'public')
         );
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('published_at', '<=', now());
+    }
 }

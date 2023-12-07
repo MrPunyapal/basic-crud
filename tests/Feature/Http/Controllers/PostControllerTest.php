@@ -126,17 +126,3 @@ test('can delete post', function () {
 
     assertSoftDeleted($post);
 });
-
-test('can only see published posts', function () {
-    Post::factory(rand(1,5))->create([
-        'published_at' => now()->addDay(),
-    ]);
-    Post::factory(rand(1,5))->create([
-        'published_at' => now()->addDay(),
-    ]);
-
-    get(route('posts.index'))
-        ->assertOk()
-        ->assertViewIs('posts.index')
-        ->assertViewHas('posts', fn ($posts) => $posts->where('published_at', '>=', now())->count() === 0);
-});

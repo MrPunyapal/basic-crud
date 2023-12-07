@@ -62,5 +62,3 @@ jobs:
 
       - name: Run tests
         run: php artisan test --parallel
-        env:
-          DB_PORT: ${{ job.services.mysql.ports[3306] }}

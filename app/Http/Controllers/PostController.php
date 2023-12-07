@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index(): View
     {
         return view('posts.index', [
-            'posts' => Post::latest()->paginate(10),
+            'posts' => Post::latest()->published()->paginate(10),
             'categories' => Settings::getCategories(),
         ]);
     }

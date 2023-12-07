@@ -12,6 +12,11 @@
 
             <p>
                 <a href="{{ route('posts.create') }}" class="btn btn-success">Create Post</a>
+                @if (Route::is('posts.index'))
+                    <a href="{{ route('posts.published') }}" class="btn btn-primary">Published Posts</a>
+                @else
+                    <a href="{{ route('posts.index') }}" class="btn btn-primary">All Posts</a>
+                @endif
             </p>
             <table class="table table-striped">
                 <thead>

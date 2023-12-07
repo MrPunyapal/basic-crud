@@ -1,6 +1,5 @@
 # Example of crud operations best practices for beginner
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mr-punyapal/basic-crud/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mr-punyapal/basic-crud/actions?query=workflow%3Atests+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/mr-punyapal/basic-crud.svg?style=flat-square)](https://packagist.org/packages/mr-punyapal/basic-crud)
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

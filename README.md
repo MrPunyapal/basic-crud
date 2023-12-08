@@ -36,6 +36,12 @@ composer install
 
 ```
 
+```bash
+
+npm install
+
+```
+
 duplicate the .env.example file and rename it to .env
 
 ```bash
@@ -61,6 +67,14 @@ php artisan migrate --seed
 ```
 
 Run the application
+
+```bash
+
+npm run dev
+
+```
+
+
 
 ```bash
 

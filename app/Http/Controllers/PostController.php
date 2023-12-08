@@ -8,16 +8,19 @@ use App\Models\Post;
 use App\Support\Settings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
+        $search = $request->input('search');
+
         return view('posts.index', [
-            'posts' => Post::latest()->paginate(10),
+            'posts' => Post::search($search)->latest()->paginate(10),
             'categories' => Settings::getCategories(),
         ]);
     }

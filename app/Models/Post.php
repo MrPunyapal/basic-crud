@@ -41,13 +41,20 @@ class Post extends Model
     public function image(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value),
-            set: fn ($value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value : $value->store('posts', 'public')
+            get: fn(string $value) => filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/' . $value),
+            set: fn($value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value : $value->store('posts', 'public')
         );
     }
 
     public function scopePublished($query)
     {
         return $query->where('published_at', '<=', now());
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->when($search, function ($query, $search) {
+            return $query->where('title', 'like', '%' . $search . '%');
+        });
     }
 }

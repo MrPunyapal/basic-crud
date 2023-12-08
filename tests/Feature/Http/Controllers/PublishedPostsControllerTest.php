@@ -22,7 +22,9 @@ test('can only see published posts', function () {
 
 test('can search posts by title', function () {
 
-    [$postToSearch, $missingPost] = Post::factory(2)->create();
+    [$postToSearch, $missingPost] = Post::factory(2)->create([
+        'published_at' => now()->subDay(),
+    ]);
 
     $searchTerm = $postToSearch->title;
     // Execute the search

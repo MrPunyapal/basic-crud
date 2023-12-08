@@ -52,7 +52,7 @@ class Post extends Model
         return $query->where('published_at', '<=', now());
     }
 
-    public function scopeSearch($query, $search): Builder
+    public function scopeSearch(Builder $query, string $search)
     {
         return $query->when($search, function ($query, $search) {
             return $query->where('title', 'like', '%' . $search . '%');

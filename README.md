@@ -1,95 +1,91 @@
-# Example of crud operations best practices for beginner
-[![Tests](https://github.com/mr-punyapal/basic-crud/actions/workflows/tests.yml/badge.svg)](https://github.com/mr-punyapal/basic-crud/actions/workflows/tests.yml)
-## Getting Started
+# CRUD Operations Best Practices Example for Beginners
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+[![Tests](https://github.com/mr-punyapal/basic-crud/actions/workflows/tests.yml/badge.svg)](https://github.com/mr-punyapal/basic-crud/actions/workflows/tests.yml)
+
+## Getting Started 🚀
+
+These instructions will guide you through setting up the project on your local machine for development and testing.
 
 ### Prerequisites
 
 You need to have installed the following software:
 
-```
-php 8.2
-
-composer 2.0.8
-
-mysql 8.0.23
-```
+- PHP 8.2
+- Composer 2.0.8
+- MySQL 8.0.23
+- Node 20.10.0
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Follow these steps to set up a development environment:
 
-Clone the repository
+1. **Clone the repository**
 
-```bash
+    ```bash
+    git clone https://github.com/mr-punyapal/basic-crud.git
+    ```
 
-git clone https://github.com/mr-punyapal/basic-crud.git
+2. **Install dependencies**
 
-```
+    ```bash
+    composer install
+    ```
 
-Install dependencies
+    ```bash
+    npm install
+    ```
 
-```bash
+3. **Duplicate the .env.example file and rename it to .env**
 
-composer install
+    ```bash
+    cp .env.example .env
+    ```
 
-```
+4. **Generate the application key**
 
-duplicate the .env.example file and rename it to .env
+    ```bash
+    php artisan key:generate
+    ```
 
-```bash
+5. **Run migration and seed**
 
-cp .env.example .env
+    ```bash
+    php artisan migrate --seed
+    ```
 
-```
+6. **Run the application**
 
-Generate the application key
+    ```bash
+    npm run dev
+    ```
 
-```bash
+    ```bash
+    php artisan serve
+    ```
 
-php artisan key:generate
+## How to Test the Application 🧪
 
-```
+- Copy .env.testing.example to .env.testing
+- Update the database configuration according to your local environment
+- Create a new database for testing
+- Run the following commands
 
-migration and seed
+    ```bash
+    php artisan key:generate --env=testing
+    ```
 
-```bash
+    ```bash
+    npm install && npm run build
+    ```
 
-php artisan migrate --seed
+    ```bash
+    ./vendor/bin/pest --parallel
+    ```
 
-```
+### Give Feedback 💬
 
-Run the application
+Give your feedback on [@MrPunyapal](https://x.com/MrPunyapal)
 
-```bash
+### Contribute 🤝
 
-php artisan serve
-
-```
-
-## How to test the application
-
-- copy .env.testing.example to .env.testing
-
-- change the database configuration as per your local environment
-
-- create a new database for testing
-
-- run the following command
-
-
-```bash
-php artisan key:generate --env=testing
-```
-```bash
-./vendor/bin/pest --parallel
-```
-
-### give me feedback on  [@MrPunyapal](https://x.com/MrPunyapal)
-
-### contribute if have any idea to improve this project
-
-
-
-
+Contribute if you have any ideas to improve this project.

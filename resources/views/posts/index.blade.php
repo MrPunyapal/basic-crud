@@ -4,20 +4,33 @@
     <div class="row">
         <div class="col-12">
             <h1>Posts</h1>
+
             @if (session()->has('success'))
                 <div class="alert alert-success">
                     {{ session()->get('success') }}
                 </div>
             @endif
 
-            <p>
-                <a href="{{ route('posts.create') }}" class="btn btn-success">Create Post</a>
-                @if (Route::is('posts.index'))
-                    <a href="{{ route('posts.published') }}" class="btn btn-primary">Published Posts</a>
-                @else
-                    <a href="{{ route('posts.index') }}" class="btn btn-primary">All Posts</a>
-                @endif
-            </p>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <a href="{{ route('posts.create') }}" class="btn btn-success">Create Post</a>
+                    @if (Route::is('posts.index'))
+                        <a href="{{ route('posts.published') }}" class="btn btn-primary">Published Posts</a>
+                    @else
+                        <a href="{{ route('posts.index') }}" class="btn btn-primary">All Posts</a>
+                    @endif
+                </div>
+                <form method="GET" class="mb-4">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search by title"
+                            value="{{ request()->search }}">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -51,7 +64,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">No posts found.</td>
+                            <td colspan="6">No posts found.</td>
                         </tr>
                     @endforelse
                 </tbody>

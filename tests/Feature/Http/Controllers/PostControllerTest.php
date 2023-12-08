@@ -27,6 +27,30 @@ test('can see posts', function () {
         ]);
 });
 
+
+test('can search posts by title', function () {
+    // Create test data
+
+    [$postToSearch, $missingPost] = Post::factory(2)->create();
+
+    $searchTerm = $postToSearch->title;
+    // Execute the search
+    $response = $this->get(route('posts.index', ['search' => $searchTerm]));
+    // Assertions
+    $response->assertOk();
+    $response->assertViewIs('posts.index');
+    $response->assertViewHasAll([
+        'categories',
+        'posts',
+    ]);
+
+    // Check if the matching post is present in the view
+    $response->assertSeeText($searchTerm);
+
+    // Check if non-matching posts are not present in the view
+    $response->assertDontSeeText($missingPost->title);
+});
+
 test('can see create post page', function () {
     get(route('posts.create'))
         ->assertOk()

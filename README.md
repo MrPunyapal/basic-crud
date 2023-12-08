@@ -8,7 +8,7 @@ These instructions will guide you through setting up the project on your local m
 
 ### Prerequisites
 
-Ensure that you have the following software installed:
+You need to have installed the following software:
 
 - PHP 8.2
 - Composer 2.0.8

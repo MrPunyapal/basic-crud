@@ -11,7 +11,7 @@ test('can only see published posts', function () {
         'published_at' => now()->addDay(),
     ]);
     Post::factory(rand(1, 5))->create([
-        'published_at' => now()->addDay(),
+        'published_at' => now()->subDay(),
     ]);
 
     get(route('posts.published'))

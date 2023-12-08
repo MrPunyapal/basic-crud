@@ -30,10 +30,10 @@ test('can see posts', function () {
 
 test('can search posts by title', function () {
     // Create test data
-    $posts = Post::factory(4)->create();
-    $post = $posts->first();
 
-    $searchTerm = $post->title;
+    [$postToSearch, $missingPost] = Post::factory(2)->create();
+
+    $searchTerm = $postToSearch->title;
     // Execute the search
     $response = $this->get(route('posts.index', ['search' => $searchTerm]));
     // Assertions
@@ -48,10 +48,7 @@ test('can search posts by title', function () {
     $response->assertSeeText($searchTerm);
 
     // Check if non-matching posts are not present in the view
-
-    foreach ($posts->skip(1) as $post) {
-        $response->assertDontSeeText($post->title);
-    }
+    $response->assertDontSeeText($missingPost->title);
 });
 
 test('can see create post page', function () {

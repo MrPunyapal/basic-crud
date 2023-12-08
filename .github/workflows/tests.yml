@@ -57,7 +57,7 @@ jobs:
       - name: Install npm dependencies
         run: npm install
       
-      - name: Run dependencies
+      - name: Run Build for Production
         run: npm run build
 
       - name: Copy .env

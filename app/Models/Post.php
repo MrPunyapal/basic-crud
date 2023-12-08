@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -46,12 +47,12 @@ class Post extends Model
         );
     }
 
-    public function scopePublished($query)
+    public function scopePublished($query): Builder
     {
         return $query->where('published_at', '<=', now());
     }
 
-    public function scopeSearch($query, $search)
+    public function scopeSearch($query, $search): Builder
     {
         return $query->when($search, function ($query, $search) {
             return $query->where('title', 'like', '%' . $search . '%');

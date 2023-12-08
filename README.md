@@ -13,6 +13,7 @@ You need to have installed the following software:
 - PHP 8.2
 - Composer 2.0.8
 - MySQL 8.0.23
+- Node 20.10.0
 
 ### Installing
 

@@ -56,6 +56,9 @@ jobs:
 
       - name: Install npm dependencies
         run: npm install
+      
+      - name: Install npm dependencies
+        run: npm run build
 
       - name: Copy .env
         run: cp .env.testing.example .env.testing

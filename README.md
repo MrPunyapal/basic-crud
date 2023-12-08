@@ -75,6 +75,10 @@ Follow these steps to set up a development environment:
     ```
 
     ```bash
+    npm install && npm run build
+    ```
+
+    ```bash
     ./vendor/bin/pest --parallel
     ```
 

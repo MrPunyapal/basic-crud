@@ -54,8 +54,8 @@ class Post extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $query->when($search, function ($query, $search) {
-            return $query->where('title', 'like', '%' . $search . '%');
+        $query->when($search, function (Builder $query, string $search) {
+            $query->where('title', 'like', '%' . $search . '%');
         });
     }
 }

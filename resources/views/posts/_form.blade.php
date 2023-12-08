@@ -101,16 +101,16 @@
 </div>
 
 @push('styles')
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/css/trix.css') }}">
+    <link href="{{ asset('theme/css/select2.min.css') }}" rel="stylesheet" />
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('theme/jquery.min.js') }}"></script>
+    <script src="{{ asset('theme/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('theme/js/trix.umd.min.js') }}"></script>
+    <script src="{{ asset('theme/js/select2.min.js') }}"></script>
 
-    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <Script>
+    <script>
         $(document).ready(function() {
             $('#title').on('blur', function() {
                 $('#slug').val(slugify($(this).val()));
@@ -129,5 +129,5 @@
                 .replace(/^-+/, '') // Trim - from start of text
                 .replace(/-+$/, ''); // Trim - from end of text
         }
-    </Script>
+    </script>
 @endpush

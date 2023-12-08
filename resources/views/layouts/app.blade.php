@@ -7,7 +7,7 @@
     <title>
         App - @yield('title', 'Home')
     </title>
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 
     @stack('styles')
 </head>

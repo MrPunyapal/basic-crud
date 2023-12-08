@@ -54,6 +54,9 @@ jobs:
       - name: Install composer dependencies
         run: composer install --no-progress
 
+      - name: Install npm dependencies
+        run: npm install
+
       - name: Copy .env
         run: cp .env.testing.example .env.testing
 

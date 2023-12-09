@@ -20,7 +20,10 @@ class PostController extends Controller
         $search = $request->input('search');
 
         return view('posts.index', [
-            'posts' => Post::search($search)->latest()->paginate(10),
+            'posts' => Post::search($search)
+                ->sortBy(request('sortBy'), request('direction'))
+                ->paginate(10)
+                ->withQueryString(),
             'categories' => Settings::getCategories(),
         ]);
     }

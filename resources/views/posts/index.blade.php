@@ -11,7 +11,6 @@
                 </div>
             @endif
 
-
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <a href="{{ route('posts.create') }}" class="btn btn-success">Create Post</a>
@@ -35,7 +34,9 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
+                        <th>
+                            <a href="?sortBy=title&direction={{ request('direction') === 'asc' ? 'desc' : 'asc' }}">Title</a>
+                        </th>
                         <th>Category</th>
                         <th>Created At</th>
                         <th>Updated At</th>

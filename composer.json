@@ -13,6 +13,7 @@
         "mews/purifier": "^3.4"
     },
     "require-dev": {
+        "driftingly/rector-laravel": "^0.26.2",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
@@ -21,6 +22,7 @@
         "pestphp/pest": "^2.28",
         "pestphp/pest-plugin-laravel": "^2.2",
         "phpunit/phpunit": "^10.1",
+        "rector/rector": "^0.18.12",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

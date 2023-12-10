@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
 
+use Illuminate\Support\Arr;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\delete;
@@ -27,6 +28,31 @@ test('can see posts', function () {
         ]);
 });
 
+test('can see posts sorted by title', function (string $direction) {
+    $posts = Post::factory(3)
+        ->sequence(
+            ['title' => 'abc'],
+            ['title' => 'bcd'],
+            ['title' => 'cde'],
+        )
+        ->create();
+
+    $expectedSortedPosts = ($direction === 'asc')
+        ? $posts->pluck('title')->all()
+        : $posts->pluck('title')->reverse()->all();
+
+    get(route('posts.index', [
+        'sortBy' => 'title',
+        'direction' => $direction,
+    ]))
+        ->assertOk()
+        ->assertViewIs('posts.index')
+        ->assertViewHasAll([
+            'categories',
+            'posts',
+        ])
+        ->assertSeeTextInOrder($expectedSortedPosts);
+})->with(['asc', 'desc']);
 
 test('can search posts by title', function () {
     // Create test data

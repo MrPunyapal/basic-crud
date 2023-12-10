@@ -53,8 +53,21 @@ test('can see posts sorted by title', function (string $direction) {
         ->assertSeeTextInOrder($expectedSortedPosts);
 })->with(['asc', 'desc']);
 
-test('can search posts by title', function () {
+test('can see posts sorted by invalid column', function () {
+    Post::factory(10)->create();
 
+    get(route('posts.index', [
+        'sortBy' => 'invalid-column',
+    ]))
+        ->assertOk()
+        ->assertViewIs('posts.index')
+        ->assertViewHasAll([
+            'categories',
+            'posts',
+        ]);
+});
+
+test('can search posts by title', function () {
     // Create test data
     [$postToSearch, $missingPost] = Post::factory(2)->create();
 

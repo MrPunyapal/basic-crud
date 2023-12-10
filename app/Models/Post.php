@@ -47,13 +47,11 @@ class Post extends Model
         );
     }
 
-    public function scopeSortBy($query, ?string $sortBy, ?string $direction): Builder
+    public function scopeSortBy($query, ?string $sortBy, ?string $direction = 'asc'): Builder
     {
         if (is_null($sortBy)) {
             return $query->latest();
         }
-
-        $direction ??= 'asc';
 
         return $query->orderBy($sortBy, $direction);
     }

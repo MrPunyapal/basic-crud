@@ -17,7 +17,13 @@ class PublishedPostsController extends Controller
         $search = $request->input('search');
 
         return view('posts.index', [
-            'posts' => Post::search($search)->published()->latest()->paginate(10),
+            'posts' => Post::query()
+            ->sortBy($request->input('sortBy'), $request->input('direction'))
+            ->search($search)
+            ->published()
+            ->latest()
+            ->paginate(10)
+            ->withQueryString(),
             'categories' => Settings::getCategories(),
         ]);
     }

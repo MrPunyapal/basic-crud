@@ -20,7 +20,10 @@ class PostController extends Controller
         return view('posts.index', [
             'posts' => Post::query()
                 ->search($request->input('search'))
-                ->sortBy($request->input('sortBy'), $request->input('direction'))
+                ->sortBy(
+                    in_array($request->input('sortBy'), ['title']) ? $request->input('sortBy') : null,
+                    $request->input('direction')
+                )
                 ->paginate(10)
                 ->withQueryString(),
             'categories' => Settings::getCategories(),

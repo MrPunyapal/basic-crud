@@ -18,10 +18,12 @@ class PublishedPostsController extends Controller
 
         return view('posts.index', [
             'posts' => Post::query()
-            ->sortBy($request->input('sortBy'), $request->input('direction'))
+            ->sortBy(
+                in_array($request->input('sortBy'), ['title']) ? $request->input('sortBy') : null,
+                in_array($request->input('direction'), ['asc','desc']) ? $request->input('direction') : 'asc',
+            )
             ->search($search)
             ->published()
-            ->latest()
             ->paginate(10)
             ->withQueryString(),
             'categories' => Settings::getCategories(),

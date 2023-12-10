@@ -4,6 +4,10 @@ test('globals')
     ->expect(['dd', 'dump', 'env', 'ray'])
     ->not->toBeUsed();
 
+test('request function not to be used in controllers')
+    ->expect('request')
+    ->not->toBeUsedIn('App\Http\Controllers');
+
 test('controllers are suffixed with Controller')
     ->expect('App\Http\Controllers')
     ->toHaveSuffix('Controller');

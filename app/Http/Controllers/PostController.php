@@ -17,11 +17,9 @@ class PostController extends Controller
      */
     public function index(Request $request): View
     {
-        $search = $request->input('search');
-
         return view('posts.index', [
-            'posts' => Post::search($search)
-                ->sortBy(request('sortBy'), request('direction'))
+            'posts' => Post::search($request->input('search'))
+                ->sortBy($request->input('sortBy'), $request->input('direction'))
                 ->paginate(10)
                 ->withQueryString(),
             'categories' => Settings::getCategories(),

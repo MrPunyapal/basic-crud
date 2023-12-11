@@ -7,8 +7,8 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Support\Settings;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
@@ -18,8 +18,12 @@ class PostController extends Controller
     public function index(Request $request): View
     {
         return view('posts.index', [
-            'posts' => Post::search($request->input('search'))
-                ->sortBy($request->input('sortBy'), $request->input('direction'))
+            'posts' => Post::query()
+                ->search($request->input('search'))
+                ->sortBy(
+                    in_array($request->input('sortBy'), ['title']) ? $request->input('sortBy') : null,
+                    $request->input('direction')
+                )
                 ->paginate(10)
                 ->withQueryString(),
             'categories' => Settings::getCategories(),

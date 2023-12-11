@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
 
-use Illuminate\Support\Arr;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\delete;
@@ -54,27 +53,38 @@ test('can see posts sorted by title', function (string $direction) {
         ->assertSeeTextInOrder($expectedSortedPosts);
 })->with(['asc', 'desc']);
 
+test('can see posts sorted by invalid column', function () {
+    Post::factory(10)->create();
+
+    get(route('posts.index', [
+        'sortBy' => 'invalid-column',
+    ]))
+        ->assertOk()
+        ->assertViewIs('posts.index')
+        ->assertViewHasAll([
+            'categories',
+            'posts',
+        ]);
+});
+
 test('can search posts by title', function () {
     // Create test data
-
     [$postToSearch, $missingPost] = Post::factory(2)->create();
 
     $searchTerm = $postToSearch->title;
+
     // Execute the search
-    $response = $this->get(route('posts.index', ['search' => $searchTerm]));
-    // Assertions
-    $response->assertOk();
-    $response->assertViewIs('posts.index');
-    $response->assertViewHasAll([
-        'categories',
-        'posts',
-    ]);
-
-    // Check if the matching post is present in the view
-    $response->assertSeeText($searchTerm);
-
-    // Check if non-matching posts are not present in the view
-    $response->assertDontSeeText($missingPost->title);
+    get(route('posts.index', ['search' => $searchTerm]))
+        ->assertOk()
+        ->assertViewIs('posts.index')
+        ->assertViewHasAll([
+            'categories',
+            'posts',
+        ])
+        // Check if the matching post is present in the view
+        ->assertSeeText($searchTerm)
+        // Check if non-matching posts are not present in the view
+        ->assertDontSeeText($missingPost->title);
 });
 
 test('can see create post page', function () {

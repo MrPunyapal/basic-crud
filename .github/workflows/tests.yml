@@ -54,9 +54,12 @@ jobs:
       - name: Install composer dependencies
         run: composer install --no-progress
 
+      - name: code style check
+        run: ./vendor/bin/pint --test
+
       - name: Install npm dependencies
         run: npm install
-      
+
       - name: Run Build for Production
         run: npm run build
 

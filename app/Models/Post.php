@@ -43,16 +43,18 @@ class Post extends Model
     public function image(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/' . $value),
-            set: fn($value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value : $value->store('posts', 'public')
+            get: fn (string $value) => filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value),
+            set: fn ($value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value : $value->store('posts', 'public')
         );
     }
 
-    public function scopeSortBy($query, ?string $sortBy, ?string $direction = 'asc'): Builder
+    public function scopeSortBy($query, ?string $sortBy, ?string $direction): Builder
     {
         if (is_null($sortBy)) {
             return $query->latest();
         }
+
+        $direction ??= 'asc';
 
         return $query->orderBy($sortBy, $direction);
     }
@@ -65,7 +67,7 @@ class Post extends Model
     public function scopeSearch(Builder $query, string $search = null)
     {
         $query->when($search, function (Builder $query, string $search) {
-            $query->where('title', 'like', '%' . $search . '%');
+            $query->where('title', 'like', '%'.$search.'%');
         });
     }
 }

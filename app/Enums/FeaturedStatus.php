@@ -1,9 +1,9 @@
 <?php
+
 namespace App\Enums;
 
 enum FeaturedStatus: int
 {
-
     case NOT_FEATURED = 0;
     case FEATURED = 1;
 
@@ -15,7 +15,6 @@ enum FeaturedStatus: int
         };
     }
 
-    
     // public function bg_color():string
     // {
     //     return match ($this) {

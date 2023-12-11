@@ -17,7 +17,7 @@ test('can only see published posts', function () {
     get(route('posts.published'))
         ->assertOk()
         ->assertViewIs('posts.index')
-        ->assertViewHas('posts', fn($posts) => $posts->where('published_at', '>=', now())->count() === 0);
+        ->assertViewHas('posts', fn ($posts) => $posts->where('published_at', '>=', now())->count() === 0);
 });
 
 test('can see posts sorted by title', function (string $direction) {

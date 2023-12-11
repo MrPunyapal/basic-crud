@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\FeaturedStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,7 +36,7 @@ class Post extends Model
     protected $casts = [
         'tags' => 'array',
         'published_at' => 'datetime',
-        'is_featured' => 'boolean',
+        'is_featured' => FeaturedStatus::class,
         'body' => CleanHtmlInput::class,
     ];
 
@@ -63,9 +64,9 @@ class Post extends Model
         return $query->where('published_at', '<=', now());
     }
 
-    public function scopeSearch(Builder $query, string $search = null)
+    public function scopeSearch(Builder $query, ?string $search)
     {
-        $query->when($search, function (Builder $query, string $search) {
+        $query->when($search, function (Builder $query, ?string $search) {
             $query->where('title', 'like', '%'.$search.'%');
         });
     }

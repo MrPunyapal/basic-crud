@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\FeaturedStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->boolean('published')->default(false);
             $table->unsignedTinyInteger('category');
             $table->json('tags')->nullable();
-            $table->unsignedTinyInteger('is_featured')->default(0);
+            $table->unsignedTinyInteger('is_featured')->default(FeaturedStatus::NOT_FEATURED);
             $table->softDeletes();
             $table->timestamps();
         });

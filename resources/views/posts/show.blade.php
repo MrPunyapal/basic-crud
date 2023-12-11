@@ -33,8 +33,10 @@
                         @endforeach
                     </div>
                     <div>
-                        @if ($post->is_featured)
+                        @if ($post->is_featured === App\Enums\FeaturedStatus::FEATURED)
                             <span class="badge bg-success">Featured</span>
+                        @else
+                            <span class="badge bg-info">Not Featured</span>
                         @endif
                     </div>
                 </div>

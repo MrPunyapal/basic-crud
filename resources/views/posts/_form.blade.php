@@ -45,16 +45,13 @@
 
 <div class="form-group mt-2">
     <label for="is_featured">Is Featured</label>
+    @foreach (App\Enums\FeaturedStatus::cases() as $featuredStatus)
     <div class="form-check mt-2">
-        <input id="is_featured_yes" class="form-check-input" type="radio" name="is_featured" value="1"
-            @checked(old('is_featured', $post->is_featured ?? null) == 1)>
-        <label for="is_featured_yes">Yes</label>
+        <input id="is_featured_{{$featuredStatus->name}}" class="form-check-input" type="radio" name="is_featured" value="{{$featuredStatus->value}}"
+            @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
+        <label for="is_featured_{{$featuredStatus->name}}">{{$featuredStatus->label()}}</label>
     </div>
-    <div class="form-check mt-2">
-        <input id="is_featured_no" class="form-check-input" type="radio" name="is_featured" value="0"
-            @checked(old('is_featured', $post->is_featured ?? null) == 0)>
-        <label for="is_featured_no">No</label>
-    </div>
+    @endforeach
 </div>
 
 <div class="form-group mt-2">

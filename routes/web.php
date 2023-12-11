@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::view('/','welcome');
+
 Route::redirect('/', '/posts');
 
 Route::get('/posts/published', App\Http\Controllers\PublishedPostsController::class)->name('posts.published');

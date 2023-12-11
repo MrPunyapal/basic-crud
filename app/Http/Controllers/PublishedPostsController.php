@@ -14,10 +14,12 @@ class PublishedPostsController extends Controller
      */
     public function __invoke(Request $request): View
     {
-        $search = $request->input('search');
-
         return view('posts.index', [
-            'posts' => Post::search($search)->published()->latest()->paginate(10),
+            'posts' => Post::search($request->input('search'))
+                ->sortBy($request->input('sortBy'), $request->input('direction'))
+                ->published()
+                ->paginate(10)
+                ->withQueryString(),
             'categories' => Settings::getCategories(),
         ]);
     }

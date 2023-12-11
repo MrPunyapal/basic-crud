@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\FeaturedStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,6 +17,8 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+
+
         return [
             'title' => $this->faker->words(5, true),
             'slug' => $this->faker->slug,
@@ -25,7 +28,7 @@ class PostFactory extends Factory
             'published_at' => $this->faker->dateTimeBetween('-1 month', '+3 months'),
             'category' => $this->faker->numberBetween(0, 7),
             'tags' => $this->faker->randomElements(['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'], $this->faker->numberBetween(1, 3)),
-            'is_featured' => $this->faker->boolean(5),
+            'is_featured' => $this->faker->randomElement(array_column(FeaturedStatus::cases(), 'value')),
         ];
     }
 }

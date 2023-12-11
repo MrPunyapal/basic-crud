@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\FeaturedStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,7 +36,7 @@ class Post extends Model
     protected $casts = [
         'tags' => 'array',
         'published_at' => 'datetime',
-        'is_featured' => 'boolean',
+        'is_featured' => FeaturedStatus::class,
         'body' => CleanHtmlInput::class,
     ];
 

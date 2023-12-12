@@ -69,7 +69,7 @@ class PostController extends Controller
     public function edit(Post $post): View
     {
         return view('posts.edit', [
-            'post' => $post->loadAggregate('category', 'title'),
+            'post' => $post,
             'categories' => Category::pluck('title', 'id'),
             'tags' => Settings::getTags(),
         ]);

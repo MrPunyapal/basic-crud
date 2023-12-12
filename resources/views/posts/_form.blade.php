@@ -32,10 +32,10 @@
 
 <div class="form-group mt-2">
     <label for="category">Category</label>
-    <select id="category" class="form-control" name="category">
+    <select id="category" class="form-control" name="category_id">
         <option value="">Select a category</option>
         @foreach ($categories as $key => $category)
-            <option value="{{ $key }}" @selected(old('category', $post->category ?? null) == $key)>
+            <option value="{{ $key }}" @selected(old('category_id', $post->category_id ?? null) == $key)>
                 {{ $category }}</option>
         @endforeach
     </select>

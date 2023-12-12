@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Support\Settings;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 

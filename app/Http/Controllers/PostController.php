@@ -28,7 +28,6 @@ class PostController extends Controller
                 )
                 ->paginate(10)
                 ->withQueryString(),
-            'categories' => Category::pluck('title', 'id'),
         ]);
     }
 

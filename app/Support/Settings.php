@@ -2,19 +2,19 @@
 
 namespace App\Support;
 
-class Settings
+final class Settings
 {
-    private static array $categories = ['Laravel', 'PHP', 'JavaScript', 'Vue.js', 'React.js', 'Angular.js', 'Java', 'C#'];
+    private const CATEGORIES = ['Laravel', 'PHP', 'JavaScript', 'Vue.js', 'React.js', 'Angular.js', 'Java', 'C#'];
 
-    private static array $tags = ['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'];
+    private const TAGS = ['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'];
 
     public static function getCategories(): array
     {
-        return self::$categories;
+        return self::CATEGORIES;
     }
 
     public static function getTags(): array
     {
-        return self::$tags;
+        return self::TAGS;
     }
 }

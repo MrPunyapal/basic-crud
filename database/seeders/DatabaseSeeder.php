@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,8 +22,20 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        \App\Models\Category::factory(10)->has(
-            \App\Models\Post::factory()->count(rand(5, 10))
+        Post::query()->truncate();
+        Category::query()->truncate();
+
+        Category::factory(10)->sequence([
+            ['title' => 'Laravel'],
+            ['title' => 'PHP'],
+            ['title' => 'JavaScript'],
+            ['title' => 'Vue.js'],
+            ['title' => 'React.js'],
+            ['title' => 'Angular.js'],
+            ['title' => 'Java'],
+            ['title' => 'C#'],
+        ])->has(
+            Post::factory()->count(rand(5, 10))
         )->create();
     }
 }

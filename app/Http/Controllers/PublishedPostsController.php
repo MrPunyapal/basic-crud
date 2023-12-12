@@ -18,6 +18,7 @@ class PublishedPostsController extends Controller
 
         return view('posts.index', [
             'posts' => Post::query()
+                ->withAggregate('category', 'title')
                 ->sortBy(
                     in_array($request->input('sortBy'), ['title']) ? $request->input('sortBy') : null,
                     in_array($request->input('direction'), ['asc', 'desc']) ? $request->input('direction') : 'asc',
@@ -26,7 +27,6 @@ class PublishedPostsController extends Controller
                 ->published()
                 ->paginate(10)
                 ->withQueryString(),
-            'categories' => Settings::getCategories(),
         ]);
     }
 }

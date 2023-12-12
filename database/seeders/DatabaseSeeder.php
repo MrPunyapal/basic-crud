@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,10 +23,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Post::query()->truncate();
-        Category::query()->truncate();
+        Schema::disableForeignKeyConstraints();
 
-        Category::factory(10)->sequence([
+        Category::query()->truncate();
+        Post::query()->truncate();
+
+        Schema::enableForeignKeyConstraints();
+
+        Category::factory(8)->sequence(
             ['title' => 'Laravel'],
             ['title' => 'PHP'],
             ['title' => 'JavaScript'],
@@ -34,7 +39,7 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Angular.js'],
             ['title' => 'Java'],
             ['title' => 'C#'],
-        ])->has(
+        )->has(
             Post::factory()->count(rand(5, 10))
         )->create();
     }

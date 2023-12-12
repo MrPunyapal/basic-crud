@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use App\Support\Settings;
 use Illuminate\Http\RedirectResponse;
@@ -19,6 +20,7 @@ class PostController extends Controller
     {
         return view('posts.index', [
             'posts' => Post::query()
+                ->withAggregate('category', 'title')
                 ->search($request->input('search'))
                 ->sortBy(
                     in_array($request->input('sortBy'), ['title']) ? $request->input('sortBy') : null,
@@ -26,7 +28,7 @@ class PostController extends Controller
                 )
                 ->paginate(10)
                 ->withQueryString(),
-            'categories' => Settings::getCategories(),
+            'categories' => Category::pluck('title', 'id'),
         ]);
     }
 
@@ -36,7 +38,7 @@ class PostController extends Controller
     public function create(): View
     {
         return view('posts.create', [
-            'categories' => Settings::getCategories(),
+            'categories' => Category::pluck('title', 'id'),
             'tags' => Settings::getTags(),
         ]);
     }
@@ -57,8 +59,7 @@ class PostController extends Controller
     public function show(Post $post): View
     {
         return view('posts.show', [
-            'post' => $post,
-            'categories' => Settings::getCategories(),
+            'post' => $post->loadAggregate('category', 'title'),
         ]);
     }
 
@@ -68,8 +69,8 @@ class PostController extends Controller
     public function edit(Post $post): View
     {
         return view('posts.edit', [
-            'post' => $post,
-            'categories' => Settings::getCategories(),
+            'post' => $post->loadAggregate('category', 'title'),
+            'categories' => Category::pluck('title', 'id'),
             'tags' => Settings::getTags(),
         ]);
     }

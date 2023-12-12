@@ -20,7 +20,7 @@
                     </form>
                 </h5>
                 <h6 class="card-subtitle mb-2 text-muted ">
-                    {{ $categories[$post->category] }} {{ $post->published_at?->format('M d, Y h:i a') }}
+                    {{ $post->category_title }} {{ $post->published_at?->format('M d, Y h:i a') }}
                 </h6>
                 <p class="card-text trix-content">
                     {!! $post->body !!}

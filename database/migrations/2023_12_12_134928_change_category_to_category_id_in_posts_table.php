@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->renameColumn('category', 'category_id');
+        });
+        Schema::table('posts', function (Blueprint $table) {
+            $table->unsignedBigInteger('category_id')->change();
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }
@@ -24,6 +27,9 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->renameColumn('category_id', 'category');
+        });
+        Schema::table('posts', function (Blueprint $table) {
+            $table->unsignedTinyInteger('category')->change();
             $table->dropForeign(['category_id']);
         });
     }

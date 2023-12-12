@@ -21,7 +21,7 @@ class Post extends Model
         'image',
         'body',
         'published_at',
-        'category',
+        'category_id',
         'tags',
         'is_featured',
     ];
@@ -69,5 +69,10 @@ class Post extends Model
         $query->when($search, function (Builder $query, ?string $search) {
             $query->where('title', 'like', '%'.$search.'%');
         });
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

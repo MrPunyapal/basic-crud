@@ -40,7 +40,6 @@ test('can see posts sorted by title', function (string $direction) {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
-            'categories',
             'posts',
         ])
         ->assertSeeTextInOrder($expectedSortedPosts);
@@ -56,7 +55,6 @@ test('can see posts if sort column name is invalid', function () {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
-            'categories',
             'posts',
         ]);
 });
@@ -72,7 +70,6 @@ test('can see posts if direction name is invalid', function () {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
-            'categories',
             'posts',
         ]);
 
@@ -91,7 +88,6 @@ test('can search posts by title', function () {
     $response->assertOk();
     $response->assertViewIs('posts.index');
     $response->assertViewHasAll([
-        'categories',
         'posts',
     ]);
 

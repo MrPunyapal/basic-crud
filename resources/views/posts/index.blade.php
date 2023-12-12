@@ -35,7 +35,8 @@
                     <tr>
                         <th>ID</th>
                         <th>
-                            <a href="?sortBy=title&direction={{ request('direction') === 'asc' ? 'desc' : 'asc' }}">Title</a>
+                            <a
+                                href="?sortBy=title&direction={{ request('direction') === 'asc' ? 'desc' : 'asc' }}">Title</a>
                         </th>
                         <th>Category</th>
                         <th>Is Featured</th>
@@ -51,7 +52,7 @@
                             <td>
                                 <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
                             </td>
-                            <td>{{ $categories[$post->category] }}</td>
+                            <td>{{ $post->category_title }}</td>
                             <td>{{ $post->is_featured->label() }}</td>
                             <td>{{ $post->created_at->format('d/m/Y H:i:s') }}</td>
                             <td>{{ $post->updated_at->since() }}</td>

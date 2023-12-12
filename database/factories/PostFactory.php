@@ -25,7 +25,7 @@ class PostFactory extends Factory
             'image' => $this->faker->imageUrl(),
             'body' => $this->faker->randomHtml(),
             'published_at' => $this->faker->dateTimeBetween('-1 month', '+3 months'),
-            'category' => $this->faker->numberBetween(0, 7),
+            'category_id' => CategoryFactory::new(),
             'tags' => $this->faker->randomElements(['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'], $this->faker->numberBetween(1, 3)),
             'is_featured' => $this->faker->randomElement(array_column(FeaturedStatus::cases(), 'value')),
         ];

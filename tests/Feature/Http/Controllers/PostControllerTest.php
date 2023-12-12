@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
 
@@ -22,7 +23,6 @@ test('can see posts', function () {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
-            'categories',
             'posts',
         ]);
 });
@@ -47,7 +47,6 @@ test('can see posts sorted by title', function (string $direction) {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
-            'categories',
             'posts',
         ])
         ->assertSeeTextInOrder($expectedSortedPosts);
@@ -62,7 +61,6 @@ test('can see posts sorted by invalid column', function () {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
-            'categories',
             'posts',
         ]);
 });
@@ -78,7 +76,6 @@ test('can search posts by title', function () {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
-            'categories',
             'posts',
         ])
         // Check if the matching post is present in the view
@@ -98,6 +95,7 @@ test('can see create post page', function () {
 });
 
 test('can create post', function () {
+    $Category = Category::factory()->create();
     $image = UploadedFile::fake()->image('some-image.png');
 
     post(route('posts.store'), [
@@ -105,7 +103,7 @@ test('can create post', function () {
         'slug' => 'test-title',
         'content' => 'Test Content',
         'image' => $image,
-        'category' => 1,
+        'category_id' => $Category->id,
         'description' => 'this is the description',
         'body' => 'this is the body',
         'tags' => ['Eloquent'],
@@ -124,7 +122,7 @@ test('cannot create post with invalid data', function () {
         ->assertSessionHasErrors([
             'title' => 'The title field is required.',
             'slug',
-            'category',
+            'category_id',
             'description',
             'body',
         ]);
@@ -137,7 +135,6 @@ test('can see post page', function () {
         ->assertOk()
         ->assertViewIs('posts.show')
         ->assertViewHasAll([
-            'categories',
             'post',
         ]);
 });
@@ -158,6 +155,8 @@ test('can see edit post page', function () {
 test('can edit post', function () {
     $post = Post::factory()->create();
 
+    $CategoryID = Category::factory()->create()->id;
+
     $image = UploadedFile::fake()->image('some-image.png');
 
     patch(route('posts.update', $post), [
@@ -165,7 +164,7 @@ test('can edit post', function () {
         'slug' => 'test-title',
         'content' => 'Test Content',
         'image' => $image,
-        'category' => 1,
+        'category_id' => $CategoryID,
         'description' => 'this is the description',
         'body' => 'this is the body',
         'tags' => ['Eloquent'],
@@ -175,6 +174,7 @@ test('can edit post', function () {
 
     assertDatabaseHas('posts', [
         'title' => 'updated Title',
+        'category_id' => $CategoryID,
     ]);
 });
 

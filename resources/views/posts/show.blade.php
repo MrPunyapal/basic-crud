@@ -1,3 +1,4 @@
+@use('App\Enums\FeaturedStatus')
 @extends('layouts.app')
 @section('title', $post->title)
 @section('content')
@@ -33,7 +34,7 @@
                         @endforeach
                     </div>
                     <div>
-                        @if ($post->is_featured === App\Enums\FeaturedStatus::FEATURED)
+                        @if ($post->is_featured === FeaturedStatus::FEATURED)
                             <span class="badge bg-success">Featured</span>
                         @else
                             <span class="badge bg-info">Not Featured</span>

@@ -1,3 +1,4 @@
+@use('App\Enums\FeaturedStatus')
 <div class="form-group mt-2">
     <label for="title">Title</label>
     <input id="title" class="form-control" type="text" name="title"
@@ -45,12 +46,12 @@
 
 <div class="form-group mt-2">
     <label for="is_featured">Is Featured</label>
-    @foreach (App\Enums\FeaturedStatus::cases() as $featuredStatus)
-    <div class="form-check mt-2">
-        <input id="is_featured_{{$featuredStatus->name}}" class="form-check-input" type="radio" name="is_featured" value="{{$featuredStatus->value}}"
-            @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
-        <label for="is_featured_{{$featuredStatus->name}}">{{$featuredStatus->label()}}</label>
-    </div>
+    @foreach (FeaturedStatus::cases() as $featuredStatus)
+        <div class="form-check mt-2">
+            <input id="is_featured_{{ $featuredStatus->name }}" class="form-check-input" type="radio"
+                name="is_featured" value="{{ $featuredStatus->value }}" @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
+            <label for="is_featured_{{ $featuredStatus->name }}">{{ $featuredStatus->label() }}</label>
+        </div>
     @endforeach
 </div>
 

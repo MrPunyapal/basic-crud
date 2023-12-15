@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FeaturedStatus;
 use App\Models\Post;
 
 class FeaturedPostController extends Controller
 {
     public function __invoke(Post $post)
     {
+        $isFeatured = $post->is_featured === FeaturedStatus::FEATURED;
         $post->update([
-            'is_featured' => !$post->is_featured,
+            'is_featured' => $isFeatured
+                ? FeaturedStatus::NOT_FEATURED
+                : FeaturedStatus::FEATURED,
         ]);
 
-        return back()->with('success', 'Post '.($post->is_featured ? 'unfeatured' : 'featured').' successfully.');
+        return back()->with('success', 'Post '.($isFeatured ? 'unfeatured' : 'featured').' successfully.');
     }
 }

@@ -64,11 +64,11 @@
                                     class="d-inline">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="submit" value="{{ $post->is_featured ? 'Unfeature' : 'Feature' }}"
+                                    <input type="submit" value="{{ $post->is_featured === FeaturedStatus::FEATURED ? 'Unfeature' : 'Feature' }}"
                                         @class([
                                             'btn',
-                                            'btn-secondary' => $post->is_featured,
-                                            'btn-success' => !$post->is_featured,
+                                            'btn-secondary' => $post->is_featured === FeaturedStatus::FEATURED,
+                                            'btn-success' => $post->is_featured === FeaturedStatus::NOT_FEATURED,
                                         ])>
                                 </form>
                                 <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary">Edit</a>

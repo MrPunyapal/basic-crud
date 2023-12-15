@@ -1,6 +1,6 @@
 @use('App\Enums\FeaturedStatus')
 <div class="form-group mt-2">
-    <label for="title">Title</label>
+    <label for="title">{{ __('posts.form.Title') }}</label>
     <input id="title" class="form-control" type="text" name="title"
         value="{{ old('title', $post->title ?? null) }}">
     @error('title')
@@ -8,7 +8,7 @@
     @enderror
 </div>
 <div class="form-group mt-2">
-    <label for="slug">Slug</label>
+    <label for="slug">{{ __('posts.form.Slug') }}</label>
     <input id="slug" class="form-control" type="text" name="slug"
         value="{{ old('slug', $post->slug ?? null) }}">
     @error('slug')
@@ -17,7 +17,7 @@
 </div>
 
 <div class="form-group mt-2">
-    <label for="description">Description</label>
+    <label for="description">{{ __('posts.form.Description') }}</label>
     <textarea id="description" class="form-control" name="description">{{ old('description', $post->description ?? null) }}</textarea>
     @error('description')
         <div class="text-danger strong">{{ $message }}</div>
@@ -25,15 +25,15 @@
 </div>
 
 <div class="form-group mt-2">
-    <label for="published_at">Published At</label>
+    <label for="published_at">{{ __('posts.form.Published At') }}</label>
     <input id="published_at" class="form-control" type="datetime-local" name="published_at"
         value="{{ old('published_at', $post->published_at ?? null) }}">
 </div>
 
 <div class="form-group mt-2">
-    <label for="category">Category</label>
+    <label for="category">{{ __('posts.form.Category') }}</label>
     <select id="category" class="form-control" name="category_id">
-        <option value="">Select a category</option>
+        <option value="">{{ __('posts.form.Select a Category') }}</option>
         @foreach ($categories as $key => $category)
             <option value="{{ $key }}" @selected(old('category_id', $post->category_id ?? null) == $key)>
                 {{ $category }}</option>
@@ -45,7 +45,7 @@
 </div>
 
 <div class="form-group mt-2">
-    <label for="is_featured">Is Featured</label>
+    <label for="is_featured">{{ __('posts.form.Is Featured') }}</label>
     @foreach (FeaturedStatus::cases() as $featuredStatus)
         <div class="form-check mt-2">
             <input id="is_featured_{{ $featuredStatus->name }}" class="form-check-input" type="radio"
@@ -56,7 +56,7 @@
 </div>
 
 <div class="form-group mt-2">
-    <label for="tags">Tags</label>
+    <label for="tags">{{ __('posts.form.Tags') }}</label>
     <select class="form-select" name="tags[]" id="tags" multiple>
         @foreach ($tags as $tag)
             <option value="{{ $tag }}" @selected(in_array($tag, old('tags', $post->tags ?? [])))>
@@ -77,7 +77,7 @@
 </div>
 
 <div class="form-group mt-2">
-    <label for="image">Image</label>
+    <label for="image">{{ __('posts.form.Image') }}</label>
     <input id="image" class="form-control" type="file" name="image">
     @error('image')
         <div class="text-danger strong">{{ $message }}</div>
@@ -90,7 +90,7 @@
 </div>
 
 <div class="form-group mt-2">
-    <label for="body">Body</label>
+    <label for="body">{{ __('posts.form.Body') }}</label>
     <input id="body" type="hidden" name="body" value="{{ old('body', $post->body ?? null) }}">
     <trix-editor input="body"></trix-editor>
     @error('body')

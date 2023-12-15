@@ -12,6 +12,6 @@ class PublishedPostController extends Controller
             'published_at' => is_null($post->published_at) ? now() : null,
         ]);
 
-        return back()->with('success', 'Post published successfully.');
+        return back()->with('success', 'Post '.(is_null($post->published_at) ? 'unpublished' : 'published').' successfully.');
     }
 }

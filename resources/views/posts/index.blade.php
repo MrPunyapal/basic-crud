@@ -14,8 +14,9 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <a href="{{ route('posts.create') }}" class="btn btn-success">Create Post</a>
-                    @if (Route::is('posts.index'))
-                        <a href="{{ route('posts.published') }}" class="btn btn-primary">Published Posts</a>
+                    @if (request('published') == false)
+                        <a href="{{ route('posts.index', ['published' => true]) }}" class="btn btn-primary">Published
+                            Posts</a>
                     @else
                         <a href="{{ route('posts.index') }}" class="btn btn-primary">All Posts</a>
                     @endif

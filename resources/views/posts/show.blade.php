@@ -11,8 +11,18 @@
             <div class="card-body">
                 <h5 class="card-title">
                     {{ $post->title }}
-                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-primary">Edit</a>
-                    <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST" class="d-inline"
+                    <form action="{{ route('posts.featured', ['post' => $post]) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('PATCH')
+                        <input type="submit" value="{{ $post->is_featured === FeaturedStatus::FEATURED ? 'Unfeature' : 'Feature' }}"
+                            @class([
+                                'btn',
+                                'btn-secondary' => $post->is_featured === FeaturedStatus::FEATURED,
+                                'btn-success' => $post->is_featured === FeaturedStatus::NOT_FEATURED,
+                            ])>
+                    </form>
+                    <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST" class="d-inline"
                         onsubmit="return confirm('Are you sure?')">
                         @csrf
                         @method('DELETE')

@@ -17,11 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// alternative to the above
 // Route::view('/','welcome');
 
+// redirect to posts
 Route::redirect('/', '/posts');
 
+// resource route for posts controller (all routes)
 Route::resource('posts', App\Http\Controllers\PostController::class);
+
+// feature post route (patch request) - only one route needed
+Route::patch('/posts/{post}/feature', App\Http\Controllers\FeaturedPostController::class)->name('posts.featured');
 
 // other option to do the same thing
 // Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');

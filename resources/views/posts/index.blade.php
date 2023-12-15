@@ -1,3 +1,4 @@
+@use('App\Enums\FeaturedStatus')
 @extends('layouts.app')
 @section('title', 'Posts')
 @section('content')
@@ -34,7 +35,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>
                             <a
                                 href="?sortBy=title&direction={{ request('direction') === 'asc' ? 'desc' : 'asc' }}">Title</a>
@@ -49,17 +50,30 @@
                 <tbody>
                     @forelse ($posts as $post)
                         <tr>
-                            <td>{{ $post->id }}</td>
                             <td>
-                                <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
+                                {{ $loop->index + $posts->firstItem() }}
+                            </td>
+                            <td>
+                                <a href="{{ route('posts.show', ['post' => $post]) }}">{{ $post->title }}</a>
                             </td>
                             <td>{{ $post->category_title }}</td>
                             <td>{{ $post->is_featured->label() }}</td>
                             <td>{{ $post->created_at->format('d/m/Y H:i:s') }}</td>
                             <td>{{ $post->updated_at->since() }}</td>
                             <td>
-                                <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST"
+                                <form action="{{ route('posts.featured', ['post' => $post]) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="submit" value="{{ $post->is_featured === FeaturedStatus::FEATURED ? 'Unfeature' : 'Feature' }}"
+                                        @class([
+                                            'btn',
+                                            'btn-secondary' => $post->is_featured === FeaturedStatus::FEATURED,
+                                            'btn-success' => $post->is_featured === FeaturedStatus::NOT_FEATURED,
+                                        ])>
+                                </form>
+                                <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST"
                                     class="d-inline" onsubmit="return confirm('Are you sure?')">
                                     @csrf
                                     @method('DELETE')

@@ -21,8 +21,6 @@ Route::get('/', function () {
 
 Route::redirect('/', '/posts');
 
-Route::get('/posts/published', App\Http\Controllers\PublishedPostsController::class)->name('posts.published');
-
 Route::resource('posts', App\Http\Controllers\PostController::class);
 
 // other option to do the same thing

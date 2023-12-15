@@ -27,6 +27,20 @@ test('can see posts', function () {
         ]);
 });
 
+test('can only see published posts', function () {
+    Post::factory(rand(1, 5))->create([
+        'published_at' => now()->addDay(),
+    ]);
+    Post::factory(rand(1, 5))->create([
+        'published_at' => now()->subDay(),
+    ]);
+
+    get(route('posts.index', ['published' => true]))
+        ->assertOk()
+        ->assertViewIs('posts.index')
+        ->assertViewHas('posts', fn ($posts) => $posts->where('published_at', '>=', now())->count() === 0);
+});
+
 test('can see posts sorted by title', function (string $direction) {
     $posts = Post::factory(3)
         ->sequence(

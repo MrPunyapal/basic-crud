@@ -1,3 +1,4 @@
+@use('App\Enums\FeaturedStatus')
 @extends('layouts.app')
 @section('title', 'Posts')
 @section('content')

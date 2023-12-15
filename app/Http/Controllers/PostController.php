@@ -22,6 +22,7 @@ class PostController extends Controller
             'posts' => Post::query()
                 ->withAggregate('category', 'title')
                 ->search($request->input('search'))
+                ->when($request->input('published'), fn ($query) => $query->published())
                 ->sortBy(
                     in_array($request->input('sortBy'), ['title']) ? $request->input('sortBy') : null,
                     $request->input('direction')

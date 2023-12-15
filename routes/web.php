@@ -26,8 +26,8 @@ Route::redirect('/', '/posts');
 // resource route for posts controller (all routes)
 Route::resource('posts', App\Http\Controllers\PostController::class);
 
-// publish post route (patch request) - only one route needed
-Route::patch('/posts/{post}/publish', App\Http\Controllers\PublishedPostController::class)->name('posts.publish');
+// feature post route (patch request) - only one route needed
+Route::patch('/posts/{post}/feature', App\Http\Controllers\FeaturedPostController::class)->name('posts.featured');
 
 // other option to do the same thing
 // Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');

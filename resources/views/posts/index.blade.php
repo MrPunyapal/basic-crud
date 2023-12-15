@@ -60,15 +60,15 @@
                             <td>{{ $post->created_at->format('d/m/Y H:i:s') }}</td>
                             <td>{{ $post->updated_at->since() }}</td>
                             <td>
-                                <form action="{{ route('posts.publish', ['post' => $post]) }}" method="POST"
+                                <form action="{{ route('posts.featured', ['post' => $post]) }}" method="POST"
                                     class="d-inline">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="submit" value="{{ $post->published_at ? 'Unpublish' : 'Publish' }}"
+                                    <input type="submit" value="{{ $post->is_featured ? 'Unfeature' : 'Feature' }}"
                                         @class([
                                             'btn',
-                                            'btn-secondary' => $post->published_at,
-                                            'btn-success' => !$post->published_at,
+                                            'btn-secondary' => $post->is_featured,
+                                            'btn-success' => !$post->is_featured,
                                         ])>
                                 </form>
                                 <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary">Edit</a>

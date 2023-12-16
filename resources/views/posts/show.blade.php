@@ -33,7 +33,7 @@
                     {{ $post->category_title }} {{ $post->published_at?->format('M d, Y h:i a') }}
                 </h6>
                 <p class="card-text trix-content">
-                    {!! $post->body !!}
+                    {!! $post->content !!}
                 </p>
             </div>
             <div class="card-footer">

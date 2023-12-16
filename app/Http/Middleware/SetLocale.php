@@ -18,6 +18,7 @@ class SetLocale
         if ($request->cookie('locale')) {
             app()->setLocale($request->cookie('locale'));
         }
+
         return $next($request);
     }
 }

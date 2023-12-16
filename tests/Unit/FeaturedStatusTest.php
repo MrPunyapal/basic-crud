@@ -18,6 +18,20 @@ it('returns the correct label for FEATURED', function () {
     expect($label)->toBe('Featured');
 });
 
+it('returns the correct label for NOT_FEATURED as boolean', function () {
+    $status = FeaturedStatus::NOT_FEATURED;
+    $label = $status->labelBool();
+
+    expect($label)->toBe(__('posts.show.No'));
+});
+
+it('returns the correct label for FEATURED as boolean', function () {
+    $status = FeaturedStatus::FEATURED;
+    $label = $status->labelBool();
+
+    expect($label)->toBe(__('posts.show.Yes'));
+});
+
 it('returns the correct color for NOT_FEATURED', function () {
     $status = FeaturedStatus::NOT_FEATURED;
     $color = $status->color();

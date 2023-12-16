@@ -15,6 +15,14 @@ enum FeaturedStatus: int
         };
     }
 
+    public function labelBool(): string
+    {
+        return match ($this) {
+            self::NOT_FEATURED => __('posts.show.No'),
+            self::FEATURED => __('posts.show.Yes'),
+        };
+    }
+
     public function color(): string
     {
         return match ($this) {

@@ -44,10 +44,10 @@
                         </div>
                     </div>
                 </div>
-                <form method="GET" class="mb-4">
+                <form class="mb-4">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control"
-                            placeholder="{{ __('posts.form.Search here') }}
+                            placeholder="{{ __('posts.form.Search here') }}"
                             value="{{ request()->search }}">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-outline-secondary">

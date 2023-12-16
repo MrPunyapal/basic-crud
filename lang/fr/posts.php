@@ -18,4 +18,9 @@ return [
         'Save Post' => 'Enregistrer l\'article',
         'Cancel' => 'Annuler',
     ],
+    'edit' =>[
+        'Edit Post' => 'Modifier l\'article',
+        'Update Post' => 'Mettre à jour l\'article',
+        'Cancel' => 'Annuler',
+    ],
 ];

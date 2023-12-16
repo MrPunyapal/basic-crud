@@ -90,10 +90,10 @@
 </div>
 
 <div class="form-group mt-2">
-    <label for="body">Body</label>
-    <input id="body" type="hidden" name="body" value="{{ old('body', $post->body ?? null) }}">
-    <trix-editor input="body"></trix-editor>
-    @error('body')
+    <label for="content">Content</label>
+    <input id="content" type="hidden" name="content" value="{{ old('content', $post->content ?? null) }}">
+    <trix-editor input="content"></trix-editor>
+    @error('content')
         <div class="text-danger strong">{{ $message }}</div>
     @enderror
 </div>

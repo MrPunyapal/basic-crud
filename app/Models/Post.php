@@ -19,7 +19,7 @@ class Post extends Model
         'slug',
         'description',
         'image',
-        'body',
+        'content',
         'published_at',
         'category_id',
         'tags',
@@ -37,7 +37,7 @@ class Post extends Model
         'tags' => 'array',
         'published_at' => 'datetime',
         'is_featured' => FeaturedStatus::class,
-        'body' => CleanHtmlInput::class,
+        'content' => CleanHtmlInput::class,
     ];
 
     public function image(): Attribute

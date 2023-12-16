@@ -41,4 +41,11 @@ return [
         'All Posts' => 'All Posts',
         'Languages' => 'Languages',
     ],
+    'messages' => [
+        'Post created successfully' => 'Post created successfully.',
+        'Post updated successfully' => 'Post updated successfully.',
+        'Post deleted successfully' => 'Post deleted successfully.',
+        'Post featured successfully' => 'Post featured successfully.',
+        'Post unfeatured successfully' => 'Post unfeatured successfully.',
+    ],
 ];

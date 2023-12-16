@@ -41,4 +41,11 @@ return [
         'All Posts' => 'Tous les articles',
         'Languages' => 'Langues',
     ],
+    'messages' => [
+        'Post created successfully' => 'Article créé avec succès.',
+        'Post updated successfully' => 'Article mis à jour avec succès.',
+        'Post deleted successfully' => 'Article supprimé avec succès.',
+        'Post featured successfully' => 'Article en vedette avec succès.',
+        'Post unfeatured successfully' => 'Article non en vedette avec succès.',
+    ],
 ];

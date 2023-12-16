@@ -14,4 +14,9 @@ return [
         'Is Featured' => 'Is Featured',
         'Published At' => 'Published At',
     ],
+    'create' => [
+        'Create Post' => 'Create Post',
+        'Save Post' => 'Save Post',
+        'Cancel' => 'Cancel',
+    ],
 ];

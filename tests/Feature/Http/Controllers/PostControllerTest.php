@@ -119,7 +119,7 @@ test('can create post', function () {
         'image' => $image,
         'category_id' => $Category->id,
         'description' => 'this is the description',
-        'body' => 'this is the body',
+        'content' => 'this is the content',
         'tags' => ['Eloquent'],
     ])
         ->assertRedirect(route('posts.index'))
@@ -138,7 +138,7 @@ test('cannot create post with invalid data', function () {
             'slug',
             'category_id',
             'description',
-            'body',
+            'content',
         ]);
 });
 
@@ -180,7 +180,7 @@ test('can edit post', function () {
         'image' => $image,
         'category_id' => $CategoryID,
         'description' => 'this is the description',
-        'body' => 'this is the body',
+        'content' => 'this is the content',
         'tags' => ['Eloquent'],
     ])
         ->assertRedirect(route('posts.index'))

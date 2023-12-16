@@ -44,5 +44,6 @@ return [
         'Posts' => 'Articles',
         'Published Posts' => 'Articles publiés',
         'All Posts' => 'Tous les articles',
+        'Languages' => 'Langues',
     ],
 ];

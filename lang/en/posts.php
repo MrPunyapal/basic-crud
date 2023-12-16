@@ -20,7 +20,7 @@ return [
         'Save Post' => 'Save Post',
         'Cancel' => 'Cancel',
     ],
-    'edit' =>[
+    'edit' => [
         'Edit Post' => 'Edit Post',
         'Update Post' => 'Update Post',
         'Cancel' => 'Cancel',

@@ -15,6 +15,11 @@ return [
         'Feature' => 'Mettre en vedette',
         'Unfeature' => 'Enlever la mise en vedette',
         'Are you sure you want to delete this post?' => 'Êtes-vous sûr de vouloir supprimer cet article?',
+        'Created At' => 'Créé le',
+        'Updated At' => 'Mis à jour le',
+        'Actions' => 'Actions',
+        'Search' => 'Rechercher',
+        'Search here' => 'Rechercher ici..',
     ],
     'create' => [
         'Create Post' => 'Créer un article',
@@ -34,5 +39,10 @@ return [
         'Yes' => 'Oui',
         'No' => 'Non',
         'View All' => 'Voir tout',
+    ],
+    'index' => [
+        'Posts' => 'Articles',
+        'Published Posts' => 'Articles publiés',
+        'All Posts' => 'Tous les articles',
     ],
 ];

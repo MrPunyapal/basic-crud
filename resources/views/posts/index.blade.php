@@ -1,10 +1,10 @@
 @use('App\Enums\FeaturedStatus')
 @extends('layouts.app')
-@section('title', 'Posts')
+@section('title', __('posts.index.Posts'))
 @section('content')
     <div class="row">
         <div class="col-12">
-            <h1>Posts</h1>
+            <h1>{{ __('posts.index.Posts') }}</h1>
 
             @if (session()->has('success'))
                 <div class="alert alert-success">
@@ -14,20 +14,26 @@
 
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <a href="{{ route('posts.create') }}" class="btn btn-success">Create Post</a>
+                    <a href="{{ route('posts.create') }}" class="btn btn-success">{{ __('posts.create.Create Post') }}</a>
                     @if (request('published') == false)
-                        <a href="{{ route('posts.index', ['published' => true]) }}" class="btn btn-primary">Published
-                            Posts</a>
+                        <a href="{{ route('posts.index', ['published' => true]) }}" class="btn btn-primary">
+                            {{ __('posts.index.Published Posts') }}
+                        </a>
                     @else
-                        <a href="{{ route('posts.index') }}" class="btn btn-primary">All Posts</a>
+                        <a href="{{ route('posts.index') }}" class="btn btn-primary">
+                            {{ __('posts.index.All Posts') }}
+                        </a>
                     @endif
                 </div>
                 <form method="GET" class="mb-4">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Search by title"
+                        <input type="text" name="search" class="form-control"
+                            placeholder="{{ __('posts.form.Search here') }}
                             value="{{ request()->search }}">
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                            <button type="submit" class="btn btn-outline-secondary">
+                                {{ __('posts.form.Search') }}
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -38,13 +44,13 @@
                         <th>#</th>
                         <th>
                             <a
-                                href="?sortBy=title&direction={{ request('direction') === 'asc' ? 'desc' : 'asc' }}">Title</a>
+                                href="?sortBy=title&direction={{ request('direction') === 'asc' ? 'desc' : 'asc' }}">{{ __('posts.form.Title') }}</a>
                         </th>
-                        <th>Category</th>
-                        <th>Is Featured</th>
-                        <th>Created At</th>
-                        <th>Updated At</th>
-                        <th>Actions</th>
+                        <th> {{ __('posts.form.Category') }} </th>
+                        <th>{{ __('posts.form.Is Featured') }} </th>
+                        <th>{{ __('posts.form.Created At') }}</th>
+                        <th>{{ __('posts.form.Updated At') }}
+                        <th>{{ __('posts.form.Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,19 +71,17 @@
                                     class="d-inline">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="submit" value="{{ $post->is_featured === FeaturedStatus::FEATURED ? 'Unfeature' : 'Feature' }}"
-                                        @class([
-                                            'btn',
-                                            'btn-secondary' => $post->is_featured === FeaturedStatus::FEATURED,
-                                            'btn-success' => $post->is_featured === FeaturedStatus::NOT_FEATURED,
-                                        ])>
+                                    <input type="submit" value="{{ $post->is_featured->changeBtnLabel() }}"
+                                        @class(['btn', $post->is_featured->changeBtnColor()])>
                                 </form>
-                                <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('posts.edit', ['post' => $post]) }}"
+                                    class="btn btn-primary">{{ __('posts.show.Edit') }}</a>
                                 <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST"
-                                    class="d-inline" onsubmit="return confirm('Are you sure?')">
+                                    class="d-inline"
+                                    onsubmit="return confirm('{{ __('posts.form.Are you sure you want to delete this post?') }}')">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <input type="submit" value="{{ __('posts.show.Delete') }}" class="btn btn-danger">
                                 </form>
                             </td>
                         </tr>

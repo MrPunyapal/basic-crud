@@ -9,9 +9,9 @@
                 @csrf
                 @include('posts._form', ['categories' => $categories, 'tags' => $tags])
                 <div class="form-group mt-2">
-                    <button type="submit" class="btn btn-success">{{ __('posts.form.Save Post') }}</button>
+                    <button type="submit" class="btn btn-success">{{ __('posts.create.Save Post') }}</button>
                     <a href="{{ route('posts.index') }}" class="btn btn-secondary">
-                        {{ __('posts.form.Cancel') }}
+                        {{ __('posts.create.Cancel') }}
                     </a>
                 </div>
             </form>

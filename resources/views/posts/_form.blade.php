@@ -50,7 +50,7 @@
         <div class="form-check mt-2">
             <input id="is_featured_{{ $featuredStatus->name }}" class="form-check-input" type="radio"
                 name="is_featured" value="{{ $featuredStatus->value }}" @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
-            <label for="is_featured_{{ $featuredStatus->name }}">{{ $featuredStatus->label() }}</label>
+            <label for="is_featured_{{ $featuredStatus->name }}">{{ $featuredStatus->labelBool() }}</label>
         </div>
     @endforeach
 </div>

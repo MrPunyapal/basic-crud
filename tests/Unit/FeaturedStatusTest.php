@@ -2,6 +2,8 @@
 
 use App\Enums\FeaturedStatus;
 
+uses(Tests\TestCase::class);
+
 it('returns the correct label for NOT_FEATURED', function () {
     $status = FeaturedStatus::NOT_FEATURED;
     $label = $status->label();

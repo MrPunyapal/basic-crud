@@ -15,7 +15,7 @@ enum FeaturedStatus: int
         };
     }
 
-    public function labelBool(): string
+    public function booleanLabel(): string
     {
         return match ($this) {
             self::NOT_FEATURED => __('posts.show.No'),

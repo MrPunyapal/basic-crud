@@ -20,14 +20,14 @@ it('returns the correct label for FEATURED', function () {
 
 it('returns the correct label for NOT_FEATURED as boolean', function () {
     $status = FeaturedStatus::NOT_FEATURED;
-    $label = $status->labelBool();
+    $label = $status->booleanLabel();
 
     expect($label)->toBe(__('posts.show.No'));
 });
 
 it('returns the correct label for FEATURED as boolean', function () {
     $status = FeaturedStatus::FEATURED;
-    $label = $status->labelBool();
+    $label = $status->booleanLabel();
 
     expect($label)->toBe(__('posts.show.Yes'));
 });

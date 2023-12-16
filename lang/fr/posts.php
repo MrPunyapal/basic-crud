@@ -8,15 +8,14 @@ return [
         'Image' => 'Image',
         'Category' => 'Catégorie',
         'Description' => 'Description',
-        'Body' => 'Corps',
         'Tags' => 'Tags',
         'Featured' => 'En vedette',
         'Is Featured' => 'En vedette',
         'Published At' => 'Publié le',
     ],
-    'create' =>[
+    'create' => [
         'Create Post' => 'Créer un article',
         'Save Post' => 'Enregistrer l\'article',
         'Cancel' => 'Annuler',
-    ]
+    ],
 ];

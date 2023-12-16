@@ -8,7 +8,6 @@ return [
         'Image' => 'Image',
         'Category' => 'Category',
         'Description' => 'Description',
-        'Body' => 'Body',
         'Tags' => 'Tags',
         'Featured' => 'Featured',
         'Is Featured' => 'Is Featured',

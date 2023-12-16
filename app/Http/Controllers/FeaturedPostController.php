@@ -16,6 +16,6 @@ class FeaturedPostController extends Controller
                 : FeaturedStatus::FEATURED,
         ]);
 
-        return back()->with('success', 'Post '.($isFeatured ? 'unfeatured' : 'featured').' successfully.');
+        return back()->with('success', __('posts.messages.Post '.($isFeatured ? 'unfeatured' : 'featured').' successfully'));
     }
 }

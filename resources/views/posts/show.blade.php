@@ -4,7 +4,7 @@
 @section('content')
     <div class="row g-0 vh-100 p-0 m-0">
         <div class="col-12 text-end mt-2">
-            <a href="{{ route('posts.index') }}" class="btn btn-secondary">View All</a>
+            <a href="{{ route('posts.index') }}" class="btn btn-secondary">{{ __('posts.show.View All') }}</a>
         </div>
         <div class="card col-8 m-auto">
             <img src="{{ $post->image }}" class="card-img-top" alt="{{ $post->title }}" height="400">
@@ -14,19 +14,16 @@
                     <form action="{{ route('posts.featured', ['post' => $post]) }}" method="POST" class="d-inline">
                         @csrf
                         @method('PATCH')
-                        <input type="submit" value="{{ $post->is_featured === FeaturedStatus::FEATURED ? 'Unfeature' : 'Feature' }}"
-                            @class([
-                                'btn',
-                                'btn-secondary' => $post->is_featured === FeaturedStatus::FEATURED,
-                                'btn-success' => $post->is_featured === FeaturedStatus::NOT_FEATURED,
-                            ])>
+                        <input type="submit" value="{{ $post->is_featured->changeBtnLabel() }}"
+                            @class(['btn', $post->is_featured->changeBtnColor()])>
                     </form>
-                    <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('posts.edit', ['post' => $post]) }}"
+                        class="btn btn-primary">{{ __('posts.show.Edit') }}</a>
                     <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST" class="d-inline"
-                        onsubmit="return confirm('Are you sure?')">
+                        onsubmit="return confirm('{{ __('posts.form.Are you sure you want to delete this post?') }}')">
                         @csrf
                         @method('DELETE')
-                        <input type="submit" value="Delete" class="btn btn-danger">
+                        <input type="submit" value="{{ __('posts.show.Delete') }}" class="btn btn-danger">
                     </form>
                 </h5>
                 <h6 class="card-subtitle mb-2 text-muted ">
@@ -44,11 +41,7 @@
                         @endforeach
                     </div>
                     <div>
-                        @if ($post->is_featured === FeaturedStatus::FEATURED)
-                            <span class="badge bg-success">Featured</span>
-                        @else
-                            <span class="badge bg-info">Not Featured</span>
-                        @endif
+                        <span @class(['badge', $post->is_featured->color()])>{{ $post->is_featured->label() }}</span>
                     </div>
                 </div>
             </div>

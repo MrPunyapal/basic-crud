@@ -20,6 +20,9 @@ Route::get('/', function () {
 // alternative to the above
 // Route::view('/','welcome');
 
+// set locale cookie
+Route::get('/set-locale/{locale}', App\Http\Controllers\SetLocaleController::class)->name('set-locale');
+
 // redirect to posts
 Route::redirect('/', '/posts');
 

@@ -50,7 +50,7 @@ class PostController extends Controller
     {
         Post::create($request->validated());
 
-        return to_route('posts.index')->with('success', 'Post created successfully.');
+        return to_route('posts.index')->with('success', __('posts.messages.Post created successfully'));
     }
 
     /**
@@ -82,7 +82,7 @@ class PostController extends Controller
     {
         $post->update($request->validated());
 
-        return to_route('posts.index')->with('success', 'Post updated successfully.');
+        return to_route('posts.index')->with('success', __('posts.messages.Post updated successfully'));
     }
 
     /**
@@ -92,6 +92,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return to_route('posts.index')->with('success', 'Post deleted successfully.');
+        return to_route('posts.index')->with('success', __('posts.messages.Post deleted successfully'));
     }
 }

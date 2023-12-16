@@ -63,7 +63,7 @@
                     <tr>
                         <th>#</th>
                         <th>
-                            <a class="text-decoration-none text-darks"
+                            <a class="text-decoration-none text-dark"
                                 href="{{ route('posts.index', [
                                     ...request()->collect()->forget(['sort', 'direction'])->toArray(),
                                     ...(function () {

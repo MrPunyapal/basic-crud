@@ -21,7 +21,7 @@ Route::get('/', function () {
 // Route::view('/','welcome');
 
 // set locale cookie
-Route::get('/set-locale/{locale}', fn ($locale) => back()->withCookie(cookie()->forever('locale', $locale)))->name('set-locale');
+Route::get('/set-locale/{locale}', App\Http\Controllers\SetLocaleController::class)->name('set-locale');
 
 // redirect to posts
 Route::redirect('/', '/posts');

@@ -14,6 +14,7 @@ return [
         'Published At' => 'Published At',
         'Feature' => 'Feature',
         'Unfeature' => 'Unfeature',
+        'Are you sure you want to delete this post?' => 'Are you sure you want to delete this post?',
     ],
     'create' => [
         'Create Post' => 'Create Post',
@@ -30,7 +31,6 @@ return [
         'Featured' => 'Featured',
         'Edit' => 'Edit',
         'Delete' => 'Delete',
-        'Are you sure you want to delete this post?' => 'Are you sure you want to delete this post?',
         'Yes' => 'Yes',
         'No' => 'No',
         'View All' => 'View All',

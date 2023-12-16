@@ -20,7 +20,7 @@
                     <a href="{{ route('posts.edit', ['post' => $post]) }}"
                         class="btn btn-primary">{{ __('posts.show.Edit') }}</a>
                     <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST" class="d-inline"
-                        onsubmit="return confirm('{{ __('posts.show.Are you sure you want to delete this post?') }}')">
+                        onsubmit="return confirm('{{ __('posts.form.Are you sure you want to delete this post?') }}')">
                         @csrf
                         @method('DELETE')
                         <input type="submit" value="{{ __('posts.show.Delete') }}" class="btn btn-danger">

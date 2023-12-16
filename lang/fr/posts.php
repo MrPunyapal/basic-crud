@@ -14,6 +14,7 @@ return [
         'Published At' => 'Publié le',
         'Feature' => 'Mettre en vedette',
         'Unfeature' => 'Enlever la mise en vedette',
+        'Are you sure you want to delete this post?' => 'Êtes-vous sûr de vouloir supprimer cet article?',
     ],
     'create' => [
         'Create Post' => 'Créer un article',
@@ -30,7 +31,6 @@ return [
         'Featured' => 'En vedette',
         'Edit' => 'Modifier',
         'Delete' => 'Supprimer',
-        'Are you sure you want to delete this post?' => 'Êtes-vous sûr de vouloir supprimer cet article?',
         'Yes' => 'Oui',
         'No' => 'Non',
         'View All' => 'Voir tout',

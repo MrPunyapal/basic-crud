@@ -50,10 +50,6 @@ class Post extends Model
 
     public function scopeSortBy($query, ?string $sortBy, ?string $direction): Builder
     {
-        if (is_null($sortBy)) {
-            return $query->latest();
-        }
-
         $direction ??= 'asc';
 
         return $query->orderBy($sortBy, $direction);

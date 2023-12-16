@@ -14,7 +14,7 @@
 
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <a href="{{ route('posts.create') }}" class="btn btn-success">{{ __('posts.create.Create Post') }}</a>
+                    <a href="{{ route('posts.create') }}" class="btn btn-success">{{ __('posts.form.Create Post') }}</a>
                     @if (request('published') == false)
                         <a href="{{ route('posts.index', ['published' => true]) }}" class="btn btn-primary">
                             {{ __('posts.index.Published Posts') }}

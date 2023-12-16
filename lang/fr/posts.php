@@ -20,13 +20,8 @@ return [
         'Actions' => 'Actions',
         'Search' => 'Rechercher',
         'Search here' => 'Rechercher ici..',
-    ],
-    'create' => [
         'Create Post' => 'Créer un article',
         'Save Post' => 'Enregistrer l\'article',
-        'Cancel' => 'Annuler',
-    ],
-    'edit' => [
         'Edit Post' => 'Modifier l\'article',
         'Update Post' => 'Mettre à jour l\'article',
         'Cancel' => 'Annuler',

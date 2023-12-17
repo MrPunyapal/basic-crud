@@ -60,31 +60,22 @@
             </div>
             <table class="table table-striped">
                 <thead>
+                    @php
+                        $queryWithoutSort = request()
+                            ->collect()
+                            ->forget(['sort', 'direction'])
+                            ->toArray();
+                        $sortQuery = function ($key) {
+                            return [...$queryWithoutSort, ...request('sort') === $key ? (request('direction') === 'asc' ? ['sort' => $key, 'direction' => 'desc'] : []) : ['sort' => $key, 'direction' => 'asc']];
+                        };
+                    @endphp
                     <tr>
                         <th>#</th>
                         <th>
                             <a class="text-decoration-none text-darks"
-                                href="{{ route('posts.index', [
-                                    ...request()->collect()->forget(['sort', 'direction'])->toArray(),
-                                    ...(function () {
-                                        if (request('sort') === 'title') {
-                                            if (request('direction') === 'asc') {
-                                                return ['sort' => 'title', 'direction' => 'desc'];
-                                            } else {
-                                                return [];
-                                            }
-                                        }
-                                        return ['sort' => 'title', 'direction' => 'asc'];
-                                    })(),
-                                ]) }}">
+                                href="{{ route('posts.index', $sortQuery('title')) }}">
                                 {{ __('posts.form.Title') }}
-                                @if (request('sort') === 'title')
-                                    @if (request('direction') === 'asc')
-                                        &darr;
-                                    @else
-                                        &uarr;
-                                    @endif
-                                @endif
+                                {!! request('sort') === 'title' ? (request('direction') === 'asc' ? '&darr;' : '&uarr;') : '' !!}
                             </a>
                         </th>
                         <th> {{ __('posts.form.Category') }} </th>

@@ -2,45 +2,58 @@
 
 namespace App\Support;
 
+use Illuminate\Support\Collection;
+
 class QueryResolver
 {
+    private Collection $query;
+
+    public function __construct()
+    {
+        $this->query = request()->collect()->forget(['page']);
+    }
+
     public function sortQuery(string $key): array
     {
+        $query = $this->query->toArray();
+        unset($query['sort'], $query['direction']);
+
         return [
-            ...request()
-                ->collect()
-                ->forget(['sort', 'direction'])
-                ->toArray(),
-            ...request('sort') === $key ? (request('direction') === 'asc' ? ['sort' => $key, 'direction' => 'desc'] : []) : ['sort' => $key, 'direction' => 'asc'],
+            ...$query,
+            ...$this->query->get('sort') === $key
+            ? ($this->query->get('direction') === 'asc' ? ['sort' => $key, 'direction' => 'desc'] : [])
+            : ['sort' => $key, 'direction' => 'asc'],
         ];
     }
 
     public function sortArrow(string $key): string
     {
-        return request('sort') === $key ? (request('direction') === 'asc' ? '&darr;' : '&uarr;') : '&darr;&uarr;';
+        return $this->query->get('sort') === $key
+        ? ($this->query->get('direction') === 'asc' ? '&darr;' : '&uarr;')
+        : '&darr;&uarr;';
     }
 
     public function publishedQuery(): array
     {
+        $query = $this->query->toArray();
+        unset($query['published']);
+
         return [
-            ...request()
-                ->collect()
-                ->forget(['published'])
-                ->toArray(),
-            'published' => request('published') ? null : true,
+            ...$query,
+            'published' => $this->query->get('published') ? null : true,
         ];
     }
 
     public function publishedLabel(): string
     {
-        return request('published') ? __('posts.index.All Posts') : __('posts.index.Published Posts');
+        return $this->query->get('published') ? __('posts.index.All Posts') : __('posts.index.Published Posts');
     }
 
     public function searchQuery(): array
     {
-        return request()
-            ->collect()
-            ->forget(['search'])
-            ->toArray();
+        $query = $this->query->toArray();
+        unset($query['search']);
+
+        return $query;
     }
 }

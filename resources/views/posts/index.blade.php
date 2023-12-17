@@ -72,7 +72,7 @@
                     <tr>
                         <th>#</th>
                         <th>
-                            <a class="text-decoration-none text-darks"
+                            <a class="text-decoration-none text-dark"
                                 href="{{ route('posts.index', $sortQuery('title')) }}">
                                 {{ __('posts.form.Title') }}
                                 {!! request('sort') === 'title' ? (request('direction') === 'asc' ? '&darr;' : '&uarr;') : '' !!}

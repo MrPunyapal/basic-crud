@@ -16,19 +16,19 @@ class QueryResolver
     public function sortQuery(string $key): array
     {
         $query = $this->query->toArray();
-        unset($query['sort'], $query['direction']);
+        unset($query['sortBy'], $query['direction']);
 
         return [
             ...$query,
-            ...$this->query->get('sort') === $key
-            ? ($this->query->get('direction') === 'asc' ? ['sort' => $key, 'direction' => 'desc'] : [])
-            : ['sort' => $key, 'direction' => 'asc'],
+            ...$this->query->get('sortBy') === $key
+            ? ($this->query->get('direction') === 'asc' ? ['sortBy' => $key, 'direction' => 'desc'] : [])
+            : ['sortBy' => $key, 'direction' => 'asc'],
         ];
     }
 
     public function sortArrow(string $key): string
     {
-        return $this->query->get('sort') === $key
+        return $this->query->get('sortBy') === $key
         ? ($this->query->get('direction') === 'asc' ? '&darr;' : '&uarr;')
         : '&darr;&uarr;';
     }

@@ -24,7 +24,7 @@ class PostController extends Controller
                 ->search($request->input('search'))
                 ->when($request->input('published'), fn ($query) => $query->published())
                 ->sortBy(
-                    in_array($request->input('sort'), ['title']) ? $request->input('sort') : null,
+                    in_array($request->input('sortBy'), ['title']) ? $request->input('sortBy') : null,
                     $request->input('direction')
                 )
                 ->paginate(10)

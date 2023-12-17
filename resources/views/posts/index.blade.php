@@ -1,4 +1,5 @@
 @use('App\Enums\FeaturedStatus')
+@inject('queryResolver', 'App\Support\QueryResolver')
 @extends('layouts.app')
 @section('title', __('posts.index.Posts'))
 @section('content')
@@ -60,24 +61,15 @@
             </div>
             <table class="table table-striped">
                 <thead>
-                    @php
-                        $sortQuery = function ($key) {
-                            return [
-                                ...request()
-                                    ->collect()
-                                    ->forget(['sort', 'direction'])
-                                    ->toArray(),
-                                ...request('sort') === $key ? (request('direction') === 'asc' ? ['sort' => $key, 'direction' => 'desc'] : []) : ['sort' => $key, 'direction' => 'asc'],
-                            ];
-                        };
-                    @endphp
                     <tr>
                         <th>#</th>
                         <th>
-                            <a class="text-decoration-none text-dark"
-                                href="{{ route('posts.index', $sortQuery('title')) }}">
+                            @php
+                                [$sortQuery, $arrow] = $queryResolver->sorter('title');
+                            @endphp
+                            <a class="text-decoration-none text-dark" href="{{ route('posts.index', $sortQuery) }}">
                                 {{ __('posts.form.Title') }}
-                                {!! request('sort') === 'title' ? (request('direction') === 'asc' ? '&darr;' : '&uarr;') : '' !!}
+                                {!! $arrow !!}
                             </a>
                         </th>
                         <th> {{ __('posts.form.Category') }} </th>

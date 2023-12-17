@@ -11,4 +11,5 @@ enum PostSortColumnsEnum: string
     use ArrayableEnum;
 
     case TITLE = 'title';
+    case IsFeatured = 'is_featured';
 }

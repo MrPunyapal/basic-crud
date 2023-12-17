@@ -21,6 +21,7 @@ class PostController extends Controller
     {
         return view('posts.index', [
             'posts' => Post::query()
+                ->select('id', 'title', 'is_featured','category_id','created_at','updated_at')
                 ->withAggregate('category', 'title')
                 ->search($request->input('search'))
                 ->when($request->input('published'), fn ($query) => $query->published())

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         // Schema::enableForeignKeyConstraints();
 
-        if(Category::count() > 0) {
+        if (Category::count() > 0) {
             return;
         }
 

@@ -58,8 +58,8 @@ class QueryResolver
         return $query;
     }
 
-    public function searchValue(): string
+    public function searchValue(): ?string
     {
-        return $this->query->get('search', '');
+        return $this->query->get('search');
     }
 }

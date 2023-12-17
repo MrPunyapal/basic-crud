@@ -1,4 +1,5 @@
 @use('App\Enums\FeaturedStatus')
+@inject('queryResolver', 'App\Support\QueryResolver')
 @extends('layouts.app')
 @section('title', __('posts.index.Posts'))
 @section('content')
@@ -15,15 +16,9 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <a href="{{ route('posts.create') }}" class="btn btn-success">{{ __('posts.form.Create Post') }}</a>
-                    @if (request('published') == false)
-                        <a href="{{ route('posts.index', ['published' => true]) }}" class="btn btn-primary">
-                            {{ __('posts.index.Published Posts') }}
-                        </a>
-                    @else
-                        <a href="{{ route('posts.index') }}" class="btn btn-primary">
-                            {{ __('posts.index.All Posts') }}
-                        </a>
-                    @endif
+                    <a href="{{ route('posts.index', $queryResolver->publishedQuery()) }}" class="btn btn-primary">
+                        {{ $queryResolver->publishedLabel() }}
+                    </a>
 
                     <div class="dropdown d-inline-block">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -44,11 +39,13 @@
                         </div>
                     </div>
                 </div>
-                <form class="mb-4">
+                <form class="mb-4" action="{{ route('posts.index') }}">
+                    @foreach ($queryResolver->searchQuery() as $key => $value)
+                        <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                    @endforeach
                     <div class="input-group">
                         <input type="text" name="search" class="form-control"
-                            placeholder="{{ __('posts.form.Search here') }}"
-                            value="{{ request()->search }}">
+                            placeholder="{{ __('posts.form.Search here') }}" value="{{ $queryResolver->SearchValue() }}">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-outline-secondary">
                                 {{ __('posts.form.Search') }}
@@ -62,8 +59,11 @@
                     <tr>
                         <th>#</th>
                         <th>
-                            <a
-                                href="?sortBy=title&direction={{ request('direction') === 'asc' ? 'desc' : 'asc' }}">{{ __('posts.form.Title') }}</a>
+                            <a class="text-decoration-none text-dark"
+                                href="{{ route('posts.index', $queryResolver->sortQuery('title')) }}">
+                                {{ __('posts.form.Title') }}
+                                {!! $queryResolver->sortArrow('title') !!}
+                            </a>
                         </th>
                         <th> {{ __('posts.form.Category') }} </th>
                         <th>{{ __('posts.form.Is Featured') }} </th>

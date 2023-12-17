@@ -140,8 +140,27 @@ Follow these steps to set up a development environment using Laravel Sail:
     ```
 ## How to Test the Application with Sail 🧪
 
-TODO
+- Copy .env.testing.example to .env.testing
+- Update the `DB_HOST` environment variable to value `mysql` (should be same as service name of database server)
+- Create a new database for testing
+    ```bash
+    ./vendor/bin/sail mysql
 
+    > create database <testing_database_name>
+    ```
+- Run the following commands
+
+    ```bash
+    ./vendor/bin/sail artisan key:generate --env=testing
+    ```
+
+    ```bash
+    ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build
+    ```
+
+    ```bash
+    ./vendor/bin/sail run --rm laravel.test ./vendor/bin/pest --parallel
+    ```
 ### Give Feedback 💬
 
 Give your feedback on [@MrPunyapal](https://x.com/MrPunyapal)

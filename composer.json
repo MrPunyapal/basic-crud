@@ -13,6 +13,7 @@
         "mews/purifier": "^3.4"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.9",
         "driftingly/rector-laravel": "^0.26.2",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",

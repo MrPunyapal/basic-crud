@@ -57,4 +57,9 @@ class QueryResolver
 
         return $query;
     }
+
+    public function searchValue(): string
+    {
+        return $this->query->get('search', '');
+    }
 }

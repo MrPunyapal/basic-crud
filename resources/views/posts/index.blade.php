@@ -1,4 +1,3 @@
-@use('App\Enums\FeaturedStatus')
 @inject('queryResolver', 'App\Support\QueryResolver')
 @extends('layouts.app')
 @section('title', __('posts.index.Posts'))

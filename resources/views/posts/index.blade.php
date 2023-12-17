@@ -64,12 +64,10 @@
                     <tr>
                         <th>#</th>
                         <th>
-                            @php
-                                [$sortQuery, $arrow] = $queryResolver->sorter('title');
-                            @endphp
-                            <a class="text-decoration-none text-dark" href="{{ route('posts.index', $sortQuery) }}">
+                            <a class="text-decoration-none text-dark"
+                                href="{{ route('posts.index', $queryResolver->sortQuery('title')) }}">
                                 {{ __('posts.form.Title') }}
-                                {!! $arrow !!}
+                                {!! $queryResolver->sortArrow('title') !!}
                             </a>
                         </th>
                         <th> {{ __('posts.form.Category') }} </th>

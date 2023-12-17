@@ -19,12 +19,4 @@ class QueryResolver
     {
         return request('sort') === $key ? (request('direction') === 'asc' ? '&darr;' : '&uarr;') : '&darr;&uarr;';
     }
-
-    public function sorter(string $key): array
-    {
-        return [
-            self::sortQuery($key),
-            self::sortArrow($key),
-        ];
-    }
 }

@@ -10,5 +10,5 @@ enum PostSortColumnsEnum: string
 {
     use ArrayableEnum;
 
-    CASE TITLE = 'title';
+    case TITLE = 'title';
 }

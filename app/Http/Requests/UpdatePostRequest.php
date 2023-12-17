@@ -25,7 +25,7 @@ class UpdatePostRequest extends FormRequest
 
         return [
             ...$rules,
-            'slug' => ['required', 'max:120', 'unique:posts,slug,'.$this->post->id, 'alpha_dash'],
+            'slug' => ['required', 'max:120', 'unique:posts,slug,'.$this->post->id, 'alpha_dash:ascii'],
             'image' => ['nullable', 'image'],
         ];
     }

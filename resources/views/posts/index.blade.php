@@ -1,4 +1,3 @@
-@use('App\Enums\FeaturedStatus')
 @inject('queryResolver', 'App\Support\QueryResolver')
 @extends('layouts.app')
 @section('title', __('posts.index.Posts'))
@@ -66,7 +65,13 @@
                             </a>
                         </th>
                         <th> {{ __('posts.form.Category') }} </th>
-                        <th>{{ __('posts.form.Is Featured') }} </th>
+                        <th>
+                            <a class="text-decoration-none text-dark"
+                                href="{{ route('posts.index', $queryResolver->sortQuery('is_featured')) }}">
+                                {{ __('posts.form.Is Featured') }}
+                                {!! $queryResolver->sortArrow('is_featured') !!}
+                            </a>
+                        </th>
                         <th>{{ __('posts.form.Created At') }}</th>
                         <th>{{ __('posts.form.Updated At') }}
                         <th>{{ __('posts.form.Actions') }}</th>
@@ -82,7 +87,7 @@
                                 <a href="{{ route('posts.show', ['post' => $post]) }}">{{ $post->title }}</a>
                             </td>
                             <td>{{ $post->category_title }}</td>
-                            <td>{{ $post->is_featured->label() }}</td>
+                            <td>{{ $post->is_featured->BooleanLabel() }}</td>
                             <td>{{ $post->created_at->format('d/m/Y H:i:s') }}</td>
                             <td>{{ $post->updated_at->since() }}</td>
                             <td>

@@ -25,7 +25,7 @@ class PostController extends Controller
                 ->search($request->input('search'))
                 ->when($request->input('published'), fn ($query) => $query->published())
                 ->when(
-                    in_array($request->input('sortBy'), PostSortColumnsEnum::values(), true),
+                    in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
                     fn ($query) => $query->sortBy($request->input('sortBy'), $request->input('direction')),
                     fn ($query) => $query->latest(),
                 )

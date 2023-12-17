@@ -19,4 +19,20 @@ class QueryResolver
     {
         return request('sort') === $key ? (request('direction') === 'asc' ? '&darr;' : '&uarr;') : '&darr;&uarr;';
     }
+
+    public function publishedQuery(): array
+    {
+        return [
+            ...request()
+                ->collect()
+                ->forget(['published'])
+                ->toArray(),
+            'published' => request('published') ? null : true,
+        ];
+    }
+
+    public function publishedLabel(): string
+    {
+        return request('published') ? __('posts.index.All Posts') : __('posts.index.Published Posts');
+    }
 }

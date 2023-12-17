@@ -20,9 +20,10 @@ class QueryResolver
 
         return [
             ...$query,
-            ...$this->query->get('sortBy') === $key
-            ? ($this->query->get('direction') === 'asc' ? ['sortBy' => $key, 'direction' => 'desc'] : [])
-            : ['sortBy' => $key, 'direction' => 'asc'],
+            ...match ($this->query->get('sortBy')) {
+                $key => $this->query->get('direction') === 'asc' ? ['sortBy' => $key, 'direction' => 'desc'] : [],
+                default => ['sortBy' => $key, 'direction' => 'asc'],
+            },
         ];
     }
 

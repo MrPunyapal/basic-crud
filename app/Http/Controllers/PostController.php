@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PostSortColumnsEnum;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
@@ -23,9 +24,10 @@ class PostController extends Controller
                 ->withAggregate('category', 'title')
                 ->search($request->input('search'))
                 ->when($request->input('published'), fn ($query) => $query->published())
-                ->sortBy(
-                    in_array($request->input('sortBy'), ['title']) ? $request->input('sortBy') : null,
-                    $request->input('direction')
+                ->when(
+                    in_array($request->input('sortBy'), PostSortColumnsEnum::values(), true),
+                    fn ($query) => $query->sortBy($request->input('sortBy'), $request->input('direction')),
+                    fn ($query) => $query->latest(),
                 )
                 ->paginate(10)
                 ->withQueryString(),

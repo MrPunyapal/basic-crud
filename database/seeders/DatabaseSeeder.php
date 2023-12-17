@@ -23,14 +23,18 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Schema::disableForeignKeyConstraints();
+        // Schema::disableForeignKeyConstraints();
 
-        Category::query()->truncate();
-        Post::query()->truncate();
+        // Category::query()->truncate();
+        // Post::query()->truncate();
 
-        Schema::enableForeignKeyConstraints();
+        // Schema::enableForeignKeyConstraints();
 
-        Category::factory(8)->sequence(
+        if(Category::count() > 0) {
+            return;
+        }
+
+        Category::factory(10)->sequence(
             ['title' => 'Laravel'],
             ['title' => 'PHP'],
             ['title' => 'JavaScript'],
@@ -39,6 +43,8 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Angular.js'],
             ['title' => 'Java'],
             ['title' => 'C#'],
+            ['title' => 'C++'],
+            ['title' => 'Python'],
         )->has(
             Post::factory()->count(rand(5, 10))
         )->create();

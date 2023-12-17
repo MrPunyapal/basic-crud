@@ -29,8 +29,7 @@ class PostController extends Controller
                     fn ($query) => $query->sortBy($request->input('sortBy'), $request->input('direction')),
                     fn ($query) => $query->latest(),
                 )
-                ->paginate(10)
-                ->withQueryString(),
+                ->paginate(10),
         ]);
     }
 

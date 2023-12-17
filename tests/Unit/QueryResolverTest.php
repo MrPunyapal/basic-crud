@@ -7,22 +7,31 @@ use function Pest\Laravel\get;
 
 uses(Tests\TestCase::class);
 
-it('can resolve sort query', function () {
+beforeEach(function () {
     Post::factory(20)
         ->create();
+});
 
-    get(route('posts.index', [
-        'sortBy' => 'title',
-        'direction' => 'asc',
-        'page' => 1,
-    ]));
+it('can resolve sort query', function ($query, $expectedQuery) {
+
+    get(route('posts.index', $query));
 
     $resolver = new QueryResolver();
 
     $sortQuery = $resolver->sortQuery('title');
 
-    expect($sortQuery)->toEqual([
-        'sortBy' => 'title',
-        'direction' => 'desc',
-    ]);
-});
+    expect($sortQuery)->toEqual($expectedQuery);
+})->with([
+    [
+        ['sortBy' => 'title', 'direction' => 'asc', 'page' => 1],
+        ['sortBy' => 'title', 'direction' => 'desc'],
+    ],
+    [
+        ['sortBy' => 'title', 'direction' => 'desc'],
+        [],
+    ],
+    [
+        ['published' => true, 'search' => 'test', 'page' => 1],
+        ['published' => true, 'search' => 'test', 'sortBy' => 'title', 'direction' => 'asc'],
+    ],
+]);

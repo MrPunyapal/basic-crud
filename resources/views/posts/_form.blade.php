@@ -90,7 +90,7 @@
 </div>
 
 <div class="form-group mt-2">
-    <label for="content">{{__('posts.form.Content')}}</label>
+    <label for="content">{{ __('posts.form.Content') }}</label>
     <input id="content" type="hidden" name="content" value="{{ old('content', $post->content ?? null) }}">
     <trix-editor input="content"></trix-editor>
     @error('content')
@@ -109,10 +109,11 @@
     <script src="{{ asset('theme/js/select2.min.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
-            $('#title').on('blur', function() {
-                $('#slug').val(slugify($(this).val()));
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('title').addEventListener('blur', function() {
+                document.getElementById('slug').value = slugify(this.value);
             });
+            // todo: remove Jquery dependancy
             $('#tags').select2({
                 tags: true,
                 maximumSelectionLength: 3

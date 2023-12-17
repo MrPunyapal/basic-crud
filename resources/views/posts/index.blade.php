@@ -61,12 +61,14 @@
             <table class="table table-striped">
                 <thead>
                     @php
-                        $queryWithoutSort = request()
-                            ->collect()
-                            ->forget(['sort', 'direction'])
-                            ->toArray();
                         $sortQuery = function ($key) {
-                            return [...$queryWithoutSort, ...request('sort') === $key ? (request('direction') === 'asc' ? ['sort' => $key, 'direction' => 'desc'] : []) : ['sort' => $key, 'direction' => 'asc']];
+                            return [
+                                ...request()
+                                    ->collect()
+                                    ->forget(['sort', 'direction'])
+                                    ->toArray(),
+                                ...request('sort') === $key ? (request('direction') === 'asc' ? ['sort' => $key, 'direction' => 'desc'] : []) : ['sort' => $key, 'direction' => 'asc'],
+                            ];
                         };
                     @endphp
                     <tr>

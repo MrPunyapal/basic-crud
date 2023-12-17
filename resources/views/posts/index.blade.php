@@ -40,12 +40,12 @@
                     </div>
                 </div>
                 <form class="mb-4" action="{{ route('posts.index') }}">
-                    @foreach (request()->collect()->forget('search')->toArray() as $key => $value)
+                    @foreach ($queryResolver->searchQuery() as $key => $value)
                         <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                     @endforeach
                     <div class="input-group">
                         <input type="text" name="search" class="form-control"
-                            placeholder="{{ __('posts.form.Search here') }}" value="{{ request()->search }}">
+                            placeholder="{{ __('posts.form.Search here') }}" value="{{ request('search') }}">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-outline-secondary">
                                 {{ __('posts.form.Search') }}

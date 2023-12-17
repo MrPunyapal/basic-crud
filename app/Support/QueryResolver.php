@@ -35,4 +35,12 @@ class QueryResolver
     {
         return request('published') ? __('posts.index.All Posts') : __('posts.index.Published Posts');
     }
+
+    public function searchQuery(): array
+    {
+        return request()
+            ->collect()
+            ->forget(['search'])
+            ->toArray();
+    }
 }

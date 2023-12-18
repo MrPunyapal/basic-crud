@@ -31,6 +31,7 @@ class PostController extends Controller
                     fn ($query) => $query->latest(),
                 )
                 ->paginate(10),
+                ->withQueryString(),
         ]);
     }
 

@@ -12,7 +12,7 @@
     @stack('styles')
 </head>
 
-<body>
+<body dir="{{ app()->isLocale('ar') ? 'rtl' : 'ltr' }}">
     <main>
         <div class="container">
             @yield('content')

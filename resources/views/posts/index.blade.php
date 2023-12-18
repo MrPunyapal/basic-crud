@@ -28,6 +28,7 @@
                             $locales = [
                                 'en' => 'English',
                                 'fr' => 'French',
+                                'ar' => 'Arabic',
                             ];
                         @endphp
                         <div class="dropdown-menu">

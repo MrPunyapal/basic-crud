@@ -1,6 +1,6 @@
 <?php
 
-return[
+return [
     'form' => [
         'Title' => 'शीर्षक',
         'Slug' => 'स्लग',

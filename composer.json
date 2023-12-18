@@ -16,6 +16,7 @@
         "barryvdh/laravel-debugbar": "^3.9",
         "driftingly/rector-laravel": "^0.26.2",
         "fakerphp/faker": "^1.9.1",
+        "laravel-lang/common": "^6.0",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.4.4",

@@ -7,6 +7,7 @@ return [
         'Content' => 'Content',
         'Image' => 'Image',
         'Category' => 'Category',
+        'Select a Category' => 'Select a Category',
         'Description' => 'Description',
         'Tags' => 'Tags',
         'Featured' => 'Featured',

@@ -29,6 +29,7 @@
                                 'en' => 'English',
                                 'fr' => 'French',
                                 'ar' => 'Arabic',
+                                'hi' => 'Hindi',
                             ];
                         @endphp
                         <div class="dropdown-menu">

@@ -7,6 +7,7 @@ return [
         'Content' => 'Contenu',
         'Image' => 'Image',
         'Category' => 'Catégorie',
+        'Select a Category' => 'Sélectionnez une catégorie',
         'Description' => 'Description',
         'Tags' => 'Tags',
         'Featured' => 'En vedette',

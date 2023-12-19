@@ -5,7 +5,20 @@ namespace Tests\Unit;
 use App\Support\Settings;
 
 test('has tags', function () {
-    $tags = ['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'];
+    expect(Settings::getTags())->toBe(['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications']);
+});
 
-    $this->assertSame($tags, Settings::getTags());
+test('has locales', function () {
+    expect(Settings::getLocales())->toBe([
+        'en' => 'English',
+        'fr' => 'French',
+        'ar' => 'Arabic',
+        'hi' => 'Hindi',
+        'gu' => 'Gujarati',
+    ]);
+});
+
+test('is rtl', function () {
+    expect(Settings::isRtl('ar'))->toBeTrue();
+    expect(Settings::isRtl('en'))->toBeFalse();
 });

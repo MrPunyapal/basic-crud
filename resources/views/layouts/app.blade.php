@@ -1,3 +1,4 @@
+@use('App\Support\Settings')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -12,7 +13,7 @@
     @stack('styles')
 </head>
 
-<body dir="{{ app()->isLocale('ar') ? 'rtl' : 'ltr' }}">
+<body dir="{{ Settings::isRtl(app()->getLocale()) ? 'rtl' : 'ltr' }}">
     <main>
         <div class="container">
             @yield('content')

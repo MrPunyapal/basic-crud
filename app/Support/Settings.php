@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 final class Settings
@@ -32,6 +34,6 @@ final class Settings
 
     public static function isRtl(string $locale): bool
     {
-        return in_array($locale, ['ar']);
+        return in_array($locale, ['ar'], true);
     }
 }

@@ -3,6 +3,7 @@
     /** @var QueryResolver $queryResolver */
 @endphp
 @inject('queryResolver', 'App\Support\QueryResolver')
+@use('App\Support\Settings')
 @extends('layouts.app')
 @section('title', __('posts.index.Posts'))
 @section('content')
@@ -28,17 +29,8 @@
                             aria-expanded="false">
                             {{ __('posts.index.Languages') }}
                         </button>
-                        @php
-                            $locales = [
-                                'en' => 'English',
-                                'fr' => 'French',
-                                'ar' => 'Arabic',
-                                'hi' => 'Hindi',
-                                'gu' => 'Gujarati',
-                            ];
-                        @endphp
                         <div class="dropdown-menu">
-                            @foreach ($locales as $locale => $Label)
+                            @foreach (Settings::getLocales() as $locale => $Label)
                                 <a class="dropdown-item {{ app()->getLocale() === $locale ? 'active' : '' }}"
                                     href="{{ route('set-locale', ['locale' => $locale]) }}">{{ $Label }}</a>
                             @endforeach

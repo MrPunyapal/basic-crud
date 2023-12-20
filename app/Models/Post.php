@@ -44,7 +44,7 @@ class Post extends Model
     public function image(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value),
+            get: fn (mixed $value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value),
             set: fn (mixed $value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value : $value->store('posts', 'public')
         );
     }

@@ -69,6 +69,6 @@ class QueryResolver
 
     public function searchValue(): mixed
     {
-        return $this->query->value('search');
+        return $this->query->get('search');
     }
 }

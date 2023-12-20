@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtmlInput;
 
@@ -48,26 +49,26 @@ class Post extends Model
         );
     }
 
-    public function scopeSortBy($query, ?string $sortBy, ?string $direction): Builder
+    public function scopeSortBy($query, ?string $sortBy, ?string $direction): void
     {
         $direction ??= 'asc';
 
-        return $query->orderBy($sortBy, $direction);
+        $query->orderBy($sortBy, $direction);
     }
 
-    public function scopePublished($query): Builder
+    public function scopePublished($query): void
     {
-        return $query->where('published_at', '<=', now());
+        $query->where('published_at', '<=', now());
     }
 
-    public function scopeSearch(Builder $query, ?string $search)
+    public function scopeSearch(Builder $query, ?string $search): void
     {
         $query->when($search, function (Builder $query, ?string $search) {
             $query->where('title', 'like', '%'.$search.'%');
         });
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Support\Settings;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -24,11 +25,11 @@ class PostController extends Controller
                 ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
                 ->withAggregate('category', 'title')
                 ->search($request->input('search'))
-                ->when($request->input('published'), fn ($query) => $query->published())
+                ->when($request->input('published'), fn ($query) => /** @var Builder|Post $query */ $query->published())
                 ->when(
                     in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
-                    fn ($query) => $query->sortBy($request->input('sortBy'), $request->input('direction')),
-                    fn ($query) => $query->latest(),
+                    fn (Builder $query) => /** @var Builder|Post $query */ $query->sortBy($request->input('sortBy'), $request->input('direction')),
+                    fn (Builder $query) => /** @var Builder|Post $query */ $query->latest(),
                 )
                 ->paginate(10)
                 ->withQueryString(),

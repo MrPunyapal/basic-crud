@@ -13,6 +13,9 @@ class QueryResolver
         $this->query = request()->collect()->forget(['page']);
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function sortQuery(string $key): array
     {
         $query = $this->query->toArray();
@@ -34,6 +37,9 @@ class QueryResolver
         : '&uarr;&darr;';
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function publishedQuery(): array
     {
         $query = $this->query->toArray();
@@ -50,6 +56,9 @@ class QueryResolver
         return $this->query->get('published') ? __('posts.index.All Posts') : __('posts.index.Published Posts');
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function searchQuery(): array
     {
         $query = $this->query->toArray();
@@ -58,8 +67,8 @@ class QueryResolver
         return $query;
     }
 
-    public function searchValue(): ?string
+    public function searchValue(): mixed
     {
-        return $this->query->get('search');
+        return $this->query->value('search');
     }
 }

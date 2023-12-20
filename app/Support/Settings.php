@@ -14,11 +14,17 @@ final class Settings
         'gu' => 'Gujarati',
     ];
 
+    /**
+     * @return  array<int, string>
+     */
     public static function getTags(): array
     {
         return self::TAGS;
     }
 
+    /**
+     * @return  array<string, string>
+     */
     public static function getLocales(): array
     {
         return self::LOCALES;

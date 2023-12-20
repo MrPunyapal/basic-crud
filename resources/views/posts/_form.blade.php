@@ -1,4 +1,6 @@
-@use('App\Enums\FeaturedStatus')
+@php
+    use App\Enums\FeaturedStatus;
+@endphp
 <div class="form-group mt-2">
     <label for="title">{{ __('posts.form.Title') }}</label>
     <input id="title" class="form-control" type="text" name="title"
@@ -113,7 +115,7 @@
             document.getElementById('title').addEventListener('blur', function() {
                 document.getElementById('slug').value = slugify(this.value);
             });
-            // todo: remove Jquery dependancy
+            // todo: remove Jquery dependency
             $('#tags').select2({
                 tags: true,
                 maximumSelectionLength: 3

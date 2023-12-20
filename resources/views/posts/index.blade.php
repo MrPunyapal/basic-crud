@@ -1,3 +1,7 @@
+@php
+    use App\Support\QueryResolver;
+    /** @var QueryResolver $queryResolver */
+@endphp
 @inject('queryResolver', 'App\Support\QueryResolver')
 @use('App\Support\Settings')
 @extends('layouts.app')
@@ -39,7 +43,7 @@
                     @endforeach
                     <div class="input-group">
                         <input type="text" name="search" class="form-control"
-                            placeholder="{{ __('posts.form.Search here') }}" value="{{ $queryResolver->SearchValue() }}">
+                            placeholder="{{ __('posts.form.Search here') }}" value="{{ $queryResolver->searchValue() }}">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-outline-secondary">
                                 {{ __('posts.form.Search') }}

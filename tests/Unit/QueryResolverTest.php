@@ -48,15 +48,15 @@ it('can resolve sort arrow', function ($query, $expectedArrow) {
 })->with([
     [
         ['sortBy' => 'title', 'direction' => 'asc', 'page' => 1],
-        '&darr;',
-    ],
-    [
-        ['sortBy' => 'title', 'direction' => 'desc'],
         '&uarr;',
     ],
     [
+        ['sortBy' => 'title', 'direction' => 'desc'],
+        '&darr;',
+    ],
+    [
         ['published' => true, 'search' => 'test', 'page' => 1],
-        '&darr;&uarr;',
+        '&uarr;&darr;',
     ],
 ]);
 

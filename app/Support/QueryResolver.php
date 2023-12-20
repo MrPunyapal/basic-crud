@@ -30,8 +30,8 @@ class QueryResolver
     public function sortArrow(string $key): string
     {
         return $this->query->get('sortBy') === $key
-        ? ($this->query->get('direction') === 'asc' ? '&darr;' : '&uarr;')
-        : '&darr;&uarr;';
+        ? ($this->query->get('direction') === 'asc' ? '&uarr;' : '&darr;')
+        : '&uarr;&darr;';
     }
 
     public function publishedQuery(): array

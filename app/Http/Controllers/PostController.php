@@ -26,7 +26,7 @@ class PostController extends Controller
             'posts' => Post::query()
                 ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
                 ->withAggregate('category', 'title')
-                ->search($request->input('search'))
+                ->search($request->input('search').'')
                 ->when($request->input('published'), fn (Builder $query) => /** @var Builder|Post $query */ $query->published())
                 ->when(
                     in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),

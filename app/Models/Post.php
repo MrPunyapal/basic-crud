@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\UploadedFile;
 use Mews\Purifier\Casts\CleanHtmlInput;
 
 /**
@@ -51,11 +52,22 @@ class Post extends Model
         return new PostBuilder($query);
     }
 
-    public function image(): Attribute
+    /**
+     * @return Attribute<string, string>
+     */
+    protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value.'' : asset('storage/'.$value),
-            set: fn (mixed $value): string => ($value instanceof \Illuminate\Http\UploadedFile ? $value->store('posts') : $value).'',
+            get: function ($value) {
+                return filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value);
+            },
+            set: function (string|UploadedFile|null $value) {
+                if ($value instanceof UploadedFile) {
+                    return $value->store('posts') ?: null;
+                }
+
+                return $value;
+            }
         );
     }
 

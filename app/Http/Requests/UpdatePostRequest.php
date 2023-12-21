@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -25,7 +27,12 @@ class UpdatePostRequest extends FormRequest
 
         return [
             ...$rules,
-            'slug' => ['required', 'max:120', 'unique:posts,slug,'.$this->route('post')->id, 'alpha_dash:ascii'],
+            'slug' => [
+                'required',
+                'max:120',
+                $this->route('post') instanceof \App\Models\Post ? 'unique:posts,slug,'.$this->route('post')->id : 'unique:posts,slug',
+                'alpha_dash:ascii',
+            ],
             'image' => ['nullable', 'image'],
         ];
     }

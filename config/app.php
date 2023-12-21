@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Facades\App\Support\Settings;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;

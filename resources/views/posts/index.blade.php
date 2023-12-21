@@ -1,9 +1,8 @@
-@php
-    use App\Support\QueryResolver;
-    /** @var QueryResolver $queryResolver */
-@endphp
 @inject('queryResolver', 'App\Support\QueryResolver')
 @use('App\Support\Settings')
+@php
+    /** @var App\Support\QueryResolver $queryResolver */
+@endphp
 @extends('layouts.app')
 @section('title', __('posts.index.Posts'))
 @section('content')

@@ -58,8 +58,10 @@ class Post extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn ():string => filter_var($this->image, FILTER_VALIDATE_URL) ? $this->image : asset('storage/'.$this->image),
-            set: function (string|UploadedFile|null $value): ?string {
+            get: function ($value) {
+                return filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value);
+            },
+            set: function (string|UploadedFile|null $value) {
                 if ($value instanceof UploadedFile) {
                     return $value->store('posts') ?: null;
                 }

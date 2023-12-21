@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Builders\PostBuilder;
 use App\Enums\PostSortColumnsEnum;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Support\Settings;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -22,19 +22,25 @@ class PostController extends Controller
      */
     public function index(Request $request): View
     {
+        $posts = Post::query()
+            ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
+            ->withAggregate('category', 'title')
+            ->when((string) $request->string('search'), function (PostBuilder $query, string $search) {
+                $query->search($search);
+            })
+            ->when($request->input('published'), fn (PostBuilder $query) => $query->published())
+            ->when(
+                in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
+                function (PostBuilder $query) use ($request) {
+                    $query->sortBy((string) $request->string('sortBy'), (string) $request->string('direction'));
+                },
+                fn (PostBuilder $query) => $query->latest(),
+            )
+            ->paginate(10)
+            ->withQueryString();
+
         return view('posts.index', [
-            'posts' => Post::query()
-                ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
-                ->withAggregate('category', 'title')
-                ->search($request->input('search').'')
-                ->when($request->input('published'), fn (Builder $query) => /** @var Builder|Post $query */ $query->published())
-                ->when(
-                    in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
-                    fn (Builder $query) => /** @var Builder|Post $query */ $query->sortBy($request->input('sortBy'), $request->input('direction')),
-                    fn (Builder $query) => /** @var Builder|Post $query */ $query->latest(),
-                )
-                ->paginate(10)
-                ->withQueryString(),
+            'posts' => $posts,
         ]);
     }
 

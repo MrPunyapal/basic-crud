@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Builders\PostBuilder;
 use App\Enums\FeaturedStatus;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mews\Purifier\Casts\CleanHtmlInput;
 
+/**
+ * @method static PostBuilder query()
+ */
 class Post extends Model
 {
     use HasFactory, SoftDeletes;
@@ -43,31 +46,17 @@ class Post extends Model
         'content' => CleanHtmlInput::class,
     ];
 
+    public function newEloquentBuilder($query): PostBuilder
+    {
+        return new PostBuilder($query);
+    }
+
     public function image(): Attribute
     {
         return Attribute::make(
             get: fn (mixed $value): string => filter_var($value, FILTER_VALIDATE_URL) ? $value.'' : asset('storage/'.$value),
             set: fn (mixed $value): string => ($value instanceof \Illuminate\Http\UploadedFile ? $value->store('posts') : $value).'',
         );
-    }
-
-    public function scopeSortBy(Builder $query, string $sortBy, ?string $direction): void
-    {
-        $direction ??= 'asc';
-
-        $query->orderBy($sortBy, $direction);
-    }
-
-    public function scopePublished(Builder $query): void
-    {
-        $query->where('published_at', '<=', now());
-    }
-
-    public function scopeSearch(Builder $query, ?string $search): void
-    {
-        $query->when($search, function (Builder $query, string $search) {
-            $query->where('title', 'like', '%'.$search.'%');
-        });
     }
 
     public function category(): BelongsTo

@@ -1,6 +1,4 @@
-@php
-    use App\Enums\FeaturedStatus;
-@endphp
+@use('App\Enums\FeaturedStatus')
 <div class="form-group mt-2">
     <label for="title">{{ __('posts.form.Title') }}</label>
     <input id="title" class="form-control" type="text" name="title"

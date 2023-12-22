@@ -1,4 +1,4 @@
-# CRUD Operations Best Practices Example for Beginners
+# Laravel CRUD Operations Best Practices Example Beginner to Advanced
 
 [![Tests](https://github.com/mr-punyapal/basic-crud/actions/workflows/tests.yml/badge.svg)](https://github.com/mr-punyapal/basic-crud/actions/workflows/tests.yml)
 

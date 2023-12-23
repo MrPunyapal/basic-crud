@@ -10,11 +10,11 @@
         <div class="col-12">
             <h1>{{ __('posts.index.Posts') }}</h1>
 
-            @if (session()->has('success'))
+            @session('success')
                 <div class="alert alert-success">
-                    {{ session()->get('success') }}
+                    {{ $value }}
                 </div>
-            @endif
+            @endsession
 
             <div class="d-flex justify-content-between align-items-center">
                 <div>

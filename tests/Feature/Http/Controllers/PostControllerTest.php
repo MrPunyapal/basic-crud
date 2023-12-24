@@ -23,6 +23,7 @@ test('root redirects to posts', function () {
 test('can see posts', function () {
     get(route('posts.index'))
         ->assertOk()
+        ->assertSessionHas('posts.index.previous.query', [])
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
             'posts',
@@ -40,6 +41,7 @@ test('can only see published posts', function () {
     get(route('posts.index', ['published' => true]))
         ->assertOk()
         ->assertViewIs('posts.index')
+        ->assertSessionHas('posts.index.previous.query', ['published' => true])
         ->assertViewHas('posts', fn ($posts) => $posts->where('published_at', '>=', now())->count() === 0);
 });
 
@@ -61,6 +63,10 @@ test('can see posts sorted by title', function (string $direction) {
         'direction' => $direction,
     ]))
         ->assertOk()
+        ->assertSessionHas('posts.index.previous.query', [
+            'sortBy' => 'title',
+            'direction' => $direction,
+        ])
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
             'posts',
@@ -90,6 +96,9 @@ test('can search posts by title', function () {
     // Execute the search
     get(route('posts.index', ['search' => $searchTerm]))
         ->assertOk()
+        ->assertSessionHas('posts.index.previous.query', [
+            'search' => $searchTerm,
+        ])
         ->assertViewIs('posts.index')
         ->assertViewHasAll([
             'posts',
@@ -113,7 +122,7 @@ test('can see create post page', function () {
 test('can create post', function () {
     $Category = Category::factory()->create();
     $image = UploadedFile::fake()->image('some-image.png');
-
+    get(route('posts.index', ['published' => true]));
     post(route('posts.store'), [
         'title' => 'Test Title',
         'slug' => 'test-title',
@@ -124,7 +133,7 @@ test('can create post', function () {
         'content' => 'this is the content',
         'tags' => ['Eloquent'],
     ])
-        ->assertRedirect(route('posts.index'))
+        ->assertRedirect(route('posts.index', ['published' => true]))
         ->assertSessionHasNoErrors();
 
     assertDatabaseHas('posts', [
@@ -175,6 +184,7 @@ test('can edit post', function () {
 
     $image = UploadedFile::fake()->image('some-image.png');
 
+    get(route('posts.index', ['sortBy' => 'title', 'direction' => 'asc']));
     patch(route('posts.update', $post), [
         'title' => 'updated Title',
         'slug' => 'test-title',
@@ -185,7 +195,7 @@ test('can edit post', function () {
         'content' => 'this is the content',
         'tags' => ['Eloquent'],
     ])
-        ->assertRedirect(route('posts.index'))
+        ->assertRedirect(route('posts.index', ['sortBy' => 'title', 'direction' => 'asc']))
         ->assertSessionHasNoErrors();
 
     assertDatabaseHas('posts', [
@@ -197,8 +207,21 @@ test('can edit post', function () {
 test('can delete post', function () {
     $post = Post::factory()->createOne();
 
+    get(route('posts.index', [
+        'sortBy' => 'title',
+        'direction' => 'asc',
+        'page' => 2,
+        'search' => 'test',
+        'published' => true,
+    ]));
     delete(route('posts.destroy', $post))
-        ->assertRedirect(route('posts.index'));
+        ->assertRedirect(route('posts.index', [
+            'sortBy' => 'title',
+            'direction' => 'asc',
+            'page' => 2,
+            'search' => 'test',
+            'published' => true,
+        ]));
 
     assertSoftDeleted($post);
 });

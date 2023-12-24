@@ -10,6 +10,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Support\QueryResolver;
 use App\Support\Settings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -62,7 +63,8 @@ class PostController extends Controller
     {
         Post::create($request->validated());
 
-        return to_route('posts.index')->with('success', __('posts.messages.Post created successfully'));
+        return to_route('posts.index', QueryResolver::getPreviousQuery('posts.index'))
+            ->with('success', __('posts.messages.Post created successfully'));
     }
 
     /**
@@ -94,7 +96,8 @@ class PostController extends Controller
     {
         $post->update($request->validated());
 
-        return to_route('posts.index')->with('success', __('posts.messages.Post updated successfully'));
+        return to_route('posts.index', QueryResolver::getPreviousQuery('posts.index'))
+            ->with('success', __('posts.messages.Post updated successfully'));
     }
 
     /**
@@ -104,6 +107,7 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return to_route('posts.index')->with('success', __('posts.messages.Post deleted successfully'));
+        return to_route('posts.index', QueryResolver::getPreviousQuery('posts.index'))
+            ->with('success', __('posts.messages.Post deleted successfully'));
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Route;
 
 class QueryResolver
 {
@@ -15,7 +16,20 @@ class QueryResolver
 
     public function __construct()
     {
+        if (request()->routeIs('*.index')) {
+            session()->put(Route::currentRouteName().'.previous.query', request()->query());
+        }
         $this->query = request()->collect()->forget(['page']);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public static function getPreviousQuery(string $routeName): array
+    {
+        $query = session()->get($routeName.'.previous.query');
+
+        return is_array($query) ? $query : [];
     }
 
     /**

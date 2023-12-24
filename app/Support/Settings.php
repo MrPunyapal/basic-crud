@@ -32,6 +32,11 @@ final class Settings
         return self::LOCALES;
     }
 
+    public static function getDir(): string
+    {
+        return self::isRtl(app()->getLocale()) ? 'rtl' : 'ltr';
+    }
+
     public static function isRtl(string $locale): bool
     {
         return in_array($locale, ['ar'], true);

@@ -34,7 +34,7 @@ final class Settings
         return self::LOCALES;
     }
 
-    public static function getDir(): string
+    public static function getDirection(): string
     {
         return self::isRtl(App::getLocale()) ? 'rtl' : 'ltr';
     }

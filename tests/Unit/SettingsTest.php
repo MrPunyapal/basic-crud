@@ -30,7 +30,7 @@ test('get direction for RTL and LTR locale', function ($locale, $dir) {
     App::shouldReceive('getLocale')
         ->once()
         ->andReturn($locale);
-    expect(Settings::getDir())->toBe($dir);
+    expect(Settings::getDirection())->toBe($dir);
 })->with([
     ['ar', 'rtl'],
     ['en', 'ltr'],

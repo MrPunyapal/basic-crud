@@ -13,7 +13,7 @@
     @stack('styles')
 </head>
 
-<body dir="{{ Settings::getDir() }}">
+<body dir="{{ Settings::getDirection() }}">
     <main>
         <div class="container">
             @yield('content')

@@ -47,6 +47,9 @@ class Post extends Model
         'content' => CleanHtmlInput::class,
     ];
 
+    /**
+     * @return PostBuilder<Post>
+     */
     public function newEloquentBuilder($query): PostBuilder
     {
         return new PostBuilder($query);
@@ -71,6 +74,9 @@ class Post extends Model
         );
     }
 
+    /**
+     * @return BelongsTo<Category, Post>
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

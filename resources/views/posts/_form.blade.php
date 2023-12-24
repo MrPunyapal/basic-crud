@@ -99,24 +99,27 @@
 </div>
 
 @push('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('theme/css/trix.css') }}">
-    <link href="{{ asset('theme/css/select2.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/css/trix.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/css/tom-select.css') }}" />
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('theme/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('theme/js/trix.umd.min.js') }}"></script>
-    <script src="{{ asset('theme/js/select2.min.js') }}"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ asset('theme/js/trix.umd.min.js') }}"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ asset('theme/js/tom-select.complete.min.js') }}"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('title').addEventListener('blur', function() {
-                document.getElementById('slug').value = slugify(this.value);
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('#title').addEventListener('blur', function() {
+                document.querySelector('#slug').value = slugify(this.value);
             });
-            // todo: remove Jquery dependency
-            $('#tags').select2({
-                tags: true,
-                maximumSelectionLength: 3
+
+            new TomSelect('#tags', {
+                create: true,
+                plugins: {
+                    remove_button: {
+                        title: 'Remove tag'
+                    }
+                }
             });
         });
 

@@ -8,6 +8,9 @@ use Illuminate\Support\Collection;
 
 class QueryResolver
 {
+    /**
+     * @var Collection<string, mixed>
+     */
     private Collection $query;
 
     public function __construct()

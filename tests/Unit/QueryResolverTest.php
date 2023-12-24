@@ -141,3 +141,33 @@ it('can resolve search value', function ($query, $expectedValue) {
         null,
     ],
 ]);
+
+it('can store previous query in session', function () {
+    $routeName = 'posts.index';
+    $query = ['sortBy' => 'title', 'direction' => 'asc', 'page' => 1];
+
+    get(route($routeName, $query));
+
+    $storedQuery = session()->get($routeName.'.previous.query');
+
+    expect($storedQuery)->toEqual($query);
+});
+
+it('can retrieve previous query from session', function () {
+    $routeName = 'posts.index';
+    $query = ['sortBy' => 'title', 'direction' => 'asc', 'page' => 1];
+
+    session()->put($routeName.'.previous.query', $query);
+
+    $previousQuery = QueryResolver::getPreviousQuery($routeName);
+
+    expect($previousQuery)->toEqual($query);
+});
+
+it('returns empty array if previous query is not found in session', function () {
+    $routeName = 'posts.index';
+
+    $previousQuery = QueryResolver::getPreviousQuery($routeName);
+
+    expect($previousQuery)->toEqual([]);
+});

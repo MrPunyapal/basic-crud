@@ -13,7 +13,7 @@
     @stack('styles')
 </head>
 
-<body dir="{{ Settings::isRtl(app()->getLocale()) ? 'rtl' : 'ltr' }}">
+<body dir="{{ Settings::getDirection() }}">
     <main>
         <div class="container">
             @yield('content')

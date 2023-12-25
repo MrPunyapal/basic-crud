@@ -3,30 +3,30 @@
     <label class="block">
         <span class="text-gray-700">{{ __('posts.form.Title') }}</span>
         <input id="title" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="title" value="{{ old('title', $post->title ?? null) }}">
+        @error('title')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
     </label>
-    @error('title')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
 </div>
 
 <div class="grid grid-cols-1 gap-6">
     <label class="block">
         <span class="text-gray-700">{{ __('posts.form.Slug') }}</span>
         <input id="slug" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="slug" value="{{ old('slug', $post->slug ?? null) }}">
+        @error('slug')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
     </label>
-    @error('slug')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
 </div>
 
 <div class="grid grid-cols-1 gap-6">
     <label class="block">
         <span class="text-gray-700">{{ __('posts.form.Description') }}</span>
         <textarea id="description" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="description">{{ old('description', $post->description ?? null) }}</textarea>
+        @error('description')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
     </label>
-    @error('description')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
 </div>
 
 <div class="grid grid-cols-1 gap-6">
@@ -46,10 +46,10 @@
                     {{ $category }}</option>
             @endforeach
         </select>
+        @error('category')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
     </label>
-    @error('category')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
 </div>
 
 <div class="grid grid-cols-1 gap-6">
@@ -81,20 +81,20 @@
                 @endif
             @endforeach
         </select>
+        @error('tags')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
     </label>
-    @error('tags')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
 </div>
 
 <div class="grid grid-cols-1 gap-6">
     <label class="block">
         <span class="text-gray-700">{{ __('posts.form.Image') }}</span>
         <input id="image" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="file" name="image">
+        @error('image')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
     </label>
-    @error('image')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
     @if (isset($post) && $post->image)
         <div class="mt-2">
             <img src="{{ $post->image }}" alt="{{ $post->title }}" width="300">
@@ -107,10 +107,10 @@
         <span class="text-gray-700">{{ __('posts.form.Content') }}</span>
         <input id="content" type="hidden" name="content" value="{{ old('content', $post->content ?? null) }}">
         <trix-editor input="content"></trix-editor>
+        @error('content')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
     </label>
-    @error('content')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
 </div>
 
 @push('styles')

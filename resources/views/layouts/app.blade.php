@@ -8,7 +8,7 @@
     <title>
         @yield('title', config('app.name'))
     </title>
-    @vite(['resources/js/app.js', 'resources/sass/app.scss'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 
     @stack('styles')
 </head>

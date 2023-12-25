@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="flex justify-center">
-        <div class="w-full max-w-md">
+        <div class="w-full">
             <h1 class="text-2xl font-bold">{{ __('posts.form.Edit Post') }}</h1>
             <form action="{{ route('posts.update', [$post]) }}" method="POST" enctype="multipart/form-data">
                 @csrf

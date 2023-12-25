@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="flex justify-center">
-        <div class="w-full max-w-md">
+        <div class="w-full">
             <h1 class="text-2xl font-bold">{{ __('posts.form.Create Post') }}</h1>
             <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

@@ -15,7 +15,7 @@
 
 <body dir="{{ Settings::getDirection() }}">
     <main>
-        <div class="container">
+        <div class="container  mx-auto p-10">
             @yield('content')
         </div>
     </main>

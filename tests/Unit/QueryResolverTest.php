@@ -7,8 +7,6 @@ use App\Support\QueryResolver;
 
 use function Pest\Laravel\get;
 
-uses(Tests\TestCase::class);
-
 beforeEach(function () {
     Post::factory(20)
         ->create();

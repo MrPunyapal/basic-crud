@@ -28,8 +28,8 @@ enum FeaturedStatus: int
     public function color(): string
     {
         return match ($this) {
-            self::NOT_FEATURED => 'bg-info',
-            self::FEATURED => 'bg-success',
+            self::NOT_FEATURED => 'bg-blue-500',
+            self::FEATURED => 'bg-green-500',
         };
     }
 
@@ -44,8 +44,8 @@ enum FeaturedStatus: int
     public function changeBtnColor(): string
     {
         return match ($this) {
-            self::NOT_FEATURED => 'btn-warning',
-            self::FEATURED => 'btn-secondary',
+            self::NOT_FEATURED => 'bg-yellow-500 hover:bg-yellow-600',
+            self::FEATURED => 'bg-gray-500 hover:bg-gray-600',
         };
     }
 }

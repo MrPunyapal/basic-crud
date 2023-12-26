@@ -36,14 +36,14 @@ it('returns the correct color for NOT_FEATURED', function () {
     $status = FeaturedStatus::NOT_FEATURED;
     $color = $status->color();
 
-    expect($color)->toBe('bg-info');
+    expect($color)->toBe('bg-blue-500');
 });
 
 it('returns the correct color for FEATURED', function () {
     $status = FeaturedStatus::FEATURED;
     $color = $status->color();
 
-    expect($color)->toBe('bg-success');
+    expect($color)->toBe('bg-green-500');
 });
 
 it('returns the correct change button label for NOT_FEATURED', function () {
@@ -64,12 +64,12 @@ it('returns the correct change button color for NOT_FEATURED', function () {
     $status = FeaturedStatus::NOT_FEATURED;
     $btnColor = $status->changeBtnColor();
 
-    expect($btnColor)->toBe('btn-warning');
+    expect($btnColor)->toBe('bg-yellow-500 hover:bg-yellow-600');
 });
 
 it('returns the correct change button color for FEATURED', function () {
     $status = FeaturedStatus::FEATURED;
     $btnColor = $status->changeBtnColor();
 
-    expect($btnColor)->toBe('btn-secondary');
+    expect($btnColor)->toBe('bg-gray-500 hover:bg-gray-600');
 });

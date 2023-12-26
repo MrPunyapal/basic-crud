@@ -4,7 +4,7 @@
 @section('content')
     <div class="flex flex-col p-0 m-0">
         <div class="flex justify-end mt-2">
-            <a href="{{ route('posts.index') }}" class="btn btn-secondary">{{ __('posts.show.View All') }}</a>
+            <a href="{{ route('posts.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">{{ __('posts.show.View All') }}</a>
         </div>
         <div class="bg-white shadow-lg rounded-lg overflow-hidden mx-auto">
             <img src="{{ $post->image }}" class="w-full" alt="{{ $post->title }}" height="400">

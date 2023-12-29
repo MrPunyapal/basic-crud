@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -35,5 +36,26 @@ class UpdatePostRequest extends FormRequest
             ],
             'image' => ['nullable', 'image'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        if (! $this->hasFile('image') && filter_var($this->get('image'), FILTER_VALIDATE_URL)) {
+
+            $file = UploadedFile::makeFromUrl(
+                (string) $this->string('image')
+            );
+
+            if ($file === null) {
+                return;
+            }
+
+            $this->merge([
+                'image' => $file,
+            ]);
+        }
     }
 }

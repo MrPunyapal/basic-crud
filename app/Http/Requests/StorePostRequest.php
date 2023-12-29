@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 
 class StorePostRequest extends FormRequest
 {
@@ -38,5 +39,26 @@ class StorePostRequest extends FormRequest
             'tags.*' => ['string', 'max:20'],
             'is_featured' => ['boolean'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        if (! $this->hasFile('image') && filter_var($this->get('image'), FILTER_VALIDATE_URL)) {
+
+            $file = UploadedFile::makeFromUrl(
+                (string) $this->string('image')
+            );
+
+            if ($file === null) {
+                return;
+            }
+
+            $this->merge([
+                'image' => $file,
+            ]);
+        }
     }
 }

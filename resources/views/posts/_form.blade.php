@@ -1,45 +1,47 @@
 @use('App\Enums\FeaturedStatus')
-<div class="grid grid-cols-1 gap-6">
-    <label class="block">
+<div class="grid grid-cols-1 gap-3">
+    <label class="block" for="title">
         <span class="text-gray-700">{{ __('posts.form.Title') }}</span>
-        <input id="title" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="title" value="{{ old('title', $post->title ?? null) }}">
+        <input id="title"
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            type="text" name="title" value="{{ old('title', $post->title ?? null) }}">
         @error('title')
             <div class="text-red-500">{{ $message }}</div>
         @enderror
     </label>
-</div>
 
-<div class="grid grid-cols-1 gap-6">
-    <label class="block">
+    <label class="block" for="slug">
         <span class="text-gray-700">{{ __('posts.form.Slug') }}</span>
-        <input id="slug" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="text" name="slug" value="{{ old('slug', $post->slug ?? null) }}">
+        <input id="slug"
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            type="text" name="slug" value="{{ old('slug', $post->slug ?? null) }}">
         @error('slug')
             <div class="text-red-500">{{ $message }}</div>
         @enderror
     </label>
-</div>
 
-<div class="grid grid-cols-1 gap-6">
-    <label class="block">
+    <label class="block" for="description">
         <span class="text-gray-700">{{ __('posts.form.Description') }}</span>
-        <textarea id="description" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="description">{{ old('description', $post->description ?? null) }}</textarea>
+        <textarea id="description"
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            name="description">{{ old('description', $post->description ?? null) }}</textarea>
         @error('description')
             <div class="text-red-500">{{ $message }}</div>
         @enderror
     </label>
-</div>
 
-<div class="grid grid-cols-1 gap-6">
-    <label class="block">
+    <label class="block" for="published_at">
         <span class="text-gray-700">{{ __('posts.form.Published At') }}</span>
-        <input id="published_at" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="datetime-local" name="published_at" value="{{ old('published_at', $post->published_at ?? null) }}">
+        <input id="published_at"
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            type="datetime-local" name="published_at" value="{{ old('published_at', $post->published_at ?? null) }}">
     </label>
-</div>
 
-<div class="grid grid-cols-1 gap-6">
-    <label class="block">
+    <label class="block" for="category">
         <span class="text-gray-700">{{ __('posts.form.Category') }}</span>
-        <select id="category" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="category_id">
+        <select id="category"
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            name="category_id">
             <option value="">{{ __('posts.form.Select a Category') }}</option>
             @foreach ($categories as $key => $category)
                 <option value="{{ $key }}" @selected(old('category_id', $post->category_id ?? null) == $key)>
@@ -50,22 +52,21 @@
             <div class="text-red-500">{{ $message }}</div>
         @enderror
     </label>
-</div>
 
-<div class="grid grid-cols-1 gap-6">
     <label class="block">
         <span class="text-gray-700">{{ __('posts.form.Is Featured') }}</span>
         @foreach (FeaturedStatus::cases() as $featuredStatus)
             <div class="mt-2 flex items-center">
-                <input id="is_featured_{{ $featuredStatus->name }}" class="form-radio h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" type="radio" name="is_featured" value="{{ $featuredStatus->value }}" @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
-                <label for="is_featured_{{ $featuredStatus->name }}" class="ml-2">{{ $featuredStatus->booleanLabel() }}</label>
+                <input id="is_featured_{{ $featuredStatus->name }}"
+                    class="form-radio h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" type="radio"
+                    name="is_featured" value="{{ $featuredStatus->value }}" @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
+                <label for="is_featured_{{ $featuredStatus->name }}"
+                    class="ml-2">{{ $featuredStatus->booleanLabel() }}</label>
             </div>
         @endforeach
     </label>
-</div>
 
-<div class="grid grid-cols-1 gap-6">
-    <label class="block">
+    <label class="block" for="tags">
         <span class="text-gray-700">{{ __('posts.form.Tags') }}</span>
         <select class="form-multiselect block w-full mt-1" name="tags[]" id="tags" multiple>
             @foreach ($tags as $tag)
@@ -85,25 +86,26 @@
             <div class="text-red-500">{{ $message }}</div>
         @enderror
     </label>
-</div>
 
-<div class="grid grid-cols-1 gap-6">
-    <label class="block">
+    <label class="block" for="image">
         <span class="text-gray-700">{{ __('posts.form.Image') }}</span>
-        <input id="image" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" type="file" name="image">
+        <input id="image"
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            type="file" name="image" onchange="previewImage(event)">
         @error('image')
             <div class="text-red-500">{{ $message }}</div>
         @enderror
     </label>
-    @if (isset($post) && $post->image)
-        <div class="mt-2">
-            <img src="{{ $post->image }}" alt="{{ $post->title }}" width="300">
-        </div>
-    @endif
-</div>
 
-<div class="grid grid-cols-1 gap-6">
-    <label class="block">
+    <div class="mt-2">
+        @if (isset($post) && $post->image)
+            <img id="image-preview" src="{{ $post->image }}" alt="{{ $post->title }}" width="300">
+        @else
+            <img id="image-preview" style="display: none;" alt="Image Preview" width="300">
+        @endif
+    </div>
+
+    <label class="block" for="content">
         <span class="text-gray-700">{{ __('posts.form.Content') }}</span>
         <input id="content" type="hidden" name="content" value="{{ old('content', $post->content ?? null) }}">
         <trix-editor input="content"></trix-editor>
@@ -145,6 +147,17 @@
                 .replace(/--+/g, '-') // Replace multiple - with single -
                 .replace(/^-+/, '') // Trim - from start of text
                 .replace(/-+$/, ''); // Trim - from end of text
+        }
+
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function() {
+                var imgElement = document.querySelector("#image-preview");
+                imgElement.src = reader.result;
+                imgElement.style.display = "block";
+            };
+            reader.readAsDataURL(input.files[0]);
         }
     </script>
 @endpush

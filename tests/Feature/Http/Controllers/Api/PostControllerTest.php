@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\deleteJson;
@@ -14,6 +16,13 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 uses(RefreshDatabase::class);
+
+beforeEach(function () {
+    Sanctum::actingAs(
+        User::factory()->create(),
+        ['*']
+    );
+});
 
 it('can list all posts', function () {
     $posts = Post::factory()->count(3)->create();

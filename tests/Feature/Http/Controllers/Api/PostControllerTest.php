@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 
 use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
@@ -72,4 +73,8 @@ it('can delete a post', function () {
 
     deleteJson(action([PostController::class, 'destroy'], $post))
         ->assertNoContent();
+
+    assertSoftDeleted('posts', [
+        'id' => $post->id,
+    ]);
 });

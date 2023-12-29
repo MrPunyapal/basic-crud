@@ -8,13 +8,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Http\JsonResponse;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): \Illuminate\Http\JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json(Post::all());
     }
@@ -22,7 +23,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request): \Illuminate\Http\JsonResponse
+    public function store(StorePostRequest $request): JsonResponse
     {
         $post = Post::create($request->validated());
 
@@ -32,7 +33,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post): \Illuminate\Http\JsonResponse
+    public function show(Post $post): JsonResponse
     {
         return response()->json($post);
     }
@@ -40,7 +41,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post): \Illuminate\Http\JsonResponse
+    public function update(UpdatePostRequest $request, Post $post): JsonResponse
     {
         $post->update($request->validated());
 
@@ -50,7 +51,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post): \Illuminate\Http\JsonResponse
+    public function destroy(Post $post): JsonResponse
     {
         $post->delete();
 

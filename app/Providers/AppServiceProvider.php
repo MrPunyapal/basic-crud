@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         UploadedFile::macro('makeFromUrl', function (string $url): ?UploadedFile {
-            $tempFile = tempnam(sys_get_temp_dir(), 'pest');
+            $tempFile = tempnam(sys_get_temp_dir(), str()->random(32));
 
             if ($tempFile === false) {
                 return null;

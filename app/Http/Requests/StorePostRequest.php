@@ -52,13 +52,12 @@ class StorePostRequest extends FormRequest
                 (string) $this->string('image')
             );
 
-            if ($file === null) {
-                return;
+            if ($file !== null) {
+                $this->merge([
+                    'image' => $file,
+                ]);
             }
-
-            $this->merge([
-                'image' => $file,
-            ]);
         }
+
     }
 }

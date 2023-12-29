@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Traits\HasFileFromUrl;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\UploadedFile;
 
 class StorePostRequest extends FormRequest
 {
+    use HasFileFromUrl;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -46,18 +48,6 @@ class StorePostRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-        if (! $this->hasFile('image') && filter_var($this->get('image'), FILTER_VALIDATE_URL)) {
-
-            $file = UploadedFile::makeFromUrl(
-                (string) $this->string('image')
-            );
-
-            if ($file !== null) {
-                $this->merge([
-                    'image' => $file,
-                ]);
-            }
-        }
-
+        $this->resolveFileFromUrl('image');
     }
 }

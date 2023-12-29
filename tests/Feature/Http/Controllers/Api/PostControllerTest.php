@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\Api\PostController;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,7 +28,7 @@ beforeEach(function () {
 it('can list all posts', function () {
     $posts = Post::factory()->count(3)->create();
 
-    getJson('/api/posts')
+    getJson(action([PostController::class, 'index']))
         ->assertOk()
         ->assertJson($posts->toArray());
 });
@@ -35,7 +36,7 @@ it('can list all posts', function () {
 it('can create a new post', function () {
     $data = Post::factory()->make()->toArray();
 
-    postJson('/api/posts', $data)
+    postJson(action([PostController::class, 'store']), $data)
         ->assertCreated();
 
     assertDatabaseHas('posts', [
@@ -47,7 +48,7 @@ it('can create a new post', function () {
 it('can show a specific post', function () {
     $post = Post::factory()->create();
 
-    getJson('/api/posts/'.$post->id)
+    getJson(action([PostController::class, 'show'], $post))
         ->assertOk()
         ->assertJson($post->toArray());
 });
@@ -56,7 +57,7 @@ it('can update a post', function () {
     $post = Post::factory()->create();
     $data = Post::factory()->make()->toArray();
 
-    putJson('/api/posts/'.$post->id, $data)
+    putJson(action([PostController::class, 'update'], $post), $data)
         ->assertOk();
 
     assertDatabaseHas('posts', [
@@ -69,6 +70,6 @@ it('can update a post', function () {
 it('can delete a post', function () {
     $post = Post::factory()->create();
 
-    deleteJson('/api/posts/'.$post->id)
+    deleteJson(action([PostController::class, 'destroy'], $post))
         ->assertNoContent();
 });

@@ -56,6 +56,14 @@ class Post extends Model
     }
 
     /**
+     * @return BelongsTo<Category, Post>
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
      * @return Attribute<string, string>
      */
     protected function image(): Attribute
@@ -72,13 +80,5 @@ class Post extends Model
                 return $value;
             }
         );
-    }
-
-    /**
-     * @return BelongsTo<Category, Post>
-     */
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
     }
 }

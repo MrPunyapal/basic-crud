@@ -89,9 +89,12 @@
 
     <label class="block" for="image">
         <span class="text-gray-700">{{ __('posts.form.Image') }}</span>
-        <input id="image"
+        <input
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            type="file" name="image" onchange="previewImage(event)">
+            id="image"
+            name="image"
+            type="file"
+        >
         @error('image')
             <div class="text-red-500">{{ $message }}</div>
         @enderror
@@ -101,7 +104,11 @@
         @if (isset($post) && $post->image)
             <img id="image-preview" src="{{ $post->image }}" alt="{{ $post->title }}" width="300">
         @else
-            <img id="image-preview" style="display: none;" alt="Image Preview" width="300">
+            <img
+                alt="Image Preview" width="300"
+                class="hidden"
+                id="image-preview"
+            >
         @endif
     </div>
 
@@ -149,15 +156,26 @@
                 .replace(/-+$/, ''); // Trim - from end of text
         }
 
-        function previewImage(event) {
-            var input = event.target;
-            var reader = new FileReader();
-            reader.onload = function() {
-                var imgElement = document.querySelector("#image-preview");
-                imgElement.src = reader.result;
-                imgElement.style.display = "block";
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
+        let previewObjectURL = null
+
+        document.querySelector('#image')?.addEventListener('change', (e) => {
+            const previewEl = document.querySelector('#image-preview');
+
+            if (previewObjectURL !== null) {
+                previewEl.classList.add('hidden')
+                URL.revokeObjectURL(previewObjectURL)
+            }
+
+            const file = e.target.files[0];
+
+            if (file === undefined) {
+                return
+            }
+
+            previewObjectURL = URL.createObjectURL(file)
+
+            previewEl.src = previewObjectURL;
+            previewEl.classList.remove('hidden');
+        })
     </script>
 @endpush

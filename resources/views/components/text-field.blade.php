@@ -1,6 +1,5 @@
 @props([
     'multiline' => false,
-    'value' => '',
 ])
 
 @php
@@ -22,7 +21,7 @@
 @endphp
 
 @if ($multiline)
-    <textarea {{ $attrs }}>{{ $value }}</textarea>
+    <textarea {{ $attrs }}>{{ $slot }}</textarea>
 @else
-    <input {{ $attrs }} value="{{ $value }}" />
+    <input {{ $attrs }} />
 @endif

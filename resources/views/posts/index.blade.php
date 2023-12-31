@@ -45,13 +45,18 @@
                 @foreach ($queryResolver->searchQuery() as $key => $value)
                     <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                 @endforeach
-                <div class="flex items-center">
-                    <input type="search" name="search" class="border border-gray-300 rounded-l-md py-2 px-4"
-                        placeholder="{{ __('posts.form.Search here') }}" value="{{ $queryResolver->searchValue() }}">
-                    <button type="submit"
-                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r-md">
+                <div class="flex items-center [&>button]:rounded-s-none [&>input]:rounded-e-none [&>input]:border-e-0">
+                    <x-text-field
+                        name="search"
+                        placeholder="{{ __('posts.form.Search here') }}"
+                        type="search"
+                        value="{{ $queryResolver->searchValue() }}"
+                    />
+                    <x-button
+                        type="submit"
+                    >
                         {{ __('posts.form.Search') }}
-                    </button>
+                    </x-button>
                 </div>
             </form>
         </div>

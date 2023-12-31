@@ -74,7 +74,7 @@ class Post extends Model
             },
             set: function (string|UploadedFile|null $value) {
                 if ($value instanceof UploadedFile) {
-                    return $value->store('posts') ?: null;
+                    return $value->store('posts', 'public') ?: null;
                 }
 
                 return $value;

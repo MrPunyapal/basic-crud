@@ -94,20 +94,11 @@
     </x-field>
     <x-field>
         <x-label for="image">{{ __('posts.form.Image') }}</x-label>
-        <input
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            id="image" name="image" type="file">
+        <x-image-field id="image" name="image" :value="$post->image" />
         @error('image')
             <x-error-message>{{ $message }}</x-error-message>
         @enderror
     </x-field>
-    <div class="mt-2">
-        @if (isset($post) && $post->image)
-            <img id="image-preview" src="{{ $post->image }}" alt="{{ $post->title }}" width="300">
-        @else
-            <img alt="Image Preview" width="300" class="hidden" id="image-preview">
-        @endif
-    </div>
     <x-field>
         <x-label for="content">{{ __('posts.form.Content') }}</x-label>
         <input id="content" type="hidden" name="content" value="{{ old('content', $post->content ?? null) }}">
@@ -151,27 +142,5 @@
                 .replace(/^-+/, '') // Trim - from start of text
                 .replace(/-+$/, ''); // Trim - from end of text
         }
-
-        let previewObjectURL = null
-
-        document.querySelector('#image')?.addEventListener('change', (e) => {
-            const previewEl = document.querySelector('#image-preview');
-
-            if (previewObjectURL !== null) {
-                previewEl.classList.add('hidden')
-                URL.revokeObjectURL(previewObjectURL)
-            }
-
-            const file = e.target.files[0];
-
-            if (file === undefined) {
-                return
-            }
-
-            previewObjectURL = URL.createObjectURL(file)
-
-            previewEl.src = previewObjectURL;
-            previewEl.classList.remove('hidden');
-        })
     </script>
 @endpush

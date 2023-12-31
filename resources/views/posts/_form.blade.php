@@ -1,47 +1,56 @@
 @use('App\Enums\FeaturedStatus')
-<div class="grid grid-cols-1 gap-3">
-    <label class="block" for="title">
-        <span class="text-gray-700">{{ __('posts.form.Title') }}</span>
-        <input id="title"
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            type="text" name="title" value="{{ old('title', $post->title ?? null) }}">
+
+<div class="space-y-8">
+    <x-field>
+        <x-label for="title">{{ __('posts.form.Title') }}</x-label>
+        <x-text-field
+            id="title"
+            name="title"
+            :value="old('title', $post->title ?? null)"
+        />
         @error('title')
-            <div class="text-red-500">{{ $message }}</div>
+        <x-error-message>{{ $message }}</x-error-message>
         @enderror
-    </label>
-
-    <label class="block" for="slug">
-        <span class="text-gray-700">{{ __('posts.form.Slug') }}</span>
-        <input id="slug"
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            type="text" name="slug" value="{{ old('slug', $post->slug ?? null) }}">
+    </x-field>
+    <x-field>
+        <x-label for="slug">{{ __('posts.form.Slug') }}</x-label>
+        <x-text-field
+            id="slug"
+            name="slug"
+            :value="old('slug', $post->slug ?? null)"
+        />
         @error('slug')
-            <div class="text-red-500">{{ $message }}</div>
+            <x-error-message>{{ $message }}</x-error-message>
         @enderror
-    </label>
-
-    <label class="block" for="description">
-        <span class="text-gray-700">{{ __('posts.form.Description') }}</span>
-        <textarea id="description"
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            name="description">{{ old('description', $post->description ?? null) }}</textarea>
+    </x-field>
+    <x-field>
+        <x-label for="description">{{ __('posts.form.Description') }}</x-label>
+        <x-text-field
+            id="description"
+            multiline
+            name="description"
+        >{{ old('description', $post->description ?? null) }}</x-text-field>
         @error('description')
-            <div class="text-red-500">{{ $message }}</div>
+            <x-error-message>{{ $message }}</x-error-message>
         @enderror
-    </label>
-
-    <label class="block" for="published_at">
-        <span class="text-gray-700">{{ __('posts.form.Published At') }}</span>
-        <input id="published_at"
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            type="datetime-local" name="published_at" value="{{ old('published_at', $post->published_at ?? null) }}">
-    </label>
-
-    <label class="block" for="category">
-        <span class="text-gray-700">{{ __('posts.form.Category') }}</span>
+    </x-field>
+    <x-field>
+        <x-label for="published_at">{{ __('posts.form.Published At') }}</x-label>
+        <x-text-field
+            id="published_at"
+            name="published_at"
+            :value="old('published_at', $post->published_at ?? null)"
+            type="datetime-local"
+        />
+        @error('published_at')
+            <x-error-message>{{ $message }}</x-error-message>
+        @enderror
+    </x-field>
+    <x-field>
+        <x-label for="category">{{ __('posts.form.Category') }}</x-label>
         <select id="category"
-            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            name="category_id">
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                name="category_id">
             <option value="">{{ __('posts.form.Select a Category') }}</option>
             @foreach ($categories as $key => $category)
                 <option value="{{ $key }}" @selected(old('category_id', $post->category_id ?? null) == $key)>
@@ -49,25 +58,23 @@
             @endforeach
         </select>
         @error('category')
-            <div class="text-red-500">{{ $message }}</div>
+            <x-error-message>{{ $message }}</x-error-message>
         @enderror
-    </label>
-
-    <label class="block">
-        <span class="text-gray-700">{{ __('posts.form.Is Featured') }}</span>
+    </x-field>
+    <x-field>
+        <x-label>{{ __('posts.form.Is Featured') }}</x-label>
         @foreach (FeaturedStatus::cases() as $featuredStatus)
             <div class="mt-2 flex items-center">
                 <input id="is_featured_{{ $featuredStatus->name }}"
-                    class="form-radio h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" type="radio"
-                    name="is_featured" value="{{ $featuredStatus->value }}" @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
+                       class="form-radio h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" type="radio"
+                       name="is_featured" value="{{ $featuredStatus->value }}" @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
                 <label for="is_featured_{{ $featuredStatus->name }}"
-                    class="ml-2">{{ $featuredStatus->booleanLabel() }}</label>
+                       class="ml-2">{{ $featuredStatus->booleanLabel() }}</label>
             </div>
         @endforeach
-    </label>
-
-    <label class="block" for="tags">
-        <span class="text-gray-700">{{ __('posts.form.Tags') }}</span>
+    </x-field>
+    <x-field>
+        <x-label for="tags">{{ __('posts.form.Tags') }}</x-label>
         <select class="form-multiselect block w-full mt-1" name="tags[]" id="tags" multiple>
             @foreach ($tags as $tag)
                 <option value="{{ $tag }}" @selected(in_array($tag, old('tags', $post->tags ?? [])))>
@@ -83,12 +90,11 @@
             @endforeach
         </select>
         @error('tags')
-            <div class="text-red-500">{{ $message }}</div>
+            <x-error-message>{{ $message }}</x-error-message>
         @enderror
-    </label>
-
-    <label class="block" for="image">
-        <span class="text-gray-700">{{ __('posts.form.Image') }}</span>
+    </x-field>
+    <x-field>
+        <x-label for="image">{{ __('posts.form.Image') }}</x-label>
         <input
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             id="image"
@@ -96,10 +102,9 @@
             type="file"
         >
         @error('image')
-            <div class="text-red-500">{{ $message }}</div>
+            <x-error-message>{{ $message }}</x-error-message>
         @enderror
-    </label>
-
+    </x-field>
     <div class="mt-2">
         @if (isset($post) && $post->image)
             <img id="image-preview" src="{{ $post->image }}" alt="{{ $post->title }}" width="300">
@@ -111,15 +116,14 @@
             >
         @endif
     </div>
-
-    <label class="block" for="content">
-        <span class="text-gray-700">{{ __('posts.form.Content') }}</span>
+    <x-field>
+        <x-label for="content">{{ __('posts.form.Content') }}</x-label>
         <input id="content" type="hidden" name="content" value="{{ old('content', $post->content ?? null) }}">
         <trix-editor input="content"></trix-editor>
         @error('content')
-            <div class="text-red-500">{{ $message }}</div>
+            <x-error-message>{{ $message }}</x-error-message>
         @enderror
-    </label>
+    </x-field>
 </div>
 
 @push('styles')

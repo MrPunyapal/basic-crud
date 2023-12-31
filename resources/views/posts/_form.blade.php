@@ -94,7 +94,7 @@
     </x-field>
     <x-field>
         <x-label for="image">{{ __('posts.form.Image') }}</x-label>
-        <x-image-field id="image" name="image" :value="$post->image" />
+        <x-image-field id="image" name="image" :value="isset($post) ? $post->image : null" />
         @error('image')
             <x-error-message>{{ $message }}</x-error-message>
         @enderror

@@ -47,16 +47,15 @@
         @enderror
     </x-field>
     <x-field>
-        <x-label for="category">{{ __('posts.form.Category') }}</x-label>
-        <select id="category"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                name="category_id">
+        <x-label for="category_id">{{ __('posts.form.Category') }}</x-label>
+        <x-select id="category_id" name="category_id">
             <option value="">{{ __('posts.form.Select a Category') }}</option>
             @foreach ($categories as $key => $category)
                 <option value="{{ $key }}" @selected(old('category_id', $post->category_id ?? null) == $key)>
-                    {{ $category }}</option>
+                    {{ $category }}
+                </option>
             @endforeach
-        </select>
+        </x-select>
         @error('category')
             <x-error-message>{{ $message }}</x-error-message>
         @enderror
@@ -75,7 +74,7 @@
     </x-field>
     <x-field>
         <x-label for="tags">{{ __('posts.form.Tags') }}</x-label>
-        <select class="form-multiselect block w-full mt-1" name="tags[]" id="tags" multiple>
+        <select class="form-multiselect block w-full" name="tags[]" id="tags" multiple>
             @foreach ($tags as $tag)
                 <option value="{{ $tag }}" @selected(in_array($tag, old('tags', $post->tags ?? [])))>
                     {{ $tag }}

@@ -1,8 +1,3 @@
-@props([
-    'multiline' => false,
-    'value' => '',
-])
-
 @php
     $class = implode(' ', [
         'appearance-none block w-full rounded-lg bg-white border text-sm/6 py-[calc(theme(spacing[1.5])+theme(spacing.px))] px-3 border-zinc-950/10',

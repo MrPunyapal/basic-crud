@@ -9,7 +9,7 @@
             :value="old('title', $post->title ?? null)"
         />
         @error('title')
-        <x-error-message>{{ $message }}</x-error-message>
+            <x-error-message>{{ $message }}</x-error-message>
         @enderror
     </x-field>
     <x-field>
@@ -66,10 +66,10 @@
         @foreach (FeaturedStatus::cases() as $featuredStatus)
             <div class="mt-2 flex items-center">
                 <input id="is_featured_{{ $featuredStatus->name }}"
-                       class="form-radio h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" type="radio"
-                       name="is_featured" value="{{ $featuredStatus->value }}" @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
+                    class="form-radio h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" type="radio"
+                    name="is_featured" value="{{ $featuredStatus->value }}" @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
                 <label for="is_featured_{{ $featuredStatus->name }}"
-                       class="ml-2">{{ $featuredStatus->booleanLabel() }}</label>
+                    class="ml-2">{{ $featuredStatus->booleanLabel() }}</label>
             </div>
         @endforeach
     </x-field>
@@ -97,10 +97,7 @@
         <x-label for="image">{{ __('posts.form.Image') }}</x-label>
         <input
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            id="image"
-            name="image"
-            type="file"
-        >
+            id="image" name="image" type="file">
         @error('image')
             <x-error-message>{{ $message }}</x-error-message>
         @enderror
@@ -109,11 +106,7 @@
         @if (isset($post) && $post->image)
             <img id="image-preview" src="{{ $post->image }}" alt="{{ $post->title }}" width="300">
         @else
-            <img
-                alt="Image Preview" width="300"
-                class="hidden"
-                id="image-preview"
-            >
+            <img alt="Image Preview" width="300" class="hidden" id="image-preview">
         @endif
     </div>
     <x-field>

@@ -9,12 +9,14 @@
                 @csrf
                 @method('PUT')
                 @include('posts._form', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
-                <div class="mt-4">
-                    <button type="submit"
-                        class="px-4 py-2 bg-green-500 text-white rounded">{{ __('posts.form.Update Post') }}</button>
-                    <a href="{{ route('posts.index') }}" class="px-4 py-2 bg-gray-500 text-white rounded ml-2">
+
+                <div class="flex items-center gap-x-4 mt-8">
+                    <x-button color="green">
+                        {{ __('posts.form.Update Post') }}
+                    </x-button>
+                    <x-button href="{{ route('posts.index') }}">
                         {{ __('posts.form.Cancel') }}
-                    </a>
+                    </x-button>
                 </div>
             </form>
         </div>

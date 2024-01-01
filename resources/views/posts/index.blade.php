@@ -27,14 +27,14 @@
                             <span>{{ __('posts.index.Languages') }} &#x25BE;</span>
                         </x-button>
                         <div class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg hidden bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                             role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                            role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                             @foreach (Settings::getLocales() as $locale => $Label)
                                 <a @class([
-                                'block px-4 py-2 text-sm',
-                                'text-gray-700 hover:bg-gray-100 hover:text-gray-900' =>
-                                    $locale != app()->getLocale(),
-                                'text-white bg-blue-500' => $locale == app()->getLocale(),
-                            ])
+                                    'block px-4 py-2 text-sm',
+                                    'text-gray-700 hover:bg-gray-100 hover:text-gray-900' =>
+                                        $locale != app()->getLocale(),
+                                    'text-white bg-blue-500' => $locale == app()->getLocale(),
+                                ])
                                     {{ $locale != app()->getLocale() ? 'href=' . route('set-locale', ['locale' => $locale]) : '' }}>{{ $Label }}</a>
                             @endforeach
                         </div>
@@ -46,15 +46,9 @@
                     <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                 @endforeach
                 <div class="flex items-center [&>button]:rounded-s-none [&>input]:rounded-e-none [&>input]:border-e-0">
-                    <x-text-field
-                        name="search"
-                        placeholder="{{ __('posts.form.Search here') }}"
-                        type="search"
-                        value="{{ $queryResolver->searchValue() }}"
-                    />
-                    <x-button
-                        type="submit"
-                    >
+                    <x-text-field name="search" placeholder="{{ __('posts.form.Search here') }}" type="search"
+                        value="{{ $queryResolver->searchValue() }}" />
+                    <x-button type="submit">
                         {{ __('posts.form.Search') }}
                     </x-button>
                 </div>
@@ -101,11 +95,8 @@
                             </td>
                             <td class="border border-slate-600 py-2 px-4">{{ $post->updated_at->since() }}</td>
                             <td class="border border-slate-600 py-2 px-4 text-nowrap">
-                                <form
-                                    action="{{ route('posts.featured', ['post' => $post]) }}"
-                                    method="POST"
-                                    class="inline"
-                                >
+                                <form action="{{ route('posts.featured', ['post' => $post]) }}" method="POST"
+                                    class="inline">
                                     @csrf
                                     @method('PATCH')
                                     <x-button :color="$post->is_featured->buttonColor()" type="submit" class="w-24">
@@ -132,15 +123,17 @@
                         </tr>
                     @endforelse
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="7">
-                            <div class="p-2">
-                                {{ $posts->links() }}
-                            </div>
-                        </td>
-                    </tr>
-                </tfoot>
+                @if ($posts->hasPages())
+                    <tfoot>
+                        <tr>
+                            <td colspan="7">
+                                <div class="p-2">
+                                    {{ $posts->links() }}
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                @endif
             </table>
         </div>
     </div>

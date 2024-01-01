@@ -108,7 +108,7 @@
                                 >
                                     @csrf
                                     @method('PATCH')
-                                    <x-button :color="$post->is_featured->buttonColor()" type="submit">
+                                    <x-button :color="$post->is_featured->buttonColor()" type="submit" class="w-24">
                                         {{ $post->is_featured->changeBtnLabel() }}
                                     </x-button>
                                 </form>

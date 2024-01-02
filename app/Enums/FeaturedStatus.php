@@ -48,4 +48,12 @@ enum FeaturedStatus: int
             self::FEATURED => 'bg-gray-500 hover:bg-gray-600',
         };
     }
+
+    public function buttonColor(): string
+    {
+        return match ($this) {
+            self::NOT_FEATURED => 'yellow',
+            self::FEATURED => 'zinc',
+        };
+    }
 }

@@ -3,16 +3,19 @@
 @section('content')
 
     <div class="flex justify-center">
-        <div class="lg:w-2/3 bg-white p-6 rounded-lg">
-            <h1 class="text-2xl font-bold">{{ __('posts.form.Create Post') }}</h1>
+        <div class="lg:w-2/3 bg-white p-6 rounded-lg bg-white shadow sm:rounded-lg p-6">
+            <h1 class="text-2xl font-bold mb-2">{{ __('posts.form.Create Post') }}</h1>
             <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @include('posts._form', ['categories' => $categories, 'tags' => $tags])
-                <div class="mt-4">
-                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">{{ __('posts.form.Save Post') }}</button>
-                    <a href="{{ route('posts.index') }}" class="px-4 py-2 bg-gray-500 text-white rounded ml-2">
+
+                <div class="flex items-center gap-x-4 mt-8">
+                    <x-button color="green">
+                        {{ __('posts.form.Save Post') }}
+                    </x-button>
+                    <x-button href="{{ route('posts.index') }}">
                         {{ __('posts.form.Cancel') }}
-                    </a>
+                    </x-button>
                 </div>
             </form>
         </div>

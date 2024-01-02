@@ -15,29 +15,29 @@
 
         <div class="flex justify-between items-center">
             <div>
-                <a href="{{ route('posts.create') }}"
-                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">{{ __('posts.form.Create Post') }}</a>
-                <a href="{{ route('posts.index', $queryResolver->publishedQuery()) }}"
-                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                    {{ $queryResolver->publishedLabel() }}
-                </a>
-
-                <div class="relative inline-block text-left ms-2">
-                    <button type="button" onclick="this.nextElementSibling.classList.toggle('hidden')"
-                        class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded inline-flex items-center">
-                        <span>{{ __('posts.index.Languages') }} &#x25BE;</span>
-                    </button>
-                    <div class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg hidden bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                        role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                        @foreach (Settings::getLocales() as $locale => $Label)
-                            <a @class([
-                                'block px-4 py-2 text-sm',
-                                'text-gray-700 hover:bg-gray-100 hover:text-gray-900' =>
-                                    $locale != app()->getLocale(),
-                                'text-white bg-blue-500' => $locale == app()->getLocale(),
-                            ])
-                                {{ $locale != app()->getLocale() ? 'href=' . route('set-locale', ['locale' => $locale]) : '' }}>{{ $Label }}</a>
-                        @endforeach
+                <div class="flex gap-x-4">
+                    <x-button color="green" :href="route('posts.create')">
+                        {{ __('posts.form.Create Post') }}
+                    </x-button>
+                    <x-button color="blue" :href="route('posts.index', $queryResolver->publishedQuery())">
+                        {{ $queryResolver->publishedLabel() }}
+                    </x-button>
+                    <div class="relative inline-block text-left ms-2">
+                        <x-button onclick="this.nextElementSibling.classList.toggle('hidden')">
+                            <span>{{ __('posts.index.Languages') }} &#x25BE;</span>
+                        </x-button>
+                        <div class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg hidden bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                            @foreach (Settings::getLocales() as $locale => $Label)
+                                <a @class([
+                                    'block px-4 py-2 text-sm',
+                                    'text-gray-700 hover:bg-gray-100 hover:text-gray-900' =>
+                                        $locale != app()->getLocale(),
+                                    'text-white bg-blue-500' => $locale == app()->getLocale(),
+                                ])
+                                    {{ $locale != app()->getLocale() ? 'href=' . route('set-locale', ['locale' => $locale]) : '' }}>{{ $Label }}</a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -45,13 +45,12 @@
                 @foreach ($queryResolver->searchQuery() as $key => $value)
                     <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                 @endforeach
-                <div class="flex items-center">
-                    <input type="search" name="search" class="border border-gray-300 rounded-l-md py-2 px-4"
-                        placeholder="{{ __('posts.form.Search here') }}" value="{{ $queryResolver->searchValue() }}">
-                    <button type="submit"
-                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r-md">
+                <div class="flex items-center [&>button]:rounded-s-none [&>input]:rounded-e-none [&>input]:border-e-0">
+                    <x-text-field name="search" placeholder="{{ __('posts.form.Search here') }}" type="search"
+                        value="{{ $queryResolver->searchValue() }}" />
+                    <x-button type="submit">
                         {{ __('posts.form.Search') }}
-                    </button>
+                    </x-button>
                 </div>
             </form>
         </div>
@@ -100,18 +99,21 @@
                                     class="inline">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="submit" value="{{ $post->is_featured->changeBtnLabel() }}"
-                                        class="{{ $post->is_featured->changeBtnColor() }} text-white font-bold py-1 px-2 rounded w-24">
+                                    <x-button :color="$post->is_featured->buttonColor()" type="submit" class="w-24">
+                                        {{ $post->is_featured->changeBtnLabel() }}
+                                    </x-button>
                                 </form>
-                                <a href="{{ route('posts.edit', ['post' => $post]) }}"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded">{{ __('posts.show.Edit') }}</a>
+                                <x-button color="blue" href="{{ route('posts.edit', ['post' => $post]) }}">
+                                    {{ __('posts.show.Edit') }}
+                                </x-button>
                                 <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST"
                                     class="inline"
                                     onsubmit="return confirm('{{ __('posts.form.Are you sure you want to delete this post?') }}')">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" value="{{ __('posts.show.Delete') }}"
-                                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded">
+                                    <x-button color="red" type="submit">
+                                        {{ __('posts.show.Delete') }}
+                                    </x-button>
                                 </form>
                             </td>
                         </tr>
@@ -121,15 +123,17 @@
                         </tr>
                     @endforelse
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="7">
-                            <div class="p-2">
-                                {{ $posts->links() }}
-                            </div>
-                        </td>
-                    </tr>
-                </tfoot>
+                @if ($posts->hasPages())
+                    <tfoot>
+                        <tr>
+                            <td colspan="7">
+                                <div class="p-2">
+                                    {{ $posts->links() }}
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                @endif
             </table>
         </div>
     </div>

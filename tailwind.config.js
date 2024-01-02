@@ -5,11 +5,10 @@ export default {
         "./resources/**/*.js",
         "./app/support/**/*.php",
         "./app/enums/**/*.php",
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
     ],
     theme: {
         extend: {},
     },
-    plugins: [require('@tailwindcss/forms'),],
-}
-
+    plugins: [],
+};

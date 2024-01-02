@@ -73,3 +73,17 @@ it('returns the correct change button color for FEATURED', function () {
 
     expect($btnColor)->toBe('bg-gray-500 hover:bg-gray-600');
 });
+
+it('returns the correct button color', function (int $value, string $expected): void {
+    expect(FeaturedStatus::tryFrom($value)->buttonColor())->toBe($expected);
+})
+    ->with([
+        FeaturedStatus::FEATURED->name => [
+            'value' => FeaturedStatus::FEATURED->value,
+            'expected' => 'zinc',
+        ],
+        FeaturedStatus::NOT_FEATURED->name => [
+            'value' => FeaturedStatus::NOT_FEATURED->value,
+            'expected' => 'yellow',
+        ],
+    ]);

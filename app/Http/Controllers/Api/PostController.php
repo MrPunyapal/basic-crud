@@ -9,6 +9,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -17,7 +18,12 @@ class PostController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json(Post::all());
+        $timeToLive = 1000;
+
+        $posts = Cache::remember('post_cache', $timeToLive , fn ()=>Post::all());
+
+        return response()->json($posts);
+
     }
 
     /**

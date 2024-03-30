@@ -40,6 +40,11 @@ class Post extends Model
     //     'deleted_at'
     // ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [

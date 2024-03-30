@@ -40,6 +40,7 @@ class Post extends Model
     //     'deleted_at'
     // ];
 
+    // todo: remove this after finding a solution for phpstan error
     protected $casts = [
         'is_featured' => FeaturedStatus::class,
     ];
@@ -54,7 +55,7 @@ class Post extends Model
         return [
             'tags' => 'array',
             'published_at' => 'datetime',
-            // 'is_featured' => FeaturedStatus::class,
+            'is_featured' => FeaturedStatus::class,
             'content' => CleanHtmlInput::class,
         ];
     }

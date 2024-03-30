@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc3484131334f0192544737082de4ba7",
+    "content-hash": "5e1616a705fccf2fb1428a095a73cdc0",
     "packages": [
         {
             "name": "brick/math",
@@ -6766,20 +6766,21 @@
         },
         {
             "name": "driftingly/rector-laravel",
-            "version": "0.26.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/driftingly/rector-laravel.git",
-                "reference": "cf6d0a7c8e2dc33b6e2bb8ccb4638f44a5c09671"
+                "reference": "47c7de91bb07c0a97df8dd1fe677c6c154608549"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/driftingly/rector-laravel/zipball/cf6d0a7c8e2dc33b6e2bb8ccb4638f44a5c09671",
-                "reference": "cf6d0a7c8e2dc33b6e2bb8ccb4638f44a5c09671",
+                "url": "https://api.github.com/repos/driftingly/rector-laravel/zipball/47c7de91bb07c0a97df8dd1fe677c6c154608549",
+                "reference": "47c7de91bb07c0a97df8dd1fe677c6c154608549",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0"
+                "php": "^7.2 || ^8.0",
+                "rector/rector": "^1.0"
             },
             "type": "rector-extension",
             "autoload": {
@@ -6794,9 +6795,9 @@
             "description": "Rector upgrades rules for Laravel Framework",
             "support": {
                 "issues": "https://github.com/driftingly/rector-laravel/issues",
-                "source": "https://github.com/driftingly/rector-laravel/tree/0.26.2"
+                "source": "https://github.com/driftingly/rector-laravel/tree/1.1.0"
             },
-            "time": "2023-10-11T21:42:53+00:00"
+            "time": "2024-03-27T16:18:46+00:00"
         },
         {
             "name": "fakerphp/faker",

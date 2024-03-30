@@ -14,7 +14,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.12",
-        "driftingly/rector-laravel": "^0.26.2",
+        "driftingly/rector-laravel": "^1.1",
         "fakerphp/faker": "^1.9.1",
         "larastan/larastan": "^2.0",
         "laravel-lang/common": "^6.0",

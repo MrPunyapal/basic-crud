@@ -4,17 +4,6 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,6 +14,9 @@ Route::get('/', function () {
 // set locale cookie
 Route::get('/set-locale/{locale}', App\Http\Controllers\LocaleController::class)->name('set-locale');
 
+// similar to: (but not best practice)
+// Route::get('/set-locale/{locale}', fn ($locale) => back()->withCookie(cookie()->forever('locale', $locale)))->name('set-locale');
+
 // redirect to posts
 Route::redirect('/', '/posts');
 
@@ -34,7 +26,7 @@ Route::resource('posts', App\Http\Controllers\PostController::class);
 // feature post route (patch request) - only one route needed
 Route::patch('/posts/{post}/feature', App\Http\Controllers\FeaturedPostController::class)->name('posts.featured');
 
-// other option to do the same thing
+// similar to:
 // Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 // Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
 // Route::post('/posts', [App\Http\Controllers\PostController::class, 'store'])->name('posts.store');

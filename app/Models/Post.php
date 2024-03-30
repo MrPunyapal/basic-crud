@@ -40,12 +40,25 @@ class Post extends Model
     //     'deleted_at'
     // ];
 
+    // todo: remove this after finding a solution for phpstan error
     protected $casts = [
-        'tags' => 'array',
-        'published_at' => 'datetime',
         'is_featured' => FeaturedStatus::class,
-        'content' => CleanHtmlInput::class,
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'tags' => 'array',
+            'published_at' => 'datetime',
+            'is_featured' => FeaturedStatus::class,
+            'content' => CleanHtmlInput::class,
+        ];
+    }
 
     /**
      * @return PostBuilder<Post>

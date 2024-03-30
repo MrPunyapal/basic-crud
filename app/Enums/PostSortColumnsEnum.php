@@ -10,7 +10,7 @@ enum PostSortColumnsEnum: string
     case IsFeatured = 'is_featured';
 
     /**
-     * @return  array<int, string>
+     * @return array<int, string>
      */
     public static function columns(): array
     {

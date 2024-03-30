@@ -33,20 +33,6 @@ class Post extends Model
         'is_featured',
     ];
 
-    // protected $guarded=[
-    //     'id',
-    //     'created_at',
-    //     'updated_at',
-    //     'deleted_at'
-    // ];
-
-    protected $casts = [
-        'tags' => 'array',
-        'published_at' => 'datetime',
-        'is_featured' => FeaturedStatus::class,
-        'content' => CleanHtmlInput::class,
-    ];
-
     /**
      * @return PostBuilder<Post>
      */
@@ -80,5 +66,14 @@ class Post extends Model
                 return $value;
             }
         );
+    }
+    protected function casts(): array
+    {
+        return [
+            'tags' => 'array',
+            'published_at' => 'datetime',
+            'is_featured' => FeaturedStatus::class,
+            'content' => CleanHtmlInput::class,
+        ];
     }
 }

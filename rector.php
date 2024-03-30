@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\Config\RectorConfig;
+use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictConstructorRector;
 use RectorLaravel\Set\LaravelSetList;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->paths([
+return RectorConfig::configure()
+    ->withPaths([
         __DIR__.'/app',
         // __DIR__.'/bootstrap',
         // __DIR__.'/config',
@@ -15,13 +15,15 @@ return static function (RectorConfig $rectorConfig): void {
         // __DIR__.'/resources',
         // __DIR__.'/routes',
         // __DIR__.'/tests',
-    ]);
-
-    // register a single rule
-    $rectorConfig->rule(InlineConstructorDefaultToPropertyRector::class);
-
-    // define sets of rules
-    $rectorConfig->sets([
+    ])
+    // register single rule
+    ->withRules([
+        TypedPropertyFromStrictConstructorRector::class,
+    ])
+    // here we can define, what prepared sets of rules will be applied
+    ->withPreparedSets(
+        // deadCode: true,
+        // codeQuality: true
+    )->withSets([
         LaravelSetList::LARAVEL_110,
     ]);
-};

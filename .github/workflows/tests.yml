@@ -74,7 +74,7 @@ jobs:
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
-      # - name: Run PHPStan
-      #   run: ./vendor/bin/phpstan --error-format=github
+      - name: Run PHPStan
+        run: ./vendor/bin/phpstan --error-format=github
 
 

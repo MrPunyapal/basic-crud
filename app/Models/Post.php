@@ -40,6 +40,10 @@ class Post extends Model
     //     'deleted_at'
     // ];
 
+    protected $casts = [
+        'is_featured' => FeaturedStatus::class,
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -50,7 +54,7 @@ class Post extends Model
         return [
             'tags' => 'array',
             'published_at' => 'datetime',
-            'is_featured' => FeaturedStatus::class,
+            // 'is_featured' => FeaturedStatus::class,
             'content' => CleanHtmlInput::class,
         ];
     }

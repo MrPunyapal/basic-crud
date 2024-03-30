@@ -19,7 +19,7 @@ final class Settings
     ];
 
     /**
-     * @return  array<int, string>
+     * @return array<int, string>
      */
     public static function getTags(): array
     {
@@ -27,7 +27,7 @@ final class Settings
     }
 
     /**
-     * @return  array<string, string>
+     * @return array<string, string>
      */
     public static function getLocales(): array
     {

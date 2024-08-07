@@ -35,4 +35,5 @@ return RectorConfig::configure()
         rectorPreset: true,
     )->withSets([
         LaravelSetList::LARAVEL_110,
+        LaravelSetList::LARAVEL_CODE_QUALITY,
     ])->withImportNames();

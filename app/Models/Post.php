@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
+use Database\Factories\PostFactory;
+use Illuminate\Database\Query\Builder;
 use App\Builders\PostBuilder;
 use App\Enums\FeaturedStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -16,9 +19,27 @@ use Mews\Purifier\Casts\CleanHtmlInput;
 
 /**
  * @method static PostBuilder query()
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string $description
+ * @property UploadedFile|string|null $image
+ * @property array $content
+ * @property Carbon|null $published_at
+ * @property int $category_id
+ * @property array|null $tags
+ * @property FeaturedStatus $is_featured
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Category $category
+ *
+ * @mixin \Eloquent
  */
 class Post extends Model
 {
+    /** @use HasFactory<PostFactory> */
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
@@ -40,11 +61,6 @@ class Post extends Model
     //     'deleted_at'
     // ];
 
-    // todo: remove this after finding a solution for phpstan error
-    protected $casts = [
-        'is_featured' => FeaturedStatus::class,
-    ];
-
     /**
      * The attributes that should be cast.
      *
@@ -61,6 +77,7 @@ class Post extends Model
     }
 
     /**
+     * @param Builder $query
      * @return PostBuilder<Post>
      */
     public function newEloquentBuilder($query): PostBuilder

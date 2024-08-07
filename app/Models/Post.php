@@ -40,8 +40,8 @@ use Mews\Purifier\Casts\CleanHtmlInput;
 class Post extends Model
 {
     /** @use HasFactory<PostFactory> */
-    use HasFactory, SoftDeletes;
-
+    use HasFactory;
+    use SoftDeletes;
     protected $fillable = [
         'title',
         'slug',

@@ -26,8 +26,8 @@ use Illuminate\Support\Carbon;
 class Category extends Model
 {
     /** @use HasFactory<CategoryFactory> */
-    use HasFactory, SoftDeletes;
-
+    use HasFactory;
+    use SoftDeletes;
     protected $fillable = [
         'title',
     ];

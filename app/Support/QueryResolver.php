@@ -19,6 +19,7 @@ class QueryResolver
         if (request()->routeIs('*.index')) {
             session()->put(Route::currentRouteName().'.previous.query', request()->query());
         }
+
         $this->query = request()->collect()->forget(['page']);
     }
 

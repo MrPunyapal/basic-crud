@@ -5,8 +5,6 @@ declare(strict_types=1);
 use App\Models\Post;
 use App\Support\QueryResolver;
 
-use function Pest\Laravel\get;
-
 beforeEach(function () {
     Post::factory(20)
         ->create();
@@ -14,7 +12,7 @@ beforeEach(function () {
 
 it('can resolve sort query', function ($query, $expectedQuery) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
     $resolver = new QueryResolver;
 
@@ -38,7 +36,7 @@ it('can resolve sort query', function ($query, $expectedQuery) {
 
 it('can resolve sort arrow', function ($query, $expectedArrow) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
     $resolver = new QueryResolver;
 
@@ -62,7 +60,7 @@ it('can resolve sort arrow', function ($query, $expectedArrow) {
 
 it('can resolve published query', function ($query, $expectedQuery) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
     $resolver = new QueryResolver;
 
@@ -82,7 +80,7 @@ it('can resolve published query', function ($query, $expectedQuery) {
 
 it('can resolve published label', function ($query, $expectedLabel) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
     $resolver = new QueryResolver;
 
@@ -102,7 +100,7 @@ it('can resolve published label', function ($query, $expectedLabel) {
 
 it('can resolve search query', function ($query, $expectedQuery) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
     $resolver = new QueryResolver;
 
@@ -122,7 +120,7 @@ it('can resolve search query', function ($query, $expectedQuery) {
 
 it('can resolve search value', function ($query, $expectedValue) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
     $resolver = new QueryResolver;
 
@@ -144,7 +142,7 @@ it('can store previous query in session', function () {
     $routeName = 'posts.index';
     $query = ['sortBy' => 'title', 'direction' => 'asc', 'page' => 1];
 
-    get(route($routeName, $query));
+    $this->get(route($routeName, $query));
 
     $storedQuery = session()->get($routeName.'.previous.query');
 

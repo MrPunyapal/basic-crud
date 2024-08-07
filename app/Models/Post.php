@@ -54,6 +54,7 @@ class Post extends Model
         'is_featured',
     ];
 
+    //equivalent to the above
     // protected $guarded=[
     //     'id',
     //     'created_at',
@@ -80,7 +81,7 @@ class Post extends Model
      * @param  Builder  $query
      * @return PostBuilder<Post>
      */
-    public function newEloquentBuilder($query): PostBuilder
+    public function newEloquentBuilder($query): PostBuilder // @pest-ignore-type
     {
         return new PostBuilder($query);
     }
@@ -94,15 +95,15 @@ class Post extends Model
     }
 
     /**
-     * @return Attribute<string, string>
+     * @return Attribute<mixed, mixed>
      */
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: function ($value) {
+            get: function (mixed $value): mixed {
                 return filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value);
             },
-            set: function (string|UploadedFile|null $value) {
+            set: function (string|UploadedFile|null $value): mixed {
                 if ($value instanceof UploadedFile) {
                     return $value->store('posts', 'public') ?: null;
                 }

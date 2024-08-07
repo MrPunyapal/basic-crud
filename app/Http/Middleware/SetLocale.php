@@ -17,10 +17,8 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->hasCookie('locale')) {
-            if (! is_null($request->cookie('locale', null))) {
-                app()->setLocale($request->cookie('locale'));
-            }
+        if ($request->hasCookie('locale') && ! is_null($request->cookie('locale', null))) {
+            app()->setLocale($request->cookie('locale'));
         }
 
         return $next($request);

@@ -41,6 +41,6 @@ final class Settings
 
     public static function isRtl(string $locale): bool
     {
-        return in_array($locale, ['ar'], true);
+        return $locale === 'ar';
     }
 }

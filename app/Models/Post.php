@@ -35,7 +35,7 @@ use Mews\Purifier\Casts\CleanHtmlInput;
  * @property Carbon|null $updated_at
  * @property-read Category $category
  *
- * @mixin \Eloquent
+ * @mixin Model
  */
 class Post extends Model
 {

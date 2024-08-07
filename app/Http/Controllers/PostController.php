@@ -51,7 +51,7 @@ class PostController extends Controller
     public function create(): View
     {
         return view('posts.create', [
-            'categories' => Category::pluck('title', 'id'),
+            'categories' => Category::query()->pluck('title', 'id'),
             'tags' => Settings::getTags(),
         ]);
     }
@@ -61,7 +61,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request): RedirectResponse
     {
-        Post::create($request->validated());
+        Post::query()->create($request->validated());
 
         return to_route('posts.index', QueryResolver::getPreviousQuery('posts.index'))
             ->with('success', __('posts.messages.Post created successfully'));
@@ -84,7 +84,7 @@ class PostController extends Controller
     {
         return view('posts.edit', [
             'post' => $post,
-            'categories' => Category::pluck('title', 'id'),
+            'categories' => Category::query()->pluck('title', 'id'),
             'tags' => Settings::getTags(),
         ]);
     }

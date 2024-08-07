@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request): JsonResponse
     {
-        $post = Post::create($request->validated());
+        $post = Post::query()->create($request->validated());
 
         return response()->json($post, 201);
     }

@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, Post> $posts
  * @property-read int|null $posts_count
  *
- * @mixin \Eloquent
+ * @mixin Model
  */
 class Category extends Model
 {

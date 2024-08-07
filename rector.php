@@ -31,6 +31,7 @@ return RectorConfig::configure()
         earlyReturn: true,
         strictBooleans: true,
         carbon: true,
+        rectorPreset: true,
     )->withSets([
         LaravelSetList::LARAVEL_110,
     ])->withImportNames();

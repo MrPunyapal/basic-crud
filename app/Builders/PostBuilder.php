@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Builders;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @template TModelClass of \App\Models\Post
  *
- * @extends \Illuminate\Database\Eloquent\Builder<\App\Models\Post>
+ * @extends Builder<Post>
  */
 class PostBuilder extends Builder
 {

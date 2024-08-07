@@ -26,4 +26,4 @@ return RectorConfig::configure()
         // codeQuality: true
     )->withSets([
         LaravelSetList::LARAVEL_110,
-    ]);
+    ])->withImportNames();

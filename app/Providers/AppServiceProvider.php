@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // @codeCoverageIgnoreStart
         UploadedFile::macro('makeFromUrl', function (string $url): ?UploadedFile {
             $tempFile = tempnam(sys_get_temp_dir(), str()->random(32));
 
@@ -45,5 +46,6 @@ class AppServiceProvider extends ServiceProvider
                 true
             );
         });
+        // @codeCoverageIgnoreEnd
     }
 }

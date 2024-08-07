@@ -11,3 +11,12 @@ test('can set locale', function ($locale) {
         ->assertRedirect(route('posts.index'))
         ->assertCookie('locale', $locale);
 })->with(['en', 'fr']);
+
+test('can set locale from cookie', function ($locale) {
+    $this->from(route('posts.index'))
+        ->withCookie('locale', $locale)
+        ->get(route('posts.index'))
+        ->assertStatus(200);
+
+    expect(app()->getLocale())->toBe($locale);
+})->with(['hi', 'gu']);

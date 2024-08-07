@@ -113,7 +113,7 @@ test('can see create post page', function () {
 });
 
 test('can create post', function () {
-    $Category = Category::factory()->create();
+    $category = Category::factory()->create();
     $image = UploadedFile::fake()->image('some-image.png');
     $this->get(route('posts.index', ['published' => true]));
     $this->post(route('posts.store'), [
@@ -121,7 +121,7 @@ test('can create post', function () {
         'slug' => 'test-title',
         'content' => 'Test Content',
         'image' => $image,
-        'category_id' => $Category->id,
+        'category_id' => $category->id,
         'description' => 'this is the description',
         'content' => 'this is the content',
         'tags' => ['Eloquent'],
@@ -129,9 +129,8 @@ test('can create post', function () {
         ->assertRedirect(route('posts.index', ['published' => true]))
         ->assertSessionHasNoErrors();
 
-    $this->assertDatabaseHas('posts', [
-        'title' => 'Test Title',
-    ]);
+    expect($category->posts()->where('title', 'Test Title')->exists())->toBeTrue();
+
 });
 
 test('cannot create post with invalid data', function () {

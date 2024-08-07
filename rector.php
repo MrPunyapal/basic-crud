@@ -25,6 +25,7 @@ return RectorConfig::configure()
         deadCode: true,
         codeQuality: true,
         codingStyle: true,
+        typeDeclarations: true,
     )->withSets([
         LaravelSetList::LARAVEL_110,
     ])->withImportNames();

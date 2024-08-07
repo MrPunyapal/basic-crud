@@ -16,7 +16,7 @@ it('can resolve sort query', function ($query, $expectedQuery) {
 
     get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $sortQuery = $resolver->sortQuery('title');
 
@@ -40,7 +40,7 @@ it('can resolve sort arrow', function ($query, $expectedArrow) {
 
     get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $sortArrow = $resolver->sortArrow('title');
 
@@ -64,7 +64,7 @@ it('can resolve published query', function ($query, $expectedQuery) {
 
     get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $publishedQuery = $resolver->publishedQuery();
 
@@ -84,7 +84,7 @@ it('can resolve published label', function ($query, $expectedLabel) {
 
     get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $publishedLabel = $resolver->publishedLabel();
 
@@ -104,7 +104,7 @@ it('can resolve search query', function ($query, $expectedQuery) {
 
     get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $searchQuery = $resolver->searchQuery();
 
@@ -124,7 +124,7 @@ it('can resolve search value', function ($query, $expectedValue) {
 
     get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $searchValue = $resolver->searchValue();
 

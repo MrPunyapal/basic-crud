@@ -26,7 +26,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = (new StorePostRequest())->rules();
+        $rules = (new StorePostRequest)->rules();
 
         return [
             ...$rules,

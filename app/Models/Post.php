@@ -102,9 +102,7 @@ class Post extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: function (mixed $value): mixed {
-                return filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value);
-            },
+            get: fn (mixed $value): mixed => filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value),
             set: function (string|UploadedFile|null $value): mixed {
                 if ($value instanceof UploadedFile) {
                     return $value->store('posts', 'public') ?: null;

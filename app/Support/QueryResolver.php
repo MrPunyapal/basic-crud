@@ -12,7 +12,7 @@ class QueryResolver
     /**
      * @var Collection<string, mixed>
      */
-    private Collection $query;
+    private readonly Collection $query;
 
     public function __construct()
     {

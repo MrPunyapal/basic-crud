@@ -20,6 +20,7 @@ return RectorConfig::configure()
     ->withRules([
         TypedPropertyFromStrictConstructorRector::class,
     ])
+    ->withPhpSets(php83: true)
     // here we can define, what prepared sets of rules will be applied
     ->withPreparedSets(
         deadCode: true,

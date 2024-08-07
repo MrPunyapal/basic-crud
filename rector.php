@@ -27,6 +27,7 @@ return RectorConfig::configure()
         codingStyle: true,
         typeDeclarations: true,
         privatization: true,
+        instanceOf: true,
     )->withSets([
         LaravelSetList::LARAVEL_110,
     ])->withImportNames();

@@ -56,6 +56,23 @@ class Post extends Model
         'is_featured',
     ];
 
+    /**
+     * @param  Builder  $query
+     * @return PostBuilder<Post>
+     */
+    public function newEloquentBuilder($query): PostBuilder // @pest-ignore-type
+    {
+        return new PostBuilder($query);
+    }
+
+    /**
+     * @return BelongsTo<Category, Post>
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     //equivalent to the above
     // protected $guarded=[
     //     'id',
@@ -77,23 +94,6 @@ class Post extends Model
             'is_featured' => FeaturedStatus::class,
             'content' => CleanHtmlInput::class,
         ];
-    }
-
-    /**
-     * @param  Builder  $query
-     * @return PostBuilder<Post>
-     */
-    public function newEloquentBuilder($query): PostBuilder // @pest-ignore-type
-    {
-        return new PostBuilder($query);
-    }
-
-    /**
-     * @return BelongsTo<Category, Post>
-     */
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
     }
 
     /**

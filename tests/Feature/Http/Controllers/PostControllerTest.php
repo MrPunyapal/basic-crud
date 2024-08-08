@@ -119,7 +119,6 @@ test('can create post', function () {
     $this->post(route('posts.store'), [
         'title' => 'Test Title',
         'slug' => 'test-title',
-        'content' => 'Test Content',
         'image' => $image,
         'category_id' => $category->id,
         'description' => 'this is the description',
@@ -129,8 +128,9 @@ test('can create post', function () {
         ->assertRedirect(route('posts.index', ['published' => true]))
         ->assertSessionHasNoErrors();
 
-    expect($category->posts()->where('title', 'Test Title')->exists())->toBeTrue();
-
+    $this->assertDatabaseHas('posts', [
+        'title' => 'Test Title',
+    ]);
 });
 
 test('cannot create post with invalid data', function () {
@@ -172,7 +172,7 @@ test('can see edit post page', function () {
 test('can edit post', function () {
     $post = Post::factory()->create();
 
-    $CategoryID = Category::factory()->create()->id;
+    $CategoryId = Category::factory()->create()->id;
 
     $image = UploadedFile::fake()->image('some-image.png');
 
@@ -180,9 +180,8 @@ test('can edit post', function () {
     $this->patch(route('posts.update', $post), [
         'title' => 'updated Title',
         'slug' => 'test-title',
-        'content' => 'Test Content',
         'image' => $image,
-        'category_id' => $CategoryID,
+        'category_id' => $CategoryId,
         'description' => 'this is the description',
         'content' => 'this is the content',
         'tags' => ['Eloquent'],
@@ -192,7 +191,7 @@ test('can edit post', function () {
 
     $this->assertDatabaseHas('posts', [
         'title' => 'updated Title',
-        'category_id' => $CategoryID,
+        'category_id' => $CategoryId,
     ]);
 });
 

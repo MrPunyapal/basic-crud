@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictConstructorRector;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Set\LaravelSetList;
 
@@ -14,9 +13,6 @@ return RectorConfig::configure()
         __DIR__.'/config',
         __DIR__.'/database',
         __DIR__.'/public',
-    ])
-    ->withRules([
-        TypedPropertyFromStrictConstructorRector::class,
     ])
     ->withPhpSets(php83: true)
     ->withPhpVersion(PhpVersion::PHP_83)

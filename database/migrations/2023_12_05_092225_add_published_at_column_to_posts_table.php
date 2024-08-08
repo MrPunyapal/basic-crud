@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->timestamp('published_at')->nullable()->after('published');
             $table->dropColumn('published');
         });
@@ -24,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->boolean('published')->default(false)->after('body');
             $table->dropColumn('published_at');
         });

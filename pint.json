@@ -6,7 +6,7 @@
         "strict_comparison":true,
         "fully_qualified_strict_types": {
             "import_symbols": true,
-            "leading_backslash_in_global_namespace": true,
+            "leading_backslash_in_global_namespace": false,
             "phpdoc_tags": [
                 "phpstan-param",
                 "phpstan-property",

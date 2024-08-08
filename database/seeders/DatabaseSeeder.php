@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         // Schema::enableForeignKeyConstraints();
 
-        if (Category::count() > 0) {
+        if (Category::query()->count() > 0) {
             return;
         }
 
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
             ['title' => 'C++'],
             ['title' => 'Python'],
         )->has(
-            Post::factory()->count(rand(5, 10))
+            Post::factory()->count(random_int(5, 10))
         )->create();
     }
 }

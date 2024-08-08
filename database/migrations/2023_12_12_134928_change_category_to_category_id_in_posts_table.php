@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->renameColumn('category', 'category_id');
         });
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->unsignedBigInteger('category_id')->change();
             $table->foreign('category_id')->references('id')->on('categories');
         });
@@ -27,10 +27,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->renameColumn('category_id', 'category');
         });
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->unsignedTinyInteger('category')->change();
             $table->dropForeign(['category_id']);
         });

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Override;
 use App\Builders\PostBuilder;
 use App\Enums\FeaturedStatus;
 use Database\Factories\PostFactory;
@@ -17,6 +16,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
 use Mews\Purifier\Casts\CleanHtmlInput;
+use Override;
 
 /**
  * @method static PostBuilder query()

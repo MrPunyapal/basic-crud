@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use Override;
 use App\Models\Post;
 use App\Traits\HasFileFromUrl;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Override;
 
 class UpdatePostRequest extends FormRequest
 {

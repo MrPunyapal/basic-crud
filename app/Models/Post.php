@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Override;
 use App\Builders\PostBuilder;
 use App\Enums\FeaturedStatus;
 use Database\Factories\PostFactory;
@@ -60,6 +61,7 @@ class Post extends Model
      * @param  Builder  $query
      * @return PostBuilder<Post>
      */
+    #[Override]
     public function newEloquentBuilder($query): PostBuilder // @pest-ignore-type
     {
         return new PostBuilder($query);
@@ -86,6 +88,7 @@ class Post extends Model
      *
      * @return array<string, string>
      */
+    #[Override]
     protected function casts(): array
     {
         return [

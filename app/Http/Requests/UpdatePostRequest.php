@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use Override;
 use App\Models\Post;
 use App\Traits\HasFileFromUrl;
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -45,6 +46,7 @@ class UpdatePostRequest extends FormRequest
     /**
      * Prepare the data for validation.
      */
+    #[Override]
     protected function prepareForValidation(): void
     {
         $this->resolveFileFromUrl('image');

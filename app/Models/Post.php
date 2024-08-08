@@ -45,6 +45,11 @@ class Post extends Model
 
     use SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
     protected $fillable = [
         'title',
         'slug',
@@ -100,13 +105,23 @@ class Post extends Model
     }
 
     /**
-     * @return Attribute<mixed, mixed>
+     * @return Attribute<string|null, string|null>
      */
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value): mixed => filter_var($value, FILTER_VALIDATE_URL) ? $value : asset('storage/'.$value),
-            set: function (string|UploadedFile|null $value): mixed {
+            get: function (mixed $value): ?string {
+                if (is_string($value)) {
+                    if (filter_var($value, FILTER_VALIDATE_URL)) {
+                        return $value;
+                    }
+
+                    return asset('storage/'.$value);
+                }
+
+                return null;
+            },
+            set: function (string|UploadedFile|null $value): ?string {
                 if ($value instanceof UploadedFile) {
                     return $value->store('posts', 'public') ?: null;
                 }

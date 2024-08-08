@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\FeaturedPostController;
+use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,7 +15,7 @@ Route::get('/', function () {
 // Route::view('/','welcome');
 
 // set locale cookie
-Route::get('/set-locale/{locale}', App\Http\Controllers\LocaleController::class)->name('set-locale');
+Route::get('/set-locale/{locale}', LocaleController::class)->name('set-locale');
 
 // similar to: (but not best practice)
 // Route::get('/set-locale/{locale}', fn ($locale) => back()->withCookie(cookie()->forever('locale', $locale)))->name('set-locale');
@@ -21,10 +24,10 @@ Route::get('/set-locale/{locale}', App\Http\Controllers\LocaleController::class)
 Route::redirect('/', '/posts');
 
 // resource route for posts controller (all routes)
-Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::resource('posts', PostController::class);
 
 // feature post route (patch request) - only one route needed
-Route::patch('/posts/{post}/feature', App\Http\Controllers\FeaturedPostController::class)->name('posts.featured');
+Route::patch('/posts/{post}/feature', FeaturedPostController::class)->name('posts.featured');
 
 // similar to:
 // Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');

@@ -4,6 +4,26 @@
         "declare_strict_types": true,
         "strict_param":true,
         "strict_comparison":true,
+        "fully_qualified_strict_types": {
+            "import_symbols": true,
+            "leading_backslash_in_global_namespace": true,
+            "phpdoc_tags": [
+                "phpstan-param",
+                "phpstan-property",
+                "phpstan-property-read",
+                "phpstan-property-write",
+                "phpstan-return",
+                "phpstan-var",
+                "param",
+                "property",
+                "property-read",
+                "property-write",
+                "return",
+                "see",
+                "throws",
+                "var"
+            ]
+        },
         "ordered_class_elements": {
             "order": [
                 "use_trait",

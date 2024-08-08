@@ -28,6 +28,10 @@
                 "method_private"
             ],
             "sort_algorithm": "none"
-        }
+        },
+        "modernize_types_casting": true,
+        "no_superfluous_elseif": true,
+        "no_useless_else": true,
+        "no_multiple_statements_per_line": true
     }
 }

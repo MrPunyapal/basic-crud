@@ -2,8 +2,8 @@
     "preset": "laravel",
     "rules": {
         "declare_strict_types": true,
-        "strict_param":true,
-        "strict_comparison":true,
+        "strict_param": true,
+        "strict_comparison": true,
         "fully_qualified_strict_types": {
             "import_symbols": true,
             "leading_backslash_in_global_namespace": false,
@@ -52,6 +52,7 @@
         "modernize_types_casting": true,
         "no_superfluous_elseif": true,
         "no_useless_else": true,
-        "no_multiple_statements_per_line": true
+        "no_multiple_statements_per_line": true,
+        "no_empty_comment": true
     }
 }

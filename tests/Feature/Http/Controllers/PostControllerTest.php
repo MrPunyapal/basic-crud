@@ -8,20 +8,13 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
 
-use function Pest\Laravel\assertDatabaseHas;
-use function Pest\Laravel\assertSoftDeleted;
-use function Pest\Laravel\delete;
-use function Pest\Laravel\get;
-use function Pest\Laravel\patch;
-use function Pest\Laravel\post;
-
 test('root redirects to posts', function () {
-    get('/')
+    $this->get('/')
         ->assertRedirect(route('posts.index'));
 });
 
 test('can see posts', function () {
-    get(route('posts.index'))
+    $this->get(route('posts.index'))
         ->assertOk()
         ->assertSessionHas('posts.index.previous.query', [])
         ->assertViewIs('posts.index')
@@ -38,7 +31,7 @@ test('can only see published posts', function () {
         'published_at' => now()->subDay(),
     ]);
 
-    get(route('posts.index', ['published' => true]))
+    $this->get(route('posts.index', ['published' => true]))
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertSessionHas('posts.index.previous.query', ['published' => true])
@@ -58,7 +51,7 @@ test('can see posts sorted by title', function (string $direction) {
         ? $posts->pluck('title')->all()
         : $posts->pluck('title')->reverse()->all();
 
-    get(route('posts.index', [
+    $this->get(route('posts.index', [
         'sortBy' => 'title',
         'direction' => $direction,
     ]))
@@ -77,7 +70,7 @@ test('can see posts sorted by title', function (string $direction) {
 test('can see posts sorted by invalid column', function () {
     Post::factory(10)->create();
 
-    get(route('posts.index', [
+    $this->get(route('posts.index', [
         'sortBy' => 'invalid-column',
     ]))
         ->assertOk()
@@ -94,7 +87,7 @@ test('can search posts by title', function () {
     $searchTerm = $postToSearch->title;
 
     // Execute the search
-    get(route('posts.index', ['search' => $searchTerm]))
+    $this->get(route('posts.index', ['search' => $searchTerm]))
         ->assertOk()
         ->assertSessionHas('posts.index.previous.query', [
             'search' => $searchTerm,
@@ -110,7 +103,7 @@ test('can search posts by title', function () {
 });
 
 test('can see create post page', function () {
-    get(route('posts.create'))
+    $this->get(route('posts.create'))
         ->assertOk()
         ->assertViewIs('posts.create')
         ->assertViewHasAll([
@@ -120,15 +113,14 @@ test('can see create post page', function () {
 });
 
 test('can create post', function () {
-    $Category = Category::factory()->create();
+    $category = Category::factory()->create();
     $image = UploadedFile::fake()->image('some-image.png');
-    get(route('posts.index', ['published' => true]));
-    post(route('posts.store'), [
+    $this->get(route('posts.index', ['published' => true]));
+    $this->post(route('posts.store'), [
         'title' => 'Test Title',
         'slug' => 'test-title',
-        'content' => 'Test Content',
         'image' => $image,
-        'category_id' => $Category->id,
+        'category_id' => $category->id,
         'description' => 'this is the description',
         'content' => 'this is the content',
         'tags' => ['Eloquent'],
@@ -136,13 +128,13 @@ test('can create post', function () {
         ->assertRedirect(route('posts.index', ['published' => true]))
         ->assertSessionHasNoErrors();
 
-    assertDatabaseHas('posts', [
+    $this->assertDatabaseHas('posts', [
         'title' => 'Test Title',
     ]);
 });
 
 test('cannot create post with invalid data', function () {
-    post(route('posts.store'), [])
+    $this->post(route('posts.store'), [])
         ->assertRedirect()
         ->assertSessionHasErrors([
             'title' => 'The title field is required.',
@@ -156,7 +148,7 @@ test('cannot create post with invalid data', function () {
 test('can see post page', function () {
     $post = Post::factory()->create();
 
-    get(route('posts.show', $post))
+    $this->get(route('posts.show', $post))
         ->assertOk()
         ->assertViewIs('posts.show')
         ->assertViewHasAll([
@@ -167,7 +159,7 @@ test('can see post page', function () {
 test('can see edit post page', function () {
     $post = Post::factory()->create();
 
-    get(route('posts.edit', $post))
+    $this->get(route('posts.edit', $post))
         ->assertOk()
         ->assertViewIs('posts.edit')
         ->assertViewHas([
@@ -180,17 +172,16 @@ test('can see edit post page', function () {
 test('can edit post', function () {
     $post = Post::factory()->create();
 
-    $CategoryID = Category::factory()->create()->id;
+    $CategoryId = Category::factory()->create()->id;
 
     $image = UploadedFile::fake()->image('some-image.png');
 
-    get(route('posts.index', ['sortBy' => 'title', 'direction' => 'asc']));
-    patch(route('posts.update', $post), [
+    $this->get(route('posts.index', ['sortBy' => 'title', 'direction' => 'asc']));
+    $this->patch(route('posts.update', $post), [
         'title' => 'updated Title',
         'slug' => 'test-title',
-        'content' => 'Test Content',
         'image' => $image,
-        'category_id' => $CategoryID,
+        'category_id' => $CategoryId,
         'description' => 'this is the description',
         'content' => 'this is the content',
         'tags' => ['Eloquent'],
@@ -198,23 +189,23 @@ test('can edit post', function () {
         ->assertRedirect(route('posts.index', ['sortBy' => 'title', 'direction' => 'asc']))
         ->assertSessionHasNoErrors();
 
-    assertDatabaseHas('posts', [
+    $this->assertDatabaseHas('posts', [
         'title' => 'updated Title',
-        'category_id' => $CategoryID,
+        'category_id' => $CategoryId,
     ]);
 });
 
 test('can delete post', function () {
     $post = Post::factory()->createOne();
 
-    get(route('posts.index', [
+    $this->get(route('posts.index', [
         'sortBy' => 'title',
         'direction' => 'asc',
         'page' => 2,
         'search' => 'test',
         'published' => true,
     ]));
-    delete(route('posts.destroy', $post))
+    $this->delete(route('posts.destroy', $post))
         ->assertRedirect(route('posts.index', [
             'sortBy' => 'title',
             'direction' => 'asc',
@@ -223,5 +214,5 @@ test('can delete post', function () {
             'published' => true,
         ]));
 
-    assertSoftDeleted($post);
+    $this->assertSoftDeleted($post);
 });

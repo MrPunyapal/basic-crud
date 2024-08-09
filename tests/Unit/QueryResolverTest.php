@@ -5,8 +5,6 @@ declare(strict_types=1);
 use App\Models\Post;
 use App\Support\QueryResolver;
 
-use function Pest\Laravel\get;
-
 beforeEach(function () {
     Post::factory(20)
         ->create();
@@ -14,9 +12,9 @@ beforeEach(function () {
 
 it('can resolve sort query', function ($query, $expectedQuery) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $sortQuery = $resolver->sortQuery('title');
 
@@ -38,9 +36,9 @@ it('can resolve sort query', function ($query, $expectedQuery) {
 
 it('can resolve sort arrow', function ($query, $expectedArrow) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $sortArrow = $resolver->sortArrow('title');
 
@@ -62,9 +60,9 @@ it('can resolve sort arrow', function ($query, $expectedArrow) {
 
 it('can resolve published query', function ($query, $expectedQuery) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $publishedQuery = $resolver->publishedQuery();
 
@@ -72,7 +70,7 @@ it('can resolve published query', function ($query, $expectedQuery) {
 })->with([
     [
         ['published' => true, 'search' => 'test', 'page' => 1],
-        ['search' => 'test', 'published' => null],
+        ['search' => 'test'],
     ],
     [
         ['search' => 'test', 'page' => 1],
@@ -82,9 +80,9 @@ it('can resolve published query', function ($query, $expectedQuery) {
 
 it('can resolve published label', function ($query, $expectedLabel) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $publishedLabel = $resolver->publishedLabel();
 
@@ -102,9 +100,9 @@ it('can resolve published label', function ($query, $expectedLabel) {
 
 it('can resolve search query', function ($query, $expectedQuery) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $searchQuery = $resolver->searchQuery();
 
@@ -122,9 +120,9 @@ it('can resolve search query', function ($query, $expectedQuery) {
 
 it('can resolve search value', function ($query, $expectedValue) {
 
-    get(route('posts.index', $query));
+    $this->get(route('posts.index', $query));
 
-    $resolver = new QueryResolver();
+    $resolver = new QueryResolver;
 
     $searchValue = $resolver->searchValue();
 
@@ -144,7 +142,7 @@ it('can store previous query in session', function () {
     $routeName = 'posts.index';
     $query = ['sortBy' => 'title', 'direction' => 'asc', 'page' => 1];
 
-    get(route($routeName, $query));
+    $this->get(route($routeName, $query));
 
     $storedQuery = session()->get($routeName.'.previous.query');
 

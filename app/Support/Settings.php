@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\App;
 
 final class Settings
 {
-    private const TAGS = ['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'];
+    private const array TAGS = ['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'];
 
-    private const LOCALES = [
+    private const array LOCALES = [
         'en' => 'English',
         'fr' => 'French',
         'ar' => 'Arabic',
@@ -41,6 +41,6 @@ final class Settings
 
     public static function isRtl(string $locale): bool
     {
-        return in_array($locale, ['ar'], true);
+        return $locale === 'ar';
     }
 }

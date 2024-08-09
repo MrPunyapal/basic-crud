@@ -10,7 +10,7 @@ These instructions will guide you through setting up the project on your local m
 
 You need to have installed the following software:
 
-- PHP 8.2
+- PHP 8.2 | 8.3
 - Composer 2.0.8
 - MySQL 8.0.23
 - Node 20.10.0
@@ -79,8 +79,27 @@ Follow these steps to set up a development environment:
     ```
 
     ```bash
-    ./vendor/bin/pest --parallel
+    # Lint the code using Pint
+    composer lint
+    composer test:lint
+
+    # Refactor the code using Rector
+    composer refactor
+    composer test:refactor
+
+    # Run PHPStan
+    composer test:types
+
+    # Run type coverage
+    composer test:types-coverage
+
+    # Run the test suite
+    composer test:unit
+
+    # Run all the tests
+    composer test
     ```
+Check [composer.json](/composer.json#L78-L92) for more details on scripts.
 
 ### Installing with Sail
 
@@ -159,7 +178,7 @@ Follow these steps to set up a development environment using Laravel Sail:
     ```
 
     ```bash
-    ./vendor/bin/sail run --rm laravel.test ./vendor/bin/pest --parallel
+    ./vendor/bin/sail run --rm laravel.test composer test
     ```
 ### Give Feedback 💬
 

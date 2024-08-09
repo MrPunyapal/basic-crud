@@ -6,22 +6,22 @@ namespace App\Providers;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\ServiceProvider;
+use Override;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
      */
-    public function register(): void
-    {
-        //
-    }
+    #[Override]
+    public function register(): void {}
 
     /**
      * Bootstrap any application services.
      */
     public function boot(): void
     {
+        // @codeCoverageIgnoreStart
         UploadedFile::macro('makeFromUrl', function (string $url): ?UploadedFile {
             $tempFile = tempnam(sys_get_temp_dir(), str()->random(32));
 
@@ -45,5 +45,6 @@ class AppServiceProvider extends ServiceProvider
                 true
             );
         });
+        // @codeCoverageIgnoreEnd
     }
 }

@@ -26,14 +26,14 @@ class PostController extends Controller
         $posts = Post::query()
             ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
             ->withAggregate('category', 'title')
-            ->when((string) $request->string('search'), function (PostBuilder $query, string $search) {
+            ->when($request->string('search')->toString(), function (PostBuilder $query, string $search): void {
                 $query->search($search);
             })
-            ->when($request->input('published'), fn (PostBuilder $query) => $query->published())
+            ->when($request->input('published'), fn (PostBuilder $query): PostBuilder => $query->published())
             ->when(
                 in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
-                function (PostBuilder $query) use ($request) {
-                    $query->sortBy((string) $request->string('sortBy'), (string) $request->string('direction'));
+                function (PostBuilder $query) use ($request): void {
+                    $query->sortBy($request->string('sortBy')->toString(), $request->string('direction')->toString());
                 },
                 fn (PostBuilder $query) => $query->latest(),
             )
@@ -51,7 +51,7 @@ class PostController extends Controller
     public function create(): View
     {
         return view('posts.create', [
-            'categories' => Category::pluck('title', 'id'),
+            'categories' => Category::query()->pluck('title', 'id'),
             'tags' => Settings::getTags(),
         ]);
     }
@@ -61,7 +61,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request): RedirectResponse
     {
-        Post::create($request->validated());
+        Post::query()->create($request->validated());
 
         return to_route('posts.index', QueryResolver::getPreviousQuery('posts.index'))
             ->with('success', __('posts.messages.Post created successfully'));
@@ -84,7 +84,7 @@ class PostController extends Controller
     {
         return view('posts.edit', [
             'post' => $post,
-            'categories' => Category::pluck('title', 'id'),
+            'categories' => Category::query()->pluck('title', 'id'),
             'tags' => Settings::getTags(),
         ]);
     }

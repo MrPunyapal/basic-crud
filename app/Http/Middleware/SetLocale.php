@@ -13,16 +13,12 @@ class SetLocale
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request):Response  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->hasCookie('locale')) {
-            if (is_array($request->cookie('locale')) || is_null($request->cookie('locale'))) {
-                $request->cookie('locale', 'en');
-            } else {
-                app()->setLocale($request->cookie('locale'));
-            }
+        if ($request->hasCookie('locale') && ! is_null($request->cookie('locale')) && ! is_array($request->cookie('locale'))) {
+            app()->setLocale($request->cookie('locale'));
         }
 
         return $next($request);

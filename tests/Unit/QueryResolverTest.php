@@ -70,7 +70,7 @@ it('can resolve published query', function ($query, $expectedQuery) {
 })->with([
     [
         ['published' => true, 'search' => 'test', 'page' => 1],
-        ['search' => 'test', 'published' => null],
+        ['search' => 'test'],
     ],
     [
         ['search' => 'test', 'page' => 1],

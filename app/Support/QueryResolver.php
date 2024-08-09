@@ -10,44 +10,49 @@ use Illuminate\Support\Facades\Route;
 class QueryResolver
 {
     /**
-     * @var Collection<string, mixed>
+     * @var Collection<string, string>
      */
     private readonly Collection $query;
 
     public function __construct()
     {
+
+        /** @var array<string, string> */
+        $query = request()->query();
+
         if (request()->routeIs('*.index')) {
-            session()->put(Route::currentRouteName().'.previous.query', request()->query());
+            session()->put(Route::currentRouteName().'.previous.query', $query);
         }
 
-        $this->query = request()->collect()->forget(['page']);
+        unset($query['page']);
+
+        $this->query = collect($query);
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string, string>|null
      */
-    public static function getPreviousQuery(string $routeName): array
+    public static function getPreviousQuery(string $routeName): ?array
     {
-        $query = session()->get($routeName.'.previous.query');
+        /** @var array<string, string> */
+        $query = session()->get($routeName.'.previous.query', []);
 
-        return is_array($query) ? $query : [];
+        return $query;
     }
 
     /**
-     * @return array<int, mixed>
+     * @return array<string, string>
      */
     public function sortQuery(string $key): array
     {
-        $query = $this->query->toArray();
+        $query = $this->query->all();
         unset($query['sortBy'], $query['direction']);
 
-        return [
-            ...$query,
-            ...match ($this->query->get('sortBy')) {
+        return $query +
+            match ($this->query->get('sortBy')) {
                 $key => $this->query->get('direction') === 'asc' ? ['sortBy' => $key, 'direction' => 'desc'] : [],
                 default => ['sortBy' => $key, 'direction' => 'asc'],
-            },
-        ];
+            };
     }
 
     public function sortArrow(string $key): string
@@ -58,17 +63,14 @@ class QueryResolver
     }
 
     /**
-     * @return array<int, mixed>
+     * @return array<string, string>
      */
     public function publishedQuery(): array
     {
-        $query = $this->query->toArray();
+        $query = $this->query->all();
         unset($query['published']);
 
-        return [
-            ...$query,
-            'published' => $this->query->get('published') ? null : true,
-        ];
+        return $query + ($this->query->get('published') ? [] : ['published' => '1']);
     }
 
     public function publishedLabel(): string
@@ -77,17 +79,17 @@ class QueryResolver
     }
 
     /**
-     * @return array<int, mixed>
+     * @return array<string, string>
      */
     public function searchQuery(): array
     {
-        $query = $this->query->toArray();
+        $query = $this->query->all();
         unset($query['search']);
 
         return $query;
     }
 
-    public function searchValue(): mixed
+    public function searchValue(): ?string
     {
         return $this->query->get('search');
     }

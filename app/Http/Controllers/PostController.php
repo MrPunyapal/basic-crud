@@ -26,14 +26,14 @@ class PostController extends Controller
         $posts = Post::query()
             ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
             ->withAggregate('category', 'title')
-            ->when((string) $request->string('search'), function (PostBuilder $query, string $search): void {
+            ->when($request->string('search')->toString(), function (PostBuilder $query, string $search): void {
                 $query->search($search);
             })
             ->when($request->input('published'), fn (PostBuilder $query): PostBuilder => $query->published())
             ->when(
                 in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
                 function (PostBuilder $query) use ($request): void {
-                    $query->sortBy((string) $request->string('sortBy'), (string) $request->string('direction'));
+                    $query->sortBy($request->string('sortBy')->toString(), $request->string('direction')->toString());
                 },
                 fn (PostBuilder $query) => $query->latest(),
             )

@@ -1,9 +1,28 @@
 {
-    "name": "laravel/laravel",
+    "name": "mr-punyapal/basic-crud",
     "type": "project",
     "description": "Example of crud operations best practices for beginner",
-    "keywords": ["laravel", "basic crud"],
+    "keywords": [
+        "basic crud",
+        "beginner",
+        "best practices",
+        "example",
+        "laravel",
+        "laravel 11",
+        "phpstan",
+        "pest",
+        "pint",
+        "rector",
+        "sanctum"
+    ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Punyapal Shah",
+            "email": "mrpunyapal@gmail.com",
+            "role": "Maintainer"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.2",

@@ -22,23 +22,22 @@ class PostController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request): View
-{
-    $posts = Post::query()
-        ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
-        ->withAggregate('category', 'title')
-        ->when($request->string('search')->toString(), fn(PostBuilder $query, $search) => $query->search($search))
-        ->when($request->input('published'), fn(PostBuilder $query) => $query->published())
-        ->when(
-            in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
-            fn(PostBuilder $query) => $query->sortBy($request->string('sortBy')->toString(), $request->string('direction')->toString()),
-            fn(PostBuilder $query) => $query->latest()
-        )
-        ->paginate(10)
-        ->withQueryString();
+    {
+        $posts = Post::query()
+            ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
+            ->withAggregate('category', 'title')
+            ->when($request->string('search')->toString(), fn (PostBuilder $query, $search): PostBuilder => $query->search($search))
+            ->when($request->input('published'), fn (PostBuilder $query): PostBuilder => $query->published())
+            ->when(
+                in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
+                fn (PostBuilder $query): PostBuilder => $query->sortBy($request->string('sortBy')->toString(), $request->string('direction')->toString()),
+                fn (PostBuilder $query) => $query->latest()
+            )
+            ->paginate(10)
+            ->withQueryString();
 
-    return view('posts.index', ['posts' => $posts]);
-}
-
+        return view('posts.index', ['posts' => $posts]);
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -12,7 +12,6 @@ You need to have installed the following software:
 
 - PHP 8.2 | 8.3
 - Composer 2.0.8
-- MySQL 8.0.23
 - Node 20.10.0
 
 ### Installing
@@ -66,8 +65,6 @@ Follow these steps to set up a development environment:
 ## How to Test the Application 🧪
 
 - Copy .env.testing.example to .env.testing
-- Update the database configuration according to your local environment
-- Create a new database for testing
 - Run the following commands
 
     ```bash
@@ -112,14 +109,13 @@ Follow these steps to set up a development environment using Laravel Sail:
 
     ```bash
     git clone https://github.com/mr-punyapal/basic-crud.git
+    ```
 
 2. **Duplicate the .env.example file and rename it to .env**
 
     ```bash
     cp .env.example .env
     ```
-
-    Update the `DB_HOST` environment variable to value `mysql` (should be same as service name of database server)
 
 3. **Install dependencies**
 
@@ -128,7 +124,7 @@ Follow these steps to set up a development environment using Laravel Sail:
         -u "$(id -u):$(id -g)" \
         -v "$(pwd):/var/www/html" \
         -w /var/www/html \
-        laravelsail/php82-composer:latest \
+        laravelsail/php83-composer:latest \
         composer install --ignore-platform-reqs
     ```
 
@@ -160,13 +156,6 @@ Follow these steps to set up a development environment using Laravel Sail:
 ## How to Test the Application with Sail 🧪
 
 - Copy .env.testing.example to .env.testing
-- Update the `DB_HOST` environment variable to value `mysql` (should be same as service name of database server)
-- Create a new database for testing
-    ```bash
-    ./vendor/bin/sail mysql
-
-    > create database <testing_database_name>
-    ```
 - Run the following commands
 
     ```bash

@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: true
       matrix:
-        fail-fast: true
         php-version: [ 8.2, 8.3 ]
 
     steps:

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('published')->default(false);
             $table->unsignedTinyInteger('category');
             $table->json('tags')->nullable();
-            $table->unsignedTinyInteger('is_featured')->default(FeaturedStatus::NOT_FEATURED);
+            $table->unsignedTinyInteger('is_featured')->default(FeaturedStatus::NotFeatured);
             $table->softDeletes();
             $table->timestamps();
         });

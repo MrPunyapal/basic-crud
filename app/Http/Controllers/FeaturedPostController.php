@@ -12,11 +12,11 @@ class FeaturedPostController extends Controller
 {
     public function __invoke(Post $post): RedirectResponse
     {
-        $isFeatured = $post->is_featured === FeaturedStatus::FEATURED;
+        $isFeatured = $post->is_featured === FeaturedStatus::Featured;
         $post->update([
             'is_featured' => $isFeatured
-                ? FeaturedStatus::NOT_FEATURED
-                : FeaturedStatus::FEATURED,
+                ? FeaturedStatus::NotFeatured
+                : FeaturedStatus::Featured,
         ]);
 
         return back()->with('success', __('posts.messages.Post '.($isFeatured ? 'unfeatured' : 'featured').' successfully'));

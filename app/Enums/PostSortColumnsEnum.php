@@ -6,7 +6,7 @@ namespace App\Enums;
 
 enum PostSortColumnsEnum: string
 {
-    case TITLE = 'title';
+    case Title = 'title';
     case IsFeatured = 'is_featured';
 
     /**

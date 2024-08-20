@@ -16,5 +16,5 @@ test('null in image attribute with image', function () {
         'image' => 'image.jpg',
     ]);
 
-    expect($post->image)->toBeUrl();
+    expect($post->image)->toBe(Storage::disk('public')->url('image.jpg'));
 });

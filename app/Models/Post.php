@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Mews\Purifier\Casts\CleanHtmlInput;
 use Override;
 
@@ -116,7 +117,7 @@ class Post extends Model
                         return $value;
                     }
 
-                    return asset('storage/'.$value);
+                    return Storage::disk('public')->url($value);
                 }
 
                 return null;

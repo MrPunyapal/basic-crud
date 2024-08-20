@@ -6,54 +6,54 @@ namespace App\Enums;
 
 enum FeaturedStatus: int
 {
-    case NOT_FEATURED = 0;
-    case FEATURED = 1;
+    case NotFeatured = 0;
+    case Featured = 1;
 
     public function label(): string
     {
         return match ($this) {
-            self::NOT_FEATURED => __('posts.show.Not Featured'),
-            self::FEATURED => __('posts.show.Featured'),
+            self::NotFeatured => __('posts.show.Not Featured'),
+            self::Featured => __('posts.show.Featured'),
         };
     }
 
     public function booleanLabel(): string
     {
         return match ($this) {
-            self::NOT_FEATURED => __('posts.show.No'),
-            self::FEATURED => __('posts.show.Yes'),
+            self::NotFeatured => __('posts.show.No'),
+            self::Featured => __('posts.show.Yes'),
         };
     }
 
     public function color(): string
     {
         return match ($this) {
-            self::NOT_FEATURED => 'bg-blue-500',
-            self::FEATURED => 'bg-green-500',
+            self::NotFeatured => 'bg-blue-500',
+            self::Featured => 'bg-green-500',
         };
     }
 
     public function changeBtnLabel(): string
     {
         return match ($this) {
-            self::NOT_FEATURED => __('posts.form.Feature'),
-            self::FEATURED => __('posts.form.Unfeature'),
+            self::NotFeatured => __('posts.form.Feature'),
+            self::Featured => __('posts.form.Unfeature'),
         };
     }
 
     public function changeBtnColor(): string
     {
         return match ($this) {
-            self::NOT_FEATURED => 'bg-yellow-500 hover:bg-yellow-600',
-            self::FEATURED => 'bg-gray-500 hover:bg-gray-600',
+            self::NotFeatured => 'bg-yellow-500 hover:bg-yellow-600',
+            self::Featured => 'bg-gray-500 hover:bg-gray-600',
         };
     }
 
     public function buttonColor(): string
     {
         return match ($this) {
-            self::NOT_FEATURED => 'yellow',
-            self::FEATURED => 'zinc',
+            self::NotFeatured => 'yellow',
+            self::Featured => 'zinc',
         };
     }
 }

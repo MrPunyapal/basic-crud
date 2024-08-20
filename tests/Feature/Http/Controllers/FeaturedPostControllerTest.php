@@ -9,7 +9,7 @@ use App\Models\Post;
 
 test('can feature a post', function () {
     $post = Post::factory()->create([
-        'is_featured' => FeaturedStatus::NOT_FEATURED,
+        'is_featured' => FeaturedStatus::NotFeatured,
     ]);
 
     $this->from(route('posts.index'))
@@ -19,13 +19,13 @@ test('can feature a post', function () {
 
     $this->assertDatabaseHas('posts', [
         'id' => $post->id,
-        'is_featured' => FeaturedStatus::FEATURED,
+        'is_featured' => FeaturedStatus::Featured,
     ]);
 });
 
 test('can unfeature a post', function () {
     $post = Post::factory()->create([
-        'is_featured' => FeaturedStatus::FEATURED,
+        'is_featured' => FeaturedStatus::Featured,
     ]);
 
     $this->from(route('posts.show', ['post' => $post]))
@@ -35,6 +35,6 @@ test('can unfeature a post', function () {
 
     $this->assertDatabaseHas('posts', [
         'id' => $post->id,
-        'is_featured' => FeaturedStatus::NOT_FEATURED,
+        'is_featured' => FeaturedStatus::NotFeatured,
     ]);
 });

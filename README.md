@@ -10,7 +10,7 @@ These instructions will guide you through setting up the project on your local m
 
 You need to have installed the following software:
 
-- PHP 8.2 | 8.3
+- PHP 8.3
 - Composer 2.0.8
 - Node 20.10.0
 

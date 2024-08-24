@@ -35,7 +35,9 @@ class PostController extends Controller
                 function (PostBuilder $query) use ($request): void {
                     $query->sortBy($request->string('sortBy')->toString(), $request->string('direction')->toString());
                 },
-                fn (PostBuilder $query) => $query->latest(),
+                function (PostBuilder $query): void {
+                    $query->latest();
+                },
             )
             ->paginate(10)
             ->withQueryString();

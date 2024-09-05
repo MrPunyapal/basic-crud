@@ -20,17 +20,17 @@ use Mews\Purifier\Casts\CleanHtmlInput;
 use Override;
 
 /**
- * @method static PostBuilder query()
+ * @method static PostBuilder<Post> query()
  *
  * @property int $id
  * @property string $title
  * @property string $slug
  * @property string $description
  * @property UploadedFile|string|null $image
- * @property array $content
+ * @property string $content
  * @property Carbon|null $published_at
  * @property int $category_id
- * @property array|null $tags
+ * @property array<string>|null $tags
  * @property FeaturedStatus $is_featured
  * @property Carbon|null $deleted_at
  * @property Carbon|null $created_at

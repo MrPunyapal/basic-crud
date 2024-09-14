@@ -24,7 +24,7 @@ it('can list all posts', function () {
 
     $this->getJson(action([PostController::class, 'index']))
         ->assertOk()
-        ->assertJson($posts->toArray());
+        ->assertJson(['data' => $posts->toArray()]);
 });
 
 it('can create a new post', function () {
@@ -44,7 +44,7 @@ it('can show a specific post', function () {
 
     $this->getJson(action([PostController::class, 'show'], $post))
         ->assertOk()
-        ->assertJson($post->toArray());
+        ->assertJson(['data' => $post->toArray()]);
 });
 
 it('can update a post', function () {

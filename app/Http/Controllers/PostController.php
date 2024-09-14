@@ -29,7 +29,9 @@ class PostController extends Controller
             ->when($request->string('search')->toString(), function (PostBuilder $query, string $search): void {
                 $query->search($search);
             })
-            ->when($request->input('published'), fn (PostBuilder $query): PostBuilder => $query->published())
+            ->when($request->input('published'), function (PostBuilder $query): void {
+                $query->published();
+            })
             ->when(
                 in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
                 function (PostBuilder $query) use ($request): void {

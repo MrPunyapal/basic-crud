@@ -46,10 +46,12 @@
             <div class="bg-gray-50 px-3 py-4">
                 <div class="flex justify-between">
                     <div>
-                        @foreach ($post->tags as $tag)
+                        @isset($post->tags)
+                            @foreach ($post->tags as $tag)
                             <span
                                 class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ $tag }}</span>
-                        @endforeach
+                            @endforeach
+                        @endisset                       
                     </div>
                     <div>
                         <span

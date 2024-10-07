@@ -88,7 +88,7 @@ Follow these steps to set up a development environment:
     composer test:types
 
     # Run type coverage
-    composer test:types-coverage
+    composer test:type-coverage
 
     # Run the test suite
     composer test:unit

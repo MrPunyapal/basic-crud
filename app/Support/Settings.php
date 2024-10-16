@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\App;
 
 final class Settings
 {
-    private const array TAGS = ['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'];
+    private const TAGS = ['Eloquent', 'Blade', 'Migrations', 'Seeding', 'Routing', 'Controllers', 'Middleware', 'Requests', 'Responses', 'Views', 'Forms', 'Validation', 'Mail', 'Notifications'];
 
-    private const array LOCALES = [
+    private const LOCALES = [
         'en' => 'English',
         'fr' => 'French',
         'ar' => 'Arabic',

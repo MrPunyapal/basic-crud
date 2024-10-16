@@ -7,6 +7,7 @@ namespace App\Http\Requests;
 use App\Traits\HasFileFromUrl;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Override;
 
 class StorePostRequest extends FormRequest
@@ -35,10 +36,10 @@ class StorePostRequest extends FormRequest
             'image' => ['required', 'image'],
             'content' => ['required'],
             'published_at' => ['nullable', 'date'],
-            'category_id' => [
-                'required',
-                'exists:categories,id',
-            ],
+          'category_id' => [
+        'required',
+        Rule::exists('categories', 'id')->whereNull('deleted_at'),
+      ],
             'tags' => ['nullable', 'array', 'max:3'],
             'tags.*' => ['string', 'max:20'],
             'is_featured' => ['boolean'],

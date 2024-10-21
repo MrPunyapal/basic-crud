@@ -6,7 +6,6 @@ namespace App\Models;
 
 use App\Builders\PostBuilder;
 use App\Enums\FeaturedStatus;
-use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,7 +40,7 @@ use Override;
  */
 class Post extends Model
 {
-    /** @use HasFactory<PostFactory> */
+    /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
 
     use SoftDeletes;

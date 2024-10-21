@@ -35,4 +35,6 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_ELOQUENT_MAGIC_METHOD_TO_QUERY_BUILDER,
         LaravelSetList::LARAVEL_CONTAINER_STRING_TO_FULLY_QUALIFIED_NAME,
         LaravelSetList::LARAVEL_ARRAYACCESS_TO_METHOD_CALL,
-    ])->withImportNames();
+        LaravelSetList::LARAVEL_COLLECTION,
+    ])
+    ->withImportNames(importDocBlockNames: false);

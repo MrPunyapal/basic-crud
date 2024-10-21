@@ -39,7 +39,7 @@ class Category extends Model
     ];
 
     /**
-     * @return HasMany<Post>
+     * @return HasMany<Post, $this>
      */
     public function posts(): HasMany
     {

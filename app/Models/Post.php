@@ -73,7 +73,7 @@ class Post extends Model
     }
 
     /**
-     * @return BelongsTo<Category, Post>
+     * @return BelongsTo<Category, $this>
      */
     public function category(): BelongsTo
     {

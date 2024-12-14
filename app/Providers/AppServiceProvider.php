@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Override;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // @codeCoverageIgnoreStart
         UploadedFile::macro('makeFromUrl', function (string $url): ?UploadedFile {
-            $tempFile = tempnam(sys_get_temp_dir(), str()->random(32));
+            $tempFile = tempnam(sys_get_temp_dir(), Str::random(32));
 
             if ($tempFile === false) {
                 return null;

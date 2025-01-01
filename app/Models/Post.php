@@ -80,7 +80,7 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    //equivalent to the above
+    // equivalent to the above
     // protected $guarded=[
     //     'id',
     //     'created_at',

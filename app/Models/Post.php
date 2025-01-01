@@ -62,6 +62,14 @@ class Post extends Model
         'is_featured',
     ];
 
+    // equivalent to the above
+    // protected $guarded=[
+    //     'id',
+    //     'created_at',
+    //     'updated_at',
+    //     'deleted_at'
+    // ];
+
     /**
      * @param  Builder  $query
      * @return PostBuilder<Post>
@@ -79,14 +87,6 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
-    // equivalent to the above
-    // protected $guarded=[
-    //     'id',
-    //     'created_at',
-    //     'updated_at',
-    //     'deleted_at'
-    // ];
 
     /**
      * The attributes that should be cast.

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
+use App\Support\FileUploaderFromUrl;
 use Illuminate\Http\UploadedFile;
 
 trait HasFileFromUrl
@@ -11,11 +12,11 @@ trait HasFileFromUrl
     public function resolveFileFromUrl(string $field): void
     {
         if (! $this->hasFile($field) && filter_var($this->get($field), FILTER_VALIDATE_URL)) {
-            $file = UploadedFile::makeFromUrl(
+            $file = (new FileUploaderFromUrl)(
                 (string) $this->string($field)
             );
 
-            if ($file !== null) {
+            if ($file instanceof UploadedFile) {
                 $this->merge([
                     $field => $file,
                 ]);

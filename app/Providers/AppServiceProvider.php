@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Support\FileUploaderFromUrl;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\ServiceProvider;
 use Override;
 
@@ -18,5 +20,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void {}
+    public function boot(): void
+    {
+        UploadedFile::macro('makeFromUrl', fn (string $url): ?UploadedFile => (new FileUploaderFromUrl)($url));
+    }
 }

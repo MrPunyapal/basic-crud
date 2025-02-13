@@ -6,6 +6,9 @@ namespace App\Traits;
 
 use Illuminate\Http\UploadedFile;
 
+/**
+ * @mixin \Illuminate\Foundation\Http\FormRequest
+ */
 trait HasFileFromUrl
 {
     public function resolveFileFromUrl(string $field): void
@@ -15,7 +18,7 @@ trait HasFileFromUrl
                 (string) $this->string($field)
             );
 
-            if ($file !== null) {
+            if ($file instanceof UploadedFile) {
                 $this->merge([
                     $field => $file,
                 ]);

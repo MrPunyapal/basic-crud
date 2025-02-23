@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -24,7 +25,7 @@ class FileUploaderFromUrl
             return null;
         }
 
-        file_put_contents($tempFile, $response->body());
+        File::put($tempFile, $response->body());
 
         return new UploadedFile(
             $tempFile,

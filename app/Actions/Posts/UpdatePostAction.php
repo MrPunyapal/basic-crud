@@ -6,7 +6,7 @@ namespace App\Actions\Posts;
 
 use App\Models\Post;
 
-class UpdatePostAction
+final class UpdatePostAction
 {
     /**
      * Update a post.

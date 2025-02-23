@@ -38,7 +38,7 @@ use Override;
  *
  * @mixin Model
  */
-class Post extends Model
+final class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
@@ -89,25 +89,9 @@ class Post extends Model
     }
 
     /**
-     * The attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    #[Override]
-    protected function casts(): array
-    {
-        return [
-            'tags' => 'array',
-            'published_at' => 'datetime',
-            'is_featured' => FeaturedStatus::class,
-            'content' => CleanHtmlInput::class,
-        ];
-    }
-
-    /**
      * @return Attribute<string|null, string|null>
      */
-    protected function image(): Attribute
+    public function image(): Attribute
     {
         return Attribute::make(
             get: function (mixed $value): ?string {
@@ -129,5 +113,21 @@ class Post extends Model
                 return $value;
             }
         );
+    }
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    #[Override]
+    protected function casts(): array
+    {
+        return [
+            'tags' => 'array',
+            'published_at' => 'datetime',
+            'is_featured' => FeaturedStatus::class,
+            'content' => CleanHtmlInput::class,
+        ];
     }
 }

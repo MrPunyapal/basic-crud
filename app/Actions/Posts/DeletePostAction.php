@@ -6,7 +6,7 @@ namespace App\Actions\Posts;
 
 use App\Models\Post;
 
-class DeletePostAction
+final class DeletePostAction
 {
     public function execute(Post $post): bool
     {

@@ -7,7 +7,7 @@ namespace App\Actions\Posts;
 use App\Enums\FeaturedStatus;
 use App\Models\Post;
 
-class TogglePostFeatureAction
+final class TogglePostFeatureAction
 {
     public function execute(Post $post): bool
     {

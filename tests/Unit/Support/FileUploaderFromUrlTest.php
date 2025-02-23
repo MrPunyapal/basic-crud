@@ -30,17 +30,3 @@ test('invoke returns null on failed request', function () {
 
     expect($uploadedFile)->toBeNull();
 });
-
-test('invoke returns null on temp file creation failure', function () {
-    Http::fake([
-        'example.com/*' => Http::response('file content', 200, ['Content-Type' => 'text/plain']),
-    ]);
-
-    $uploader = $this->partialMock(FileUploaderFromUrl::class, function ($mock) {
-        $mock->shouldReceive('tempnam')->andReturn(false);
-    });
-
-    $uploadedFile = $uploader('http://example.com/file.txt');
-
-    expect($uploadedFile)->toBeNull();
-});

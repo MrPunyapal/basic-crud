@@ -22,7 +22,7 @@ use Illuminate\Support\Carbon;
  *
  * @mixin Model
  */
-class Category extends Model
+final class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;

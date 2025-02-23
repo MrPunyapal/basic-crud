@@ -6,7 +6,7 @@ namespace App\Actions\Posts;
 
 use App\Models\Post;
 
-class CreatePostAction
+final class CreatePostAction
 {
     /**
      * Create a new post.

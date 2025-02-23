@@ -12,7 +12,7 @@ use Override;
 /**
  * @extends Factory<Post>
  */
-class PostFactory extends Factory
+final class PostFactory extends Factory
 {
     /**
      * Define the model's default state.

@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Support;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
-class FileUploaderFromUrl
+final class FileUploaderFromUrl
 {
     public function __invoke(string $url): ?UploadedFile
     {
@@ -18,25 +19,16 @@ class FileUploaderFromUrl
             return null;
         }
 
-        $tempFile = $this->tempnam(sys_get_temp_dir(), Str::random(32));
+        $tempFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.Str::uuid()->toString();
 
-        if ($tempFile === false) {
-            return null;
-        }
-
-        file_put_contents($tempFile, $response->body());
+        File::put($tempFile, $response->body());
 
         return new UploadedFile(
             $tempFile,
-            basename($url),
+            File::basename($url),
             $response->header('Content-Type') ?: null,
             null,
             true
         );
-    }
-
-    public function tempnam(string $dir, string $prefix): string|false
-    {
-        return tempnam($dir, $prefix);
     }
 }

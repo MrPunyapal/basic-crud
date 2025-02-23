@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\Posts\CreatePostAction;
+use App\Actions\Posts\DeletePostAction;
+use App\Actions\Posts\UpdatePostAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -24,9 +27,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request): JsonResource
+    public function store(StorePostRequest $request, CreatePostAction $action): JsonResource
     {
-        return new JsonResource(Post::query()->create($request->validated()));
+        return new JsonResource($action->execute($request->validated()));
     }
 
     /**
@@ -40,9 +43,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post): JsonResource
+    public function update(UpdatePostRequest $request, Post $post, UpdatePostAction $action): JsonResource
     {
-        $post->update($request->validated());
+        $action->execute($post, $request->validated());
 
         return new JsonResource($post);
     }
@@ -50,9 +53,9 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post): Response
+    public function destroy(Post $post, DeletePostAction $action): Response
     {
-        $post->delete();
+        $action->execute($post);
 
         return response()->noContent();
     }

@@ -7,10 +7,7 @@ namespace Tests\Feature;
 use App\Http\Controllers\Api\PostController;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
-
-uses(RefreshDatabase::class);
 
 beforeEach(function () {
     Sanctum::actingAs(

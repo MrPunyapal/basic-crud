@@ -33,7 +33,7 @@ use Override;
  *
  * @mixin Model
  */
-class User extends Authenticatable // implements MustVerifyEmail
+final class User extends Authenticatable // implements MustVerifyEmail
 {
     use HasApiTokens;
 

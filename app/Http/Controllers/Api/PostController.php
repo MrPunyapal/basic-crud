@@ -14,7 +14,7 @@ use App\Models\Post;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
-class PostController extends Controller
+final class PostController extends Controller
 {
     /**
      * Display a listing of the resource.

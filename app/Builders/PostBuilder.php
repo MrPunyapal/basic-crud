@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * @extends Builder<Post>
  */
-class PostBuilder extends Builder
+final class PostBuilder extends Builder
 {
     public function search(string $search): static
     {

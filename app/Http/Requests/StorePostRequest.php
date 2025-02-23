@@ -9,7 +9,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Override;
 
-class StorePostRequest extends FormRequest
+final class StorePostRequest extends FormRequest
 {
     use HasFileFromUrl;
 

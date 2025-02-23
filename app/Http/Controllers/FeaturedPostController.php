@@ -9,7 +9,7 @@ use App\Enums\FeaturedStatus;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 
-class FeaturedPostController extends Controller
+final class FeaturedPostController extends Controller
 {
     public function __invoke(Post $post, TogglePostFeatureAction $action): RedirectResponse
     {

@@ -7,12 +7,12 @@ namespace App\Support;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 
-class QueryResolver
+final readonly class QueryResolver
 {
     /**
      * @var Collection<string, string>
      */
-    private readonly Collection $query;
+    private Collection $query;
 
     public function __construct()
     {
@@ -30,9 +30,9 @@ class QueryResolver
     }
 
     /**
-     * @return array<string, string>|null
+     * @return array<string, string>
      */
-    public static function getPreviousQuery(string $routeName): ?array
+    public static function getPreviousQuery(string $routeName): array
     {
         /** @var array<string, string> */
         $query = session()->get($routeName.'.previous.query', []);

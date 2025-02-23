@@ -11,7 +11,7 @@ use Override;
 /**
  * @extends Factory<Category>
  */
-class CategoryFactory extends Factory
+final class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.

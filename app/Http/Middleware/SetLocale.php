@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SetLocale
+final class SetLocale
 {
     /**
      * Handle an incoming request.

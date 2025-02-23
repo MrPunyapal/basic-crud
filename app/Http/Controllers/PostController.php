@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Actions\Posts\CreatePostAction;
+use App\Actions\Posts\DeletePostAction;
+use App\Actions\Posts\UpdatePostAction;
 use App\Builders\PostBuilder;
 use App\Enums\PostSortColumnsEnum;
 use App\Http\Requests\StorePostRequest;
@@ -63,9 +66,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request): RedirectResponse
+    public function store(StorePostRequest $request, CreatePostAction $action): RedirectResponse
     {
-        Post::query()->create($request->validated());
+        $action->execute($request->validated());
 
         return to_route('posts.index', QueryResolver::getPreviousQuery('posts.index'))
             ->with('success', __('posts.messages.Post created successfully'));
@@ -96,9 +99,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post): RedirectResponse
+    public function update(UpdatePostRequest $request, Post $post, UpdatePostAction $action): RedirectResponse
     {
-        $post->update($request->validated());
+        $action->execute($post, $request->validated());
 
         return to_route('posts.index', QueryResolver::getPreviousQuery('posts.index'))
             ->with('success', __('posts.messages.Post updated successfully'));
@@ -107,9 +110,9 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post): RedirectResponse
+    public function destroy(Post $post, DeletePostAction $action): RedirectResponse
     {
-        $post->delete();
+        $action->execute($post);
 
         return to_route('posts.index', QueryResolver::getPreviousQuery('posts.index'))
             ->with('success', __('posts.messages.Post deleted successfully'));

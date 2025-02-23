@@ -19,25 +19,16 @@ class FileUploaderFromUrl
             return null;
         }
 
-        $tempFile = $this->tempnam(sys_get_temp_dir(), Str::random(32));
-
-        if ($tempFile === false) {
-            return null;
-        }
+        $tempFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.Str::uuid()->toString();
 
         File::put($tempFile, $response->body());
 
         return new UploadedFile(
             $tempFile,
-            basename($url),
+            File::basename($url),
             $response->header('Content-Type') ?: null,
             null,
             true
         );
-    }
-
-    public function tempnam(string $dir, string $prefix): string|false
-    {
-        return tempnam($dir, $prefix);
     }
 }

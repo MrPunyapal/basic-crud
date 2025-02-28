@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -19,9 +20,9 @@ final class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResource
+    public function index(Request $request): JsonResource
     {
-        return JsonResource::collection(Post::all());
+        return JsonResource::collection(Post::query()->filter($request->fluent())->paginate(10)->withQueryString());
     }
 
     /**

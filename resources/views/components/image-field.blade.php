@@ -23,7 +23,7 @@
         </svg>
         @if ($value)
             <img
-                class="max-w-none rounded-md absolute size-[calc(100%+theme(spacing[0.5]))] object-center object-cover -top-px -start-px"
+                class="max-w-none rounded-md absolute size-[calc(100%+(--spacing(0.5)))] object-center object-cover -top-px -start-px"
                 src="{{ $value }}"
             />
         @endif
@@ -64,7 +64,7 @@
 
             const imageEl = document.createElement('img')
 
-            imageEl.className = 'max-w-none rounded-md absolute size-[calc(100%+theme(spacing[0.5]))] object-center object-cover -top-px -start-px'
+            imageEl.className = 'max-w-none rounded-md absolute size-[calc(100%+(--spacing(0.5)))] object-center object-cover -top-px -start-px'
             imageEl.dataset.preview = ''
             imageEl.src = previewObjectURL
 

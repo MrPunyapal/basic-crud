@@ -120,7 +120,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('#title').addEventListener('blur', function() {
+            document.querySelector('#title').addEventListener('blur-sm', function() {
                 document.querySelector('#slug').value = slugify(this.value);
             });
 

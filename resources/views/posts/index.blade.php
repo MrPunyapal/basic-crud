@@ -74,7 +74,13 @@
                                 {!! $queryResolver->sortArrow('is_featured') !!}
                             </a>
                         </th>
-                        <th class="border border-slate-600">{{ __('posts.form.Created At') }}</th>
+                        <th class="border border-slate-600">
+                            <a class="text-decoration-none text-dark"
+                                href="{{ route('posts.index', $queryResolver->sortQuery('created_at')) }}">
+                                {{ __('posts.form.Created At') }}
+                                {!! $queryResolver->sortArrow('created_at') !!}
+                            </a>
+                        </th>
                         <th class="border border-slate-600">{{ __('posts.form.Updated At') }}
                         <th class="border border-slate-600">{{ __('posts.form.Actions') }}</th>
                     </tr>

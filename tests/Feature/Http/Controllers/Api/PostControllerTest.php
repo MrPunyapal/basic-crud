@@ -24,6 +24,110 @@ it('can list all posts', function () {
         ->assertJson(['data' => $posts->toArray()]);
 });
 
+it('returns filtered posts based on search parameter', function () {
+    $user = User::factory()->create();
+    $postA = Post::factory()->create([
+        'title' => 'Test Post A',
+        'published_at' => now()->subDay(),
+    ]);
+    $postB = Post::factory()->create([
+        'title' => 'Another Post B',
+        'published_at' => now()->addDay(),
+    ]);
+
+    $response = $this->actingAs($user)
+        ->getJson(action([PostController::class, 'index'], ['search' => 'Test']))
+        ->assertSuccessful();
+
+    expect($response->json('data'))->toHaveCount(1);
+    expect($response->json('data.0.id'))->toBe($postA->id);
+});
+
+it('returns filtered posts based on published parameter', function () {
+    $user = User::factory()->create();
+    $postA = Post::factory()->create([
+        'title' => 'Test Post A',
+        'published_at' => now()->subDay(),
+    ]);
+    $postB = Post::factory()->create([
+        'title' => 'Another Post B',
+        'published_at' => now()->addDay(),
+    ]);
+
+    $response = $this->actingAs($user)
+        ->getJson(action([PostController::class, 'index'], ['published' => true]))
+        ->assertSuccessful();
+
+    expect($response->json('data'))->toHaveCount(1);
+    expect($response->json('data.0.id'))->toBe($postA->id);
+});
+
+it('can sort posts by specified column and direction', function () {
+    $user = User::factory()->create();
+    $postA = Post::factory()->create([
+        'title' => 'Test Post A',
+        'published_at' => now()->subDay(),
+    ]);
+    $postB = Post::factory()->create([
+        'title' => 'Another Post B',
+        'published_at' => now()->addDay(),
+    ]);
+
+    $response = $this->actingAs($user)
+        ->getJson(action([PostController::class, 'index'], ['sortBy' => 'title', 'direction' => 'asc']))
+        ->assertSuccessful();
+
+    expect($response->json('data'))->toHaveCount(2);
+    expect($response->json('data.0.id'))->toBe($postB->id);
+    expect($response->json('data.1.id'))->toBe($postA->id);
+});
+
+it('returns posts with default sorting when sort column is invalid', function () {
+    $user = User::factory()->create();
+    $postA = Post::factory()->create([
+        'title' => 'Test Post A',
+        'published_at' => now()->subDay(),
+    ]);
+    $postB = Post::factory()->create([
+        'title' => 'Another Post B',
+        'published_at' => now()->addDay(),
+    ]);
+
+    $response = $this->actingAs($user)
+        ->getJson(action([PostController::class, 'index'], ['sortBy' => 'invalid_column']))
+        ->assertSuccessful();
+
+    expect($response->json('data'))->toHaveCount(2);
+});
+
+it('combines multiple filter parameters', function () {
+    $user = User::factory()->create();
+    $postA = Post::factory()->create([
+        'title' => 'Test Post A',
+        'published_at' => now()->subDay(),
+    ]);
+    $postB = Post::factory()->create([
+        'title' => 'Another Post B',
+        'published_at' => now()->addDay(),
+    ]);
+    $postC = Post::factory()->create([
+        'title' => 'Test Post C',
+        'published_at' => now()->subDay(),
+    ]);
+
+    $response = $this->actingAs($user)
+        ->getJson(action([PostController::class, 'index'], [
+            'search' => 'Test',
+            'published' => true,
+        ]))
+        ->assertSuccessful();
+
+    expect($response->json('data'))->toHaveCount(2);
+    expect(collect($response->json('data'))->pluck('id')->toArray())
+        ->toContain($postA->id, $postC->id)
+        ->not->toContain($postB->id);
+});
+
 it('can create a new post', function () {
     $data = Post::factory()->make()->toArray();
 

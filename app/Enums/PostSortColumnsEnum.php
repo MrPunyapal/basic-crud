@@ -8,6 +8,7 @@ enum PostSortColumnsEnum: string
 {
     case Title = 'title';
     case IsFeatured = 'is_featured';
+    case CreatedAt = 'created_at';
 
     /**
      * @return array<int, string>

@@ -7,8 +7,6 @@ namespace App\Http\Controllers;
 use App\Actions\Posts\CreatePostAction;
 use App\Actions\Posts\DeletePostAction;
 use App\Actions\Posts\UpdatePostAction;
-use App\Builders\PostBuilder;
-use App\Enums\PostSortColumnsEnum;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
@@ -29,21 +27,7 @@ final class PostController extends Controller
         $posts = Post::query()
             ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
             ->withAggregate('category', 'title')
-            ->when($request->string('search')->toString(), function (PostBuilder $query, string $search): void {
-                $query->search($search);
-            })
-            ->when($request->input('published'), function (PostBuilder $query): void {
-                $query->published();
-            })
-            ->when(
-                in_array($request->input('sortBy'), PostSortColumnsEnum::columns(), true),
-                function (PostBuilder $query) use ($request): void {
-                    $query->sortBy($request->string('sortBy')->toString(), $request->string('direction')->toString());
-                },
-                function (PostBuilder $query): void {
-                    $query->latest();
-                },
-            )
+            ->filter($request->fluent())
             ->paginate(10)
             ->withQueryString();
 

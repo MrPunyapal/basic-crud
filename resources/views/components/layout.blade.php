@@ -5,9 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        @yield('title', config('app.name'))
-    </title>
+    <title>{{ $title ?? config('app.name') }}</title>
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 
     @stack('styles')
@@ -15,8 +13,8 @@
 
 <body dir="{{ Settings::getDirection() }}">
     <main>
-        <div class="container  mx-auto p-10">
-            @yield('content')
+        <div class="container mx-auto p-10">
+            {{ $slot }}
         </div>
     </main>
     @stack('scripts')

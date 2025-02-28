@@ -1,5 +1,4 @@
 @use('App\Enums\FeaturedStatus')
-
 <div class="space-y-8">
     <x-field>
         <x-label for="title">{{ __('posts.form.Title') }}</x-label>

@@ -1,8 +1,6 @@
 @inject('queryResolver', 'App\Support\QueryResolver')
 @use('App\Support\Settings')
-@extends('layouts.app')
-@section('title', __('posts.index.Posts'))
-@section('content')
+<x-layout :title="__('posts.index.Posts')">
     <div class="flex flex-col">
         <h1 class="text-2xl font-bold">{{ __('posts.index.Posts') }}</h1>
 
@@ -143,4 +141,4 @@
             </table>
         </div>
     </div>
-@endsection
+</x-layout>

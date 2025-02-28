@@ -1,7 +1,5 @@
 @use('App\Enums\FeaturedStatus')
-@extends('layouts.app')
-@section('title', $post->title)
-@section('content')
+<x-layout :title="$post->title">
     <div class="max-w-xl w-full mx-auto flex flex-col p-0 m-0">
         <x-button class="self-end" :href="route('posts.index')">
             {{ __('posts.show.View All') }}
@@ -51,7 +49,7 @@
                             <span
                                 class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ $tag }}</span>
                             @endforeach
-                        @endisset                       
+                        @endisset
                     </div>
                     <div>
                         <span
@@ -61,4 +59,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-layout>

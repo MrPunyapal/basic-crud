@@ -1,7 +1,4 @@
-@extends('layouts.app')
-@section('title', __('posts.form.Create Post'))
-@section('content')
-
+<x-layout :title="__('posts.form.Create Post')">
     <div class="flex justify-center">
         <div class="lg:w-2/3 bg-white p-6 rounded-lg bg-white shadow-sm sm:rounded-lg p-6">
             <h1 class="text-2xl font-bold mb-2">{{ __('posts.form.Create Post') }}</h1>
@@ -20,4 +17,4 @@
             </form>
         </div>
     </div>
-@endsection
+</x-layout>

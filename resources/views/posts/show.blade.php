@@ -6,9 +6,9 @@
         <x-button class="self-end" :href="route('posts.index')">
             {{ __('posts.show.View All') }}
         </x-button>
-        <div class="bg-gray-50 mt-4 shadow overflow-hidden rounded-lg">
+        <div class="bg-gray-50 mt-4 shadow-sm overflow-hidden rounded-lg">
             <img src="{{ $post->image }}" class="w-full" alt="{{ $post->title }}" height="400" />
-            <div class="px-3 py-4 bg-white shadow-sm rounded m-1">
+            <div class="px-3 py-4 bg-white shadow-xs rounded-sm m-1">
                 <div class="flex gap-x-4">
                     <div class="flex-1">
                         <h1 class="text-2xl font-bold mb-2">

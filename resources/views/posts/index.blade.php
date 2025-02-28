@@ -26,7 +26,7 @@
                         <x-button onclick="this.nextElementSibling.classList.toggle('hidden')">
                             <span>{{ __('posts.index.Languages') }} &#x25BE;</span>
                         </x-button>
-                        <div class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg hidden bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        <div class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg hidden bg-white ring-1 ring-black ring-opacity-5 focus:outline-hidden"
                             role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                             @foreach (Settings::getLocales() as $locale => $Label)
                                 <a @class([

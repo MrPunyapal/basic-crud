@@ -1,6 +1,6 @@
 # Laravel CRUD Operations Best Practices Example Beginner to Advanced
 
-[![Tests](https://github.com/mr-punyapal/basic-crud/actions/workflows/tests.yml/badge.svg)](https://github.com/mr-punyapal/basic-crud/actions/workflows/tests.yml)
+[![Tests](https://github.com/mrpunyapal/basic-crud/actions/workflows/tests.yml/badge.svg)](https://github.com/mr-punyapal/basic-crud/actions/workflows/tests.yml)
 
 ## Getting Started 🚀
 
@@ -21,7 +21,7 @@ Follow these steps to set up a development environment:
 1. **Clone the repository**
 
     ```bash
-    git clone https://github.com/mr-punyapal/basic-crud.git
+    git clone https://github.com/mrpunyapal/basic-crud.git
     ```
 
 2. **Install dependencies**

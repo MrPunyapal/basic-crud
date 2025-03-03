@@ -108,7 +108,7 @@ Follow these steps to set up a development environment using Laravel Sail:
 1. **Clone the repository**
 
     ```bash
-    git clone https://github.com/mr-punyapal/basic-crud.git
+    git clone https://github.com/mrpunyapal/basic-crud.git
     ```
 
 2. **Duplicate the .env.example file and rename it to .env**

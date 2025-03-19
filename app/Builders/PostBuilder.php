@@ -44,19 +44,17 @@ final class PostBuilder extends Builder
     {
         $this->when($filters->string('search')->toString(), function (PostBuilder $query, string $search): void {
             $query->search($search);
-        })
-            ->when($filters->get('published'), function (PostBuilder $query): void {
-                $query->published();
-            })
-            ->when(
-                in_array($filters->get('sortBy'), PostSortColumnsEnum::columns(), true),
-                function (PostBuilder $query) use ($filters): void {
-                    $query->sortBy($filters->string('sortBy')->toString(), $filters->string('direction')->toString());
-                },
-                function (PostBuilder $query): void {
-                    $query->latest();
-                },
-            );
+        })->when($filters->get('published'), function (PostBuilder $query): void {
+            $query->published();
+        })->when(
+            in_array($filters->get('sortBy'), PostSortColumnsEnum::columns(), true),
+            function (PostBuilder $query) use ($filters): void {
+                $query->sortBy($filters->string('sortBy')->toString(), $filters->string('direction')->toString());
+            },
+            function (PostBuilder $query): void {
+                $query->latest();
+            },
+        );
 
         return $this;
     }

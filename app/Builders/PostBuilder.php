@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Fluent;
 
 /**
+ * @template TModelClass of \App\Models\Post
+ *
  * @extends Builder<Post>
  */
 final class PostBuilder extends Builder

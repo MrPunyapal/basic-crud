@@ -41,7 +41,6 @@
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",
-        "nunomaduro/phpinsights": "^2.11",
         "pestphp/pest": "^3.0",
         "pestphp/pest-plugin-laravel": "^3.0",
         "pestphp/pest-plugin-type-coverage": "^3.2",

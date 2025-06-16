@@ -93,4 +93,40 @@ describe('BulkDeletePostsAction', function () {
         expect($postsForDeletion)->toHaveCount(2);
         expect($postsForDeletion->pluck('id')->toArray())->toEqual($existingPosts->pluck('id')->toArray());
     });
+
+    it('handles invalid non-numeric post IDs', function () {
+        $action = new BulkDeletePostsAction;
+        $deletedCount = $action->execute(['invalid', 'not-a-number', null, false]);
+
+        expect($deletedCount)->toBe(0);
+    });
+
+    it('handles mixed valid and invalid post IDs', function () {
+        $existingPost = Post::factory()->create();
+        $mixedIds = [$existingPost->id, 'invalid', null, 'not-a-number'];
+
+        $action = new BulkDeletePostsAction;
+        $deletedCount = $action->execute($mixedIds);
+
+        expect($deletedCount)->toBe(1);
+        $this->assertSoftDeleted('posts', ['id' => $existingPost->id]);
+    });
+
+    it('handles invalid post IDs for confirmation', function () {
+        $action = new BulkDeletePostsAction;
+        $postsForDeletion = $action->getPostsForDeletion(['invalid', 'not-a-number', null]);
+
+        expect($postsForDeletion)->toBeEmpty();
+    });
+
+    it('handles mixed valid and invalid post IDs for confirmation', function () {
+        $existingPost = Post::factory()->create();
+        $mixedIds = [$existingPost->id, 'invalid', null, 'not-a-number'];
+
+        $action = new BulkDeletePostsAction;
+        $postsForDeletion = $action->getPostsForDeletion($mixedIds);
+
+        expect($postsForDeletion)->toHaveCount(1);
+        expect($postsForDeletion->first()->id)->toBe($existingPost->id);
+    });
 });

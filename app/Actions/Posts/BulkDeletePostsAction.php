@@ -12,7 +12,7 @@ final class BulkDeletePostsAction
     /**
      * Execute bulk delete operation for multiple posts
      *
-     * @param  array<int>  $postIds
+     * @param  array<mixed>  $postIds
      * @return int Number of deleted posts
      */
     public function execute(array $postIds): int
@@ -21,8 +21,21 @@ final class BulkDeletePostsAction
             return 0;
         }
 
+        // Convert to integers and filter out invalid values
+        $validPostIds = array_filter(array_map(function (mixed $id): int {
+            if (is_numeric($id)) {
+                return (int) $id;
+            }
+
+            return 0;
+        }, $postIds));
+
+        if ($validPostIds === []) {
+            return 0;
+        }
+
         // Get the posts that exist and user can delete
-        $posts = Post::query()->whereIn('id', $postIds)->get();
+        $posts = Post::query()->whereIn('id', $validPostIds)->get();
 
         if ($posts->isEmpty()) {
             return 0;
@@ -42,7 +55,7 @@ final class BulkDeletePostsAction
     /**
      * Get posts that will be deleted for confirmation
      *
-     * @param  array<int>  $postIds
+     * @param  array<mixed>  $postIds
      * @return Collection<int, Post>
      */
     public function getPostsForDeletion(array $postIds): Collection
@@ -51,7 +64,20 @@ final class BulkDeletePostsAction
             return new Collection;
         }
 
-        return Post::query()->whereIn('id', $postIds)
+        // Convert to integers and filter out invalid values
+        $validPostIds = array_filter(array_map(function (mixed $id): int {
+            if (is_numeric($id)) {
+                return (int) $id;
+            }
+
+            return 0;
+        }, $postIds));
+
+        if ($validPostIds === []) {
+            return new Collection;
+        }
+
+        return Post::query()->whereIn('id', $validPostIds)
             ->select('id', 'title')
             ->get();
     }

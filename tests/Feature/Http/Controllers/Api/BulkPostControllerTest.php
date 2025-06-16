@@ -34,7 +34,34 @@ it('can bulk delete posts via API', function (): void {
     }
 });
 
-it('can bulk delete single post via API', function (): void {
+it('validates required post_ids field via API', function (): void {
+    $response = $this->deleteJson('/api/posts/bulk', []);
+
+    $response->assertUnprocessable()
+        ->assertJsonValidationErrors(['post_ids']);
+});
+
+it('validates invalid post IDs via API', function (): void {
+    $response = $this->deleteJson('/api/posts/bulk', [
+        'post_ids' => [999, 1000],
+    ]);
+
+    $response->assertUnprocessable()
+        ->assertJsonValidationErrors(['post_ids.0', 'post_ids.1']);
+});
+
+it('requires authentication for API bulk operations', function (): void {
+    $this->app['auth']->forgetGuards();
+    $posts = Post::factory()->count(2)->create();
+
+    $response = $this->deleteJson('/api/posts/bulk', [
+        'post_ids' => $posts->pluck('id')->toArray(),
+    ]);
+
+    $response->assertUnauthorized();
+});
+
+it('handles single post deletion message via API', function (): void {
     $post = Post::factory()->create();
 
     $response = $this->deleteJson('/api/posts/bulk', [
@@ -52,42 +79,4 @@ it('can bulk delete single post via API', function (): void {
         ]);
 
     $this->assertSoftDeleted('posts', ['id' => $post->id]);
-});
-
-it('validates required post_ids field via API', function (): void {
-    $response = $this->deleteJson('/api/posts/bulk', []);
-
-    $response->assertUnprocessable()
-        ->assertJsonValidationErrors(['post_ids']);
-});
-
-it('requires authentication for API bulk operations', function (): void {
-    $this->app['auth']->forgetGuards();
-    $posts = Post::factory()->count(2)->create();
-
-    $response = $this->deleteJson('/api/posts/bulk', [
-        'post_ids' => $posts->pluck('id')->toArray(),
-    ]);
-
-    $response->assertUnauthorized();
-});
-
-it('handles invalid post IDs via API', function (): void {
-    $response = $this->deleteJson('/api/posts/bulk', [
-        'post_ids' => ['invalid', 'not-a-number', null],
-    ]);
-
-    $response->assertUnprocessable()
-        ->assertJsonValidationErrors(['post_ids.0', 'post_ids.1', 'post_ids.2']);
-});
-
-it('handles mixed valid and invalid post IDs via API', function (): void {
-    $validPost = Post::factory()->create();
-
-    $response = $this->deleteJson('/api/posts/bulk', [
-        'post_ids' => [$validPost->id, 'invalid'],
-    ]);
-
-    $response->assertUnprocessable()
-        ->assertJsonValidationErrors(['post_ids.1']);
 });

@@ -9,9 +9,6 @@ use App\Support\QueryResolver;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-/**
- * Controller for handling bulk operations on posts
- */
 final class BulkPostController extends Controller
 {
     /**

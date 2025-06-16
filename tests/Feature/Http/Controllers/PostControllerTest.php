@@ -81,12 +81,10 @@ test('can see posts sorted by invalid column', function () {
 });
 
 test('can search posts by title', function () {
-    // Create test data
     [$postToSearch, $missingPost] = Post::factory(2)->create();
 
     $searchTerm = $postToSearch->title;
 
-    // Execute the search
     $this->get(route('posts.index', ['search' => $searchTerm]))
         ->assertOk()
         ->assertSessionHas('posts.index.previous.query', [
@@ -96,9 +94,7 @@ test('can search posts by title', function () {
         ->assertViewHasAll([
             'posts',
         ])
-        // Check if the matching post is present in the view
         ->assertSeeText($searchTerm)
-        // Check if non-matching posts are not present in the view
         ->assertDontSeeText($missingPost->title);
 });
 

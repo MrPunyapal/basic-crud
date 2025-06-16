@@ -25,7 +25,7 @@ final class PostController extends Controller
     public function index(Request $request): View
     {
         $posts = Post::query()
-            ->select('id', 'title', 'is_featured', 'category_id', 'created_at', 'updated_at')
+            ->select('id', 'title', 'is_featured', 'category_id', 'description', 'created_at', 'updated_at')
             ->withAggregate('category', 'title')
             ->filter($request->fluent())
             ->paginate(10)

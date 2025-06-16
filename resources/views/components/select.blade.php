@@ -1,10 +1,10 @@
 @php
     $class = implode(' ', [
-        'appearance-none block w-full rounded-lg bg-white border text-sm/6 h-9 px-3 border-zinc-950/10',
-        // focus
-        'focus:border-zinc-950/20 focus:outline focus:outline-offset-2 focus:outline-2 focus:outline-blue-500',
-        // hover
-        'hover:border-zinc-950/20',
+        'w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 backdrop-blur-sm text-slate-900',
+        'focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none',
+        'hover:border-slate-300 transition-all duration-200',
+        'disabled:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50',
+        'appearance-none bg-no-repeat bg-right bg-[length:20px] bg-[url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'m6 8 4 4 4-4\'/%3e%3c/svg%3e")]',
     ]);
 @endphp
 

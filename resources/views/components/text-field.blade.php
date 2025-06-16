@@ -4,11 +4,11 @@
 
 @php
     $class = implode(' ', [
-        'appearance-none block w-full rounded-lg bg-white border text-sm/6 h-9 px-3 border-zinc-950/10',
-        // focus
-        'focus:border-zinc-950/20 focus:outline focus:outline-offset-2 focus:outline-2 focus:outline-blue-500',
-        // hover
-        'hover:border-zinc-950/20',
+        'w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 backdrop-blur-sm text-slate-900 placeholder-slate-500',
+        'focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none',
+        'hover:border-slate-300 transition-all duration-200',
+        'disabled:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50',
+        $multiline ? 'min-h-[120px] resize-y' : 'h-12',
     ]);
 
     $attrs = $attributes->merge([

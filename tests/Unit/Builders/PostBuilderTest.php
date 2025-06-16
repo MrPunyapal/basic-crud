@@ -63,7 +63,6 @@ test('filter builder defaults to latest ordering when sort column is invalid', f
 
     $posts = Post::query()->filter($filters)->get();
 
-    // Latest should sort by created_at desc
     expect($posts->pluck('id')->toArray())
         ->toBe([$this->postB->id, $this->postA->id, $this->postC->id]);
 });

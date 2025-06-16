@@ -41,6 +41,6 @@ final class PostFactory extends Factory
      */
     private function fakeImageUrl(): string
     {
-        return 'https://fakeimg.pl/350x200/?text='.$this->faker->word;
+        return 'https://picsum.photos/350/200/';
     }
 }

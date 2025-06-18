@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Builders\PostBuilder;
 use App\Enums\FeaturedStatus;
+use Illuminate\Database\Eloquent\Attributes\UseEloquentBuilder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +39,7 @@ use Override;
  *
  * @mixin Model
  */
+#[UseEloquentBuilder(PostBuilder::class)]
 final class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
@@ -70,15 +72,15 @@ final class Post extends Model
     //     'deleted_at'
     // ];
 
-    /**
-     * @param  Builder  $query
-     * @return PostBuilder<Post>
-     */
-    #[Override]
-    public function newEloquentBuilder($query): PostBuilder // @pest-ignore-type
-    {
-        return new PostBuilder($query);
-    }
+    // /**
+    //  * @param  Builder  $query
+    //  * @return PostBuilder<Post>
+    //  */
+    // #[Override]
+    // public function newEloquentBuilder($query): PostBuilder // @pest-ignore-type
+    // {
+    //     return new PostBuilder($query);
+    // }
 
     /**
      * @return BelongsTo<Category, $this>

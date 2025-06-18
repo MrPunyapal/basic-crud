@@ -41,6 +41,12 @@
                     <i class="fas fa-eye"></i>
                     <span>{{ $queryResolver->publishedLabel() }}</span>
                 </x-button>
+
+                <!-- Create Post Button -->
+                <a href="{{ route('posts.create') }}" class="flex items-center space-x-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-6 py-3 rounded-xl transition-all duration-200 font-medium hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap">
+                    <i class="fas fa-plus"></i>
+                    <span>{{ __('posts.form.Create Post') }}</span>
+                </a>
             </div>
         </div>
 
@@ -58,12 +64,54 @@
             </div>
         @endsession
 
+        @session('error')
+            <div class="glass border border-red-200 bg-red-50/50 text-red-800 p-4 rounded-xl animate-slide-up">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-exclamation-circle text-red-600"></i>
+                        <span>{{ $value }}</span>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="text-red-600 hover:text-red-800 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        @endsession
+
         <!-- Posts Table -->
         <div class="glass rounded-2xl overflow-hidden border border-white/20">
+            <!-- Bulk Actions Bar -->
+            <div id="bulk-actions" class="hidden bg-gradient-to-r from-red-50 to-pink-50 border-b border-red-200 p-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium text-red-800">
+                            <span id="selected-count">0</span> {{ __('posts.form.selected') }}
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button type="button" onclick="clearSelection()" class="text-sm text-red-600 hover:text-red-800 transition-colors">
+                            {{ __('posts.form.Clear Selection') }}
+                        </button>
+                        <button type="button" onclick="confirmBulkDelete()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2">
+                            <i class="fas fa-trash"></i>
+                            <span>{{ __('posts.form.Delete Selected') }}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <form id="bulk-delete-form" action="{{ route('posts.bulk-destroy') }}" method="POST" class="hidden">
+                @csrf
+                @method('DELETE')
+            </form>
+
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead class="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-white/20">
                         <tr>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                <input type="checkbox" id="select-all" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-2" onchange="toggleSelectAll()">
+                            </th>
                             <th class="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                                 #
                             </th>
@@ -102,6 +150,9 @@
                     <tbody class="bg-white/50 backdrop-blur-sm divide-y divide-slate-200">
                         @forelse ($posts as $post)
                             <tr class="hover:bg-blue-50/30 transition-colors duration-200">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <input type="checkbox" name="post_ids[]" value="{{ $post->id }}" class="post-checkbox rounded border-slate-300 text-blue-600 focus:ring-blue-500 focus:ring-2" onchange="updateBulkActions()">
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
                                     <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center text-white text-xs font-bold">
                                         {{ $loop->index + $posts->firstItem() }}
@@ -182,7 +233,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-12 text-center">
+                                <td colspan="8" class="px-6 py-12 text-center">
                                     <div class="flex flex-col items-center">
                                         <div class="w-16 h-16 bg-gradient-to-r from-slate-200 to-slate-300 rounded-full flex items-center justify-center mb-4">
                                             <i class="fas fa-file-alt text-2xl text-slate-500"></i>
@@ -210,4 +261,92 @@
             </div>
         @endif
     </div>
+
+    <script>
+        function toggleSelectAll() {
+            const selectAllCheckbox = document.getElementById('select-all');
+            const postCheckboxes = document.querySelectorAll('.post-checkbox');
+
+            postCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+
+            updateBulkActions();
+        }
+
+        function updateBulkActions() {
+            const postCheckboxes = document.querySelectorAll('.post-checkbox');
+            const checkedBoxes = document.querySelectorAll('.post-checkbox:checked');
+            const selectAllCheckbox = document.getElementById('select-all');
+            const bulkActionsBar = document.getElementById('bulk-actions');
+            const selectedCount = document.getElementById('selected-count');
+
+            // Update select all checkbox state
+            if (checkedBoxes.length === 0) {
+                selectAllCheckbox.indeterminate = false;
+                selectAllCheckbox.checked = false;
+            } else if (checkedBoxes.length === postCheckboxes.length) {
+                selectAllCheckbox.indeterminate = false;
+                selectAllCheckbox.checked = true;
+            } else {
+                selectAllCheckbox.indeterminate = true;
+                selectAllCheckbox.checked = false;
+            }
+
+            // Show/hide bulk actions bar
+            if (checkedBoxes.length > 0) {
+                bulkActionsBar.classList.remove('hidden');
+                selectedCount.textContent = checkedBoxes.length;
+            } else {
+                bulkActionsBar.classList.add('hidden');
+            }
+        }
+
+        function clearSelection() {
+            const postCheckboxes = document.querySelectorAll('.post-checkbox');
+            const selectAllCheckbox = document.getElementById('select-all');
+
+            postCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            selectAllCheckbox.checked = false;
+            selectAllCheckbox.indeterminate = false;
+
+            updateBulkActions();
+        }
+
+        function confirmBulkDelete() {
+            const checkedBoxes = document.querySelectorAll('.post-checkbox:checked');
+
+            if (checkedBoxes.length === 0) {
+                alert('Please select at least one post to delete.');
+                return;
+            }
+
+            const confirmMessage = checkedBoxes.length === 1
+                ? 'Are you sure you want to delete this post?'
+                : `Are you sure you want to delete ${checkedBoxes.length} posts?`;
+
+            if (confirm(confirmMessage)) {
+                const form = document.getElementById('bulk-delete-form');
+
+                // Add selected post IDs to the form
+                checkedBoxes.forEach(checkbox => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'post_ids[]';
+                    input.value = checkbox.value;
+                    form.appendChild(input);
+                });
+
+                form.submit();
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBulkActions();
+        });
+    </script>
 </x-layout>

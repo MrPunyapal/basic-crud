@@ -74,9 +74,9 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "lint": "pint",
+        "lint": "pint --parallel",
         "refactor": "rector",
-        "test:lint": "pint --test",
+        "test:lint": "pint --test --parallel",
         "test:refactor": "rector --dry-run",
         "test:types": "phpstan analyse",
         "test:arch": "pest --filter=arch",

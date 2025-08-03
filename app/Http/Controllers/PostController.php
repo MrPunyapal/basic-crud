@@ -17,7 +17,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-final class PostController extends Controller
+final class PostController
 {
     /**
      * Display a listing of the resource.

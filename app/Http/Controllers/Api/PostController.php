@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Api;
 use App\Actions\Posts\CreatePostAction;
 use App\Actions\Posts\DeletePostAction;
 use App\Actions\Posts\UpdatePostAction;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
@@ -15,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
-final class PostController extends Controller
+final class PostController
 {
     /**
      * Display a listing of the resource.

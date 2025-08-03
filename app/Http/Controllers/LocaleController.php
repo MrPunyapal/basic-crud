@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 
-final class LocaleController extends Controller
+final class LocaleController
 {
     /**
      * Handle the incoming request.

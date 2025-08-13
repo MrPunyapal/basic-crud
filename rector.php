@@ -20,11 +20,11 @@ return RectorConfig::configure()
      * Includes the Laravel app source, bootstrap file, config, database, and public directories.
      */
     ->withPaths([
-        __DIR__ . '/app',
-        __DIR__ . '/bootstrap/app.php',
-        __DIR__ . '/config',
-        __DIR__ . '/database',
-        __DIR__ . '/public',
+        __DIR__.'/app',
+        __DIR__.'/bootstrap/app.php',
+        __DIR__.'/config',
+        __DIR__.'/database',
+        __DIR__.'/public',
     ])
 
     /**

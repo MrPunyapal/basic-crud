@@ -93,7 +93,7 @@ final class Post extends Model
     /**
      * @return Attribute<string|null, string|null>
      */
-    public function image(): Attribute
+    protected function image(): Attribute
     {
         return Attribute::make(
             get: function (mixed $value): ?string {

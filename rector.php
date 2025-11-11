@@ -24,7 +24,6 @@ return RectorConfig::configure()
         privatization: true,
         instanceOf: true,
         earlyReturn: true,
-        strictBooleans: true,
         carbon: true,
     )->withSets([
         LaravelSetList::LARAVEL_110,

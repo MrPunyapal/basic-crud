@@ -9,7 +9,7 @@ use App\Support\QueryResolver;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-final class BulkPostController extends Controller
+final class BulkPostController
 {
     /**
      * Bulk delete multiple posts

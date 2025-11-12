@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Actions\Posts\BulkDeletePostsAction;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
  * API Controller for handling bulk operations on posts
  */
-final class BulkPostController extends Controller
+final class BulkPostController
 {
     /**
      * Bulk delete multiple posts

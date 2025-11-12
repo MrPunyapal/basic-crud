@@ -76,13 +76,11 @@ Follow these steps to set up a development environment:
     ```
 
     ```bash
-    # Lint the code using Pint
+    # Lint and refactor the code using Pint and Rector
     composer lint
-    composer test:lint
 
-    # Refactor the code using Rector
-    composer refactor
-    composer test:refactor
+    # Test lint and refactor (dry run) using Pint and Rector
+    composer test:lint
 
     # Run PHPStan
     composer test:types
@@ -96,7 +94,7 @@ Follow these steps to set up a development environment:
     # Run all the tests
     composer test
     ```
-Check [composer.json](/composer.json#L78-L92) for more details on scripts.
+Check [composer.json](/composer.json#L77-L89) for more details on scripts.
 
 ### Installing with Sail
 

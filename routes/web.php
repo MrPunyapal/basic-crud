@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\BulkPostController;
 use App\Http\Controllers\FeaturedPostController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PostController;
@@ -34,6 +35,9 @@ Route::resource('posts', PostController::class);
 // Route::get('/posts/{post}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
 // Route::put('/posts/{post}', [App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
 // Route::delete('/posts/{post}', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
+
+// bulk delete posts route
+Route::delete('/posts-bulk-delete', [BulkPostController::class, 'destroy'])->name('posts.bulk-destroy');
 
 // feature post route (patch request) - only one route needed
 Route::patch('/posts/{post}/feature', FeaturedPostController::class)->name('posts.featured');

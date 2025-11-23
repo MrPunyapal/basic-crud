@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.3 || ^8.4 || ^8.5",
         "guzzlehttp/guzzle": "^7.10",
         "laravel/framework": "^12.38.1",
         "laravel/sanctum": "^4.2",
@@ -41,11 +41,10 @@
         "laravel/sail": "^1.48",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.8.2",
-        "pestphp/pest": "^3.8.4",
-        "pestphp/pest-plugin-laravel": "^3.2",
+        "pestphp/pest": "^3.8.4|^4.0",
+        "pestphp/pest-plugin-laravel": "^3.2|^4.0",
         "pestphp/pest-plugin-type-coverage": "^3.6.1",
         "phpstan/phpstan": "^2.1.32",
-        "phpunit/phpunit": "^11.5.33",
         "rector/rector": "^2.2.8"
     },
     "autoload": {

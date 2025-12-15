@@ -15,7 +15,7 @@ trait HasFileFromUrl
     public function resolveFileFromUrl(string $field): void
     {
         if (! $this->hasFile($field) && filter_var($this->get($field), FILTER_VALIDATE_URL)) {
-            $file = app(FileUploaderFromUrl::class)(
+            $file = resolve(FileUploaderFromUrl::class)(
                 (string) $this->string($field)
             );
 

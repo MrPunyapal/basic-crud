@@ -1,9 +1,11 @@
 <?php
 
 declare(strict_types=1);
-use App\Models\Post;
 
-test('null in image attribute', function () {
+use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
+
+test('null in image attribute', function (): void {
     $post = Post::factory()->create([
         'image' => null,
     ]);
@@ -11,7 +13,7 @@ test('null in image attribute', function () {
     expect($post->image)->toBeNull();
 });
 
-test('null in image attribute with image', function () {
+test('null in image attribute with image', function (): void {
     $post = Post::factory()->create([
         'image' => 'image.jpg',
     ]);

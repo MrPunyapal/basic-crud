@@ -4,7 +4,7 @@ declare(strict_types=1);
 use App\Models\Category;
 use App\Models\Post;
 
-test('it gets posts from relation', function () {
+test('it gets posts from relation', function (): void {
     $category = Category::factory()->create();
     $posts = Post::factory()->count(3)->create([
         'category_id' => $category->id,

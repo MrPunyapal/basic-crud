@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Actions\Posts\DeletePostAction;
 use App\Models\Post;
 
-it('deletes a post', function () {
+it('deletes a post', function (): void {
     $post = Post::factory()->create();
 
     $action = new DeletePostAction;

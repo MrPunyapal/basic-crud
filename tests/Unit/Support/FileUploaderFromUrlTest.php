@@ -6,7 +6,7 @@ use App\Support\FileUploaderFromUrl;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
 
-test('invoke returns uploaded file', function () {
+test('invoke returns uploaded file', function (): void {
     Http::fake([
         'example.com/*' => Http::response('file content', 200, ['Content-Type' => 'text/plain']),
     ]);
@@ -20,7 +20,7 @@ test('invoke returns uploaded file', function () {
     expect(file_get_contents($uploadedFile->getPathname()))->toBe('file content');
 });
 
-test('invoke returns null on failed request', function () {
+test('invoke returns null on failed request', function (): void {
     Http::fake([
         'example.com/*' => Http::response('Not Found', 404),
     ]);

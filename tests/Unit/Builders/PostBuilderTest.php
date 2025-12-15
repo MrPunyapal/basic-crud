@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Models\Post;
 use Illuminate\Support\Fluent;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->postA = Post::factory()->create([
         'title' => 'Test Post A',
         'published_at' => now()->subDay(),
@@ -25,7 +25,7 @@ beforeEach(function () {
     ]);
 });
 
-test('filter builder can search posts by title', function () {
+test('filter builder can search posts by title', function (): void {
     $filters = new Fluent(['search' => 'Test']);
 
     $posts = Post::query()->filter($filters)->get();
@@ -34,7 +34,7 @@ test('filter builder can search posts by title', function () {
         ->and($posts->first()->id)->toBe($this->postA->id);
 });
 
-test('filter builder can filter published posts', function () {
+test('filter builder can filter published posts', function (): void {
     $filters = new Fluent(['published' => true]);
 
     $posts = Post::query()->filter($filters)->get();
@@ -44,7 +44,7 @@ test('filter builder can filter published posts', function () {
         ->and($posts->pluck('id')->toArray())->not->toContain($this->postB->id);
 });
 
-test('filter builder can sort posts by specified column and direction', function () {
+test('filter builder can sort posts by specified column and direction', function (): void {
     $filters = new Fluent([
         'sortBy' => 'created_at',
         'direction' => 'asc',
@@ -56,7 +56,7 @@ test('filter builder can sort posts by specified column and direction', function
         ->toBe([$this->postC->id, $this->postA->id, $this->postB->id]);
 });
 
-test('filter builder defaults to latest ordering when sort column is invalid', function () {
+test('filter builder defaults to latest ordering when sort column is invalid', function (): void {
     $filters = new Fluent([
         'sortBy' => 'invalid_column',
     ]);
@@ -68,7 +68,7 @@ test('filter builder defaults to latest ordering when sort column is invalid', f
         ->toBe([$this->postB->id, $this->postA->id, $this->postC->id]);
 });
 
-test('filter builder can combine multiple filters', function () {
+test('filter builder can combine multiple filters', function (): void {
     $filters = new Fluent([
         'search' => 'Post',
         'published' => true,

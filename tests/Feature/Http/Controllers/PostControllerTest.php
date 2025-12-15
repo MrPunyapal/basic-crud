@@ -8,12 +8,12 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
 
-test('root redirects to posts', function () {
+test('root redirects to posts', function (): void {
     $this->get('/')
         ->assertRedirect(route('posts.index'));
 });
 
-test('can see posts', function () {
+test('can see posts', function (): void {
     $this->get(route('posts.index'))
         ->assertOk()
         ->assertSessionHas('posts.index.previous.query', [])
@@ -23,11 +23,11 @@ test('can see posts', function () {
         ]);
 });
 
-test('can only see published posts', function () {
-    Post::factory(rand(1, 5))->create([
+test('can only see published posts', function (): void {
+    Post::factory(random_int(1, 5))->create([
         'published_at' => now()->addDay(),
     ]);
-    Post::factory(rand(1, 5))->create([
+    Post::factory(random_int(1, 5))->create([
         'published_at' => now()->subDay(),
     ]);
 
@@ -35,10 +35,10 @@ test('can only see published posts', function () {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertSessionHas('posts.index.previous.query', ['published' => true])
-        ->assertViewHas('posts', fn ($posts) => $posts->where('published_at', '>=', now())->count() === 0);
+        ->assertViewHas('posts', fn ($posts): bool => $posts->where('published_at', '>=', now())->count() === 0);
 });
 
-test('can see posts sorted by title', function (string $direction) {
+test('can see posts sorted by title', function (string $direction): void {
     $posts = Post::factory(3)
         ->sequence(
             ['title' => 'abc'],
@@ -67,7 +67,7 @@ test('can see posts sorted by title', function (string $direction) {
         ->assertSeeTextInOrder($expectedSortedPosts);
 })->with(['asc', 'desc']);
 
-test('can see posts sorted by invalid column', function () {
+test('can see posts sorted by invalid column', function (): void {
     Post::factory(10)->create();
 
     $this->get(route('posts.index', [
@@ -80,7 +80,7 @@ test('can see posts sorted by invalid column', function () {
         ]);
 });
 
-test('can search posts by title', function () {
+test('can search posts by title', function (): void {
     // Create test data
     [$postToSearch, $missingPost] = Post::factory(2)->create();
 
@@ -102,7 +102,7 @@ test('can search posts by title', function () {
         ->assertDontSeeText($missingPost->title);
 });
 
-test('can see create post page', function () {
+test('can see create post page', function (): void {
     $this->get(route('posts.create'))
         ->assertOk()
         ->assertViewIs('posts.create')
@@ -112,7 +112,7 @@ test('can see create post page', function () {
         ]);
 });
 
-test('can create post', function () {
+test('can create post', function (): void {
     $category = Category::factory()->create();
     $image = UploadedFile::fake()->image('some-image.png');
     $this->get(route('posts.index', ['published' => true]));
@@ -133,7 +133,7 @@ test('can create post', function () {
     ]);
 });
 
-test('cannot create post with invalid data', function () {
+test('cannot create post with invalid data', function (): void {
     $this->post(route('posts.store'), [])
         ->assertRedirect()
         ->assertSessionHasErrors([
@@ -145,7 +145,7 @@ test('cannot create post with invalid data', function () {
         ]);
 });
 
-test('can see post page', function () {
+test('can see post page', function (): void {
     $post = Post::factory()->create();
 
     $this->get(route('posts.show', $post))
@@ -156,7 +156,7 @@ test('can see post page', function () {
         ]);
 });
 
-test('can see edit post page', function () {
+test('can see edit post page', function (): void {
     $post = Post::factory()->create();
 
     $this->get(route('posts.edit', $post))
@@ -169,7 +169,7 @@ test('can see edit post page', function () {
         ]);
 });
 
-test('can edit post', function () {
+test('can edit post', function (): void {
     $post = Post::factory()->create();
 
     $CategoryId = Category::factory()->create()->id;
@@ -195,7 +195,7 @@ test('can edit post', function () {
     ]);
 });
 
-test('can delete post', function () {
+test('can delete post', function (): void {
     $post = Post::factory()->createOne();
 
     $this->get(route('posts.index', [

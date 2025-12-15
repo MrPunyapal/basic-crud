@@ -7,7 +7,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Enums\FeaturedStatus;
 use App\Models\Post;
 
-test('can feature a post', function () {
+test('can feature a post', function (): void {
     $post = Post::factory()->create([
         'is_featured' => FeaturedStatus::NotFeatured,
     ]);
@@ -23,7 +23,7 @@ test('can feature a post', function () {
     ]);
 });
 
-test('can unfeature a post', function () {
+test('can unfeature a post', function (): void {
     $post = Post::factory()->create([
         'is_featured' => FeaturedStatus::Featured,
     ]);

@@ -6,7 +6,7 @@ use App\Actions\Posts\TogglePostFeatureAction;
 use App\Enums\FeaturedStatus;
 use App\Models\Post;
 
-it('toggles a post feature', function () {
+it('toggles a post feature', function (): void {
     $post = Post::factory()->create([
         'is_featured' => FeaturedStatus::NotFeatured,
     ]);
@@ -17,7 +17,7 @@ it('toggles a post feature', function () {
     expect($post->refresh()->is_featured)->toBe(FeaturedStatus::Featured);
 });
 
-it('toggles a post feature off', function () {
+it('toggles a post feature off', function (): void {
     $post = Post::factory()->create(['is_featured' => FeaturedStatus::Featured]);
 
     $action = new TogglePostFeatureAction;

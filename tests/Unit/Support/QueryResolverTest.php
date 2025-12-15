@@ -5,12 +5,12 @@ declare(strict_types=1);
 use App\Models\Post;
 use App\Support\QueryResolver;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Post::factory(20)
         ->create();
 });
 
-it('can resolve sort query', function ($query, $expectedQuery) {
+it('can resolve sort query', function ($query, $expectedQuery): void {
 
     $this->get(route('posts.index', $query));
 
@@ -34,7 +34,7 @@ it('can resolve sort query', function ($query, $expectedQuery) {
     ],
 ]);
 
-it('can resolve sort arrow', function ($query, $expectedArrow) {
+it('can resolve sort arrow', function ($query, $expectedArrow): void {
 
     $this->get(route('posts.index', $query));
 
@@ -58,7 +58,7 @@ it('can resolve sort arrow', function ($query, $expectedArrow) {
     ],
 ]);
 
-it('can resolve published query', function ($query, $expectedQuery) {
+it('can resolve published query', function ($query, $expectedQuery): void {
 
     $this->get(route('posts.index', $query));
 
@@ -78,7 +78,7 @@ it('can resolve published query', function ($query, $expectedQuery) {
     ],
 ]);
 
-it('can resolve published label', function ($query, $expectedLabel) {
+it('can resolve published label', function ($query, $expectedLabel): void {
 
     $this->get(route('posts.index', $query));
 
@@ -98,7 +98,7 @@ it('can resolve published label', function ($query, $expectedLabel) {
     ],
 ]);
 
-it('can resolve search query', function ($query, $expectedQuery) {
+it('can resolve search query', function ($query, $expectedQuery): void {
 
     $this->get(route('posts.index', $query));
 
@@ -118,7 +118,7 @@ it('can resolve search query', function ($query, $expectedQuery) {
     ],
 ]);
 
-it('can resolve search value', function ($query, $expectedValue) {
+it('can resolve search value', function ($query, $expectedValue): void {
 
     $this->get(route('posts.index', $query));
 
@@ -138,7 +138,7 @@ it('can resolve search value', function ($query, $expectedValue) {
     ],
 ]);
 
-it('can store previous query in session', function () {
+it('can store previous query in session', function (): void {
     $routeName = 'posts.index';
     $query = ['sortBy' => 'title', 'direction' => 'asc', 'page' => 1];
 
@@ -149,7 +149,7 @@ it('can store previous query in session', function () {
     expect($storedQuery)->toEqual($query);
 });
 
-it('can retrieve previous query from session', function () {
+it('can retrieve previous query from session', function (): void {
     $routeName = 'posts.index';
     $query = ['sortBy' => 'title', 'direction' => 'asc', 'page' => 1];
 
@@ -160,10 +160,10 @@ it('can retrieve previous query from session', function () {
     expect($previousQuery)->toEqual($query);
 });
 
-it('returns empty array if previous query is not found in session', function () {
+it('returns empty array if previous query is not found in session', function (): void {
     $routeName = 'posts.index';
 
     $previousQuery = QueryResolver::getPreviousQuery($routeName);
 
-    expect($previousQuery)->toEqual([]);
+    expect($previousQuery)->toBeEmpty();
 });

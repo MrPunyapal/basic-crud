@@ -9,14 +9,14 @@ use App\Models\Post;
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Sanctum::actingAs(
         User::factory()->create(),
         ['*']
     );
 });
 
-it('can list all posts', function () {
+it('can list all posts', function (): void {
     $posts = Post::factory()->count(3)->create();
 
     $this->getJson(action([PostController::class, 'index']))
@@ -24,7 +24,7 @@ it('can list all posts', function () {
         ->assertJson(['data' => $posts->toArray()]);
 });
 
-it('returns filtered posts based on search parameter', function () {
+it('returns filtered posts based on search parameter', function (): void {
     $user = User::factory()->create();
     $postA = Post::factory()->create([
         'title' => 'Test Post A',
@@ -43,7 +43,7 @@ it('returns filtered posts based on search parameter', function () {
     expect($response->json('data.0.id'))->toBe($postA->id);
 });
 
-it('returns filtered posts based on published parameter', function () {
+it('returns filtered posts based on published parameter', function (): void {
     $user = User::factory()->create();
     $postA = Post::factory()->create([
         'title' => 'Test Post A',
@@ -62,7 +62,7 @@ it('returns filtered posts based on published parameter', function () {
     expect($response->json('data.0.id'))->toBe($postA->id);
 });
 
-it('can sort posts by specified column and direction', function () {
+it('can sort posts by specified column and direction', function (): void {
     $user = User::factory()->create();
     $postA = Post::factory()->create([
         'title' => 'Test Post A',
@@ -82,7 +82,7 @@ it('can sort posts by specified column and direction', function () {
     expect($response->json('data.1.id'))->toBe($postA->id);
 });
 
-it('returns posts with default sorting when sort column is invalid', function () {
+it('returns posts with default sorting when sort column is invalid', function (): void {
     $user = User::factory()->create();
     $postA = Post::factory()->create([
         'title' => 'Test Post A',
@@ -100,7 +100,7 @@ it('returns posts with default sorting when sort column is invalid', function ()
     expect($response->json('data'))->toHaveCount(2);
 });
 
-it('combines multiple filter parameters', function () {
+it('combines multiple filter parameters', function (): void {
     $user = User::factory()->create();
     $postA = Post::factory()->create([
         'title' => 'Test Post A',
@@ -128,7 +128,7 @@ it('combines multiple filter parameters', function () {
         ->not->toContain($postB->id);
 });
 
-it('can create a new post', function () {
+it('can create a new post', function (): void {
     $data = Post::factory()->make()->toArray();
 
     $this->postJson(action([PostController::class, 'store']), $data)
@@ -140,7 +140,7 @@ it('can create a new post', function () {
     ]);
 });
 
-it('can show a specific post', function () {
+it('can show a specific post', function (): void {
     $post = Post::factory()->create();
 
     $this->getJson(action([PostController::class, 'show'], $post))
@@ -148,7 +148,7 @@ it('can show a specific post', function () {
         ->assertJson(['data' => $post->toArray()]);
 });
 
-it('can update a post', function () {
+it('can update a post', function (): void {
     $post = Post::factory()->create();
     $data = Post::factory()->make()->toArray();
 
@@ -162,7 +162,7 @@ it('can update a post', function () {
     ]);
 });
 
-it('can delete a post', function () {
+it('can delete a post', function (): void {
     $post = Post::factory()->create();
 
     $this->deleteJson(action([PostController::class, 'destroy'], $post))

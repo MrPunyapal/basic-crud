@@ -22,8 +22,8 @@ test('has locales', function (): void {
 });
 
 test('is rtl', function (): void {
-    expect(Settings::isRtl('ar'))->toBeTrue();
-    expect(Settings::isRtl('en'))->toBeFalse();
+    expect(Settings::isRtl('ar'))->toBeTrue()
+        ->and(Settings::isRtl('en'))->toBeFalse();
 });
 
 test('get direction for RTL and LTR locale', function ($locale, $dir): void {

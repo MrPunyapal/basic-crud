@@ -10,7 +10,7 @@ test('it gets posts from relation', function (): void {
         'category_id' => $category->id,
     ]);
 
-    expect($category->posts->count())->toBe(3);
-    expect($category->posts->first()->title)->toBe($posts->first()->title);
-    expect($category->posts->last()->title)->toBe($posts->last()->title);
+    expect($category->posts->count())->toBe(3)
+        ->and($category->posts->first()->title)->toBe($posts->first()->title)
+        ->and($category->posts->last()->title)->toBe($posts->last()->title);
 });

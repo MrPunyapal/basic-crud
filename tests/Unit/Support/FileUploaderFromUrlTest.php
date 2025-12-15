@@ -14,10 +14,10 @@ test('invoke returns uploaded file', function (): void {
     $uploader = new FileUploaderFromUrl;
     $uploadedFile = $uploader('http://example.com/file.txt');
 
-    expect($uploadedFile)->toBeInstanceOf(UploadedFile::class);
-    expect($uploadedFile->getClientOriginalName())->toBe('file.txt');
-    expect($uploadedFile->getClientMimeType())->toBe('text/plain');
-    expect(file_get_contents($uploadedFile->getPathname()))->toBe('file content');
+    expect($uploadedFile)->toBeInstanceOf(UploadedFile::class)
+        ->and($uploadedFile->getClientOriginalName())->toBe('file.txt')
+        ->and($uploadedFile->getClientMimeType())->toBe('text/plain')
+        ->and(file_get_contents($uploadedFile->getPathname()))->toBe('file content');
 });
 
 test('invoke returns null on failed request', function (): void {

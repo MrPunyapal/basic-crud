@@ -14,8 +14,8 @@ test('it can update a post', function (): void {
 
     $result = (new UpdatePostAction)->execute($post, $updateData);
 
-    expect($result)->toBeTrue();
-    expect($post->fresh())
+    expect($result)->toBeTrue()
+        ->and($post->fresh())
         ->title->toBe('Updated Title')
         ->content->toContain('Updated content');
 });

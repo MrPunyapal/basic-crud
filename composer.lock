@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92698a655631ee196ebc2cb6c0b23947",
+    "content-hash": "5da901f7d8f8b21a77a9f3733c5b23e4",
     "packages": [
         {
             "name": "brick/math",
@@ -7395,16 +7395,16 @@
         },
         {
             "name": "larastan/larastan",
-            "version": "v3.8.0",
+            "version": "v3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/larastan/larastan.git",
-                "reference": "d13ef96d652d1b2a8f34f1760ba6bf5b9c98112e"
+                "reference": "ff3725291bc4c7e6032b5a54776e3e5104c86db9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/larastan/larastan/zipball/d13ef96d652d1b2a8f34f1760ba6bf5b9c98112e",
-                "reference": "d13ef96d652d1b2a8f34f1760ba6bf5b9c98112e",
+                "url": "https://api.github.com/repos/larastan/larastan/zipball/ff3725291bc4c7e6032b5a54776e3e5104c86db9",
+                "reference": "ff3725291bc4c7e6032b5a54776e3e5104c86db9",
                 "shasum": ""
             },
             "require": {
@@ -7418,7 +7418,7 @@
                 "illuminate/pipeline": "^11.44.2 || ^12.4.1",
                 "illuminate/support": "^11.44.2 || ^12.4.1",
                 "php": "^8.2",
-                "phpstan/phpstan": "^2.1.29"
+                "phpstan/phpstan": "^2.1.32"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^13",
@@ -7473,7 +7473,7 @@
             ],
             "support": {
                 "issues": "https://github.com/larastan/larastan/issues",
-                "source": "https://github.com/larastan/larastan/tree/v3.8.0"
+                "source": "https://github.com/larastan/larastan/tree/v3.8.1"
             },
             "funding": [
                 {
@@ -7481,7 +7481,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-27T23:09:14+00:00"
+            "time": "2025-12-11T16:37:35+00:00"
         },
         {
             "name": "laravel-lang/actions",
@@ -8910,16 +8910,16 @@
         },
         {
             "name": "mrpunyapal/rector-pest",
-            "version": "0.0.5",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MrPunyapal/rector-pest.git",
-                "reference": "4baabd1784c1e3ef26188c61a9693255300b9a3c"
+                "reference": "738cd4e9955bba4343b6a1b0c01bb3f56f01a1cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MrPunyapal/rector-pest/zipball/4baabd1784c1e3ef26188c61a9693255300b9a3c",
-                "reference": "4baabd1784c1e3ef26188c61a9693255300b9a3c",
+                "url": "https://api.github.com/repos/MrPunyapal/rector-pest/zipball/738cd4e9955bba4343b6a1b0c01bb3f56f01a1cd",
+                "reference": "738cd4e9955bba4343b6a1b0c01bb3f56f01a1cd",
                 "shasum": ""
             },
             "require": {
@@ -8965,9 +8965,9 @@
             ],
             "support": {
                 "issues": "https://github.com/MrPunyapal/rector-pest/issues",
-                "source": "https://github.com/MrPunyapal/rector-pest/tree/0.0.5"
+                "source": "https://github.com/MrPunyapal/rector-pest/tree/0.1.2"
             },
-            "time": "2025-12-15T07:56:38+00:00"
+            "time": "2025-12-15T13:16:01+00:00"
         },
         {
             "name": "myclabs/deep-copy",

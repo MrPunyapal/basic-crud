@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Builders\PostBuilder;
 use App\Enums\FeaturedStatus;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\UseEloquentBuilder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,29 +41,23 @@ use Override;
  * @mixin Model
  */
 #[UseEloquentBuilder(PostBuilder::class)]
+#[Fillable([
+    'title',
+    'slug',
+    'description',
+    'image',
+    'content',
+    'published_at',
+    'category_id',
+    'tags',
+    'is_featured',
+])]
 final class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
 
     use SoftDeletes;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'title',
-        'slug',
-        'description',
-        'image',
-        'content',
-        'published_at',
-        'category_id',
-        'tags',
-        'is_featured',
-    ];
 
     // equivalent to the above
     // protected $guarded=[

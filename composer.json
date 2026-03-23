@@ -26,13 +26,13 @@
     "require": {
         "php": "^8.3",
         "guzzlehttp/guzzle": "^7.10",
-        "laravel/framework": "^12.54.1",
+        "laravel/framework": "^13.0",
         "laravel/sanctum": "^4.3.1",
-        "laravel/tinker": "^2.11.1",
+        "laravel/tinker": "^3.0",
         "mews/purifier": "^3.4.3"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.16.5",
+        "barryvdh/laravel-debugbar": "^4.0",
         "driftingly/rector-laravel": "^2.1.12",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.9.3",
@@ -43,11 +43,11 @@
         "mockery/mockery": "^1.6.12",
         "mrpunyapal/rector-pest": "^0.1.9",
         "nunomaduro/collision": "^8.9.1",
-        "pestphp/pest": "^3.8.6",
-        "pestphp/pest-plugin-laravel": "^3.2",
-        "pestphp/pest-plugin-type-coverage": "^3.6.1",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-type-coverage": "^4.0",
         "phpstan/phpstan": "^2.1.40",
-        "phpunit/phpunit": "^11.5.50",
+        "phpunit/phpunit": "^12.0",
         "rector/rector": "^2.3.8"
     },
     "autoload": {
@@ -110,6 +110,12 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/Purifier.git"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

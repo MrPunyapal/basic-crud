@@ -28,7 +28,7 @@ return RectorConfig::configure()
         earlyReturn: true,
         carbon: true,
     )->withSets([
-        LaravelSetList::LARAVEL_110,
+        LaravelSetList::LARAVEL_130,
         LaravelSetList::LARAVEL_CODE_QUALITY,
         LaravelSetList::LARAVEL_IF_HELPERS,
         LaravelSetList::LARAVEL_ARRAY_STR_FUNCTION_TO_STATIC_CALL,

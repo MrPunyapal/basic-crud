@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f79dbc9e06d56dcaa74a6010b8ebc164",
+    "content-hash": "8d8717ccbba264063fe3579bcb9fd948",
     "packages": [
         {
             "name": "brick/math",
@@ -2148,11 +2148,17 @@
         },
         {
             "name": "mews/purifier",
-            "version": "3.4.3",
+            "version": "dev-l13-compatibility",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-shift/Purifier.git",
+                "reference": "4c5a7269ece07ded23367f6f378eaf5d318ded89"
+            },
             "dist": {
-                "type": "path",
-                "url": "./packages/mews/purifier",
-                "reference": "64f12621073afa3370de98e8604fb8b500590347"
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-shift/Purifier/zipball/4c5a7269ece07ded23367f6f378eaf5d318ded89",
+                "reference": "4c5a7269ece07ded23367f6f378eaf5d318ded89",
+                "shasum": ""
             },
             "require": {
                 "ezyang/htmlpurifier": "^4.16.0",
@@ -2216,10 +2222,10 @@
                 "security",
                 "xss"
             ],
-            "transport-options": {
-                "symlink": false,
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/laravel-shift/Purifier/tree/l13-compatibility"
+            },
+            "time": "2026-02-20T18:20:50+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -12451,7 +12457,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "mews/purifier": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

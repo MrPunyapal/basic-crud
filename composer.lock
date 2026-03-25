@@ -9285,16 +9285,16 @@
         },
         {
             "name": "mrpunyapal/peststan",
-            "version": "0.1.0",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MrPunyapal/PestStan.git",
-                "reference": "12520f97ea209dad9b8a4314ee51ca77ba26331a"
+                "reference": "96fbeeed07372e71cd71c168d915625b78f19fa0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MrPunyapal/PestStan/zipball/12520f97ea209dad9b8a4314ee51ca77ba26331a",
-                "reference": "12520f97ea209dad9b8a4314ee51ca77ba26331a",
+                "url": "https://api.github.com/repos/MrPunyapal/PestStan/zipball/96fbeeed07372e71cd71c168d915625b78f19fa0",
+                "reference": "96fbeeed07372e71cd71c168d915625b78f19fa0",
                 "shasum": ""
             },
             "require": {
@@ -9304,7 +9304,7 @@
             "require-dev": {
                 "laravel/pint": "^1.18",
                 "mrpunyapal/rector-pest": "^0.2.0",
-                "pestphp/pest": "^3.0 || ^4.0",
+                "pestphp/pest": "^3.0 || ^4.0 || ^5.0",
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan-strict-rules": "^2.0",
                 "rector/rector": "^2.0"
@@ -9335,7 +9335,7 @@
             ],
             "support": {
                 "issues": "https://github.com/MrPunyapal/PestStan/issues",
-                "source": "https://github.com/MrPunyapal/PestStan/tree/0.1.0"
+                "source": "https://github.com/MrPunyapal/PestStan/tree/0.1.3"
             },
             "funding": [
                 {
@@ -9343,7 +9343,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-19T13:24:35+00:00"
+            "time": "2026-03-25T17:37:31+00:00"
         },
         {
             "name": "mrpunyapal/rector-pest",
@@ -10689,11 +10689,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.43",
+            "version": "2.1.44",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d01bebe3edfd4d49b9666ee5b8271ddca561042f",
-                "reference": "d01bebe3edfd4d49b9666ee5b8271ddca561042f",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4a88c083c668b2c364a425c9b3171b2d9ea5d218",
+                "reference": "4a88c083c668b2c364a425c9b3171b2d9ea5d218",
                 "shasum": ""
             },
             "require": {
@@ -10738,7 +10738,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-24T20:40:50+00:00"
+            "time": "2026-03-25T17:34:21+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bebc4f68421890205cd113b29f0e404",
+    "content-hash": "7ec1ae14e42ba8d4e2f346a370cc8f63",
     "packages": [
         {
             "name": "brick/math",
@@ -9285,16 +9285,16 @@
         },
         {
             "name": "mrpunyapal/peststan",
-            "version": "0.1.4",
+            "version": "0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MrPunyapal/PestStan.git",
-                "reference": "0d82c35f33d461b20b7afb394e154c72d5d58db5"
+                "reference": "c4cbb7a041cbdc4e255a72a45b098c7d8cab5fd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MrPunyapal/PestStan/zipball/0d82c35f33d461b20b7afb394e154c72d5d58db5",
-                "reference": "0d82c35f33d461b20b7afb394e154c72d5d58db5",
+                "url": "https://api.github.com/repos/MrPunyapal/PestStan/zipball/c4cbb7a041cbdc4e255a72a45b098c7d8cab5fd0",
+                "reference": "c4cbb7a041cbdc4e255a72a45b098c7d8cab5fd0",
                 "shasum": ""
             },
             "require": {
@@ -9335,7 +9335,7 @@
             ],
             "support": {
                 "issues": "https://github.com/MrPunyapal/PestStan/issues",
-                "source": "https://github.com/MrPunyapal/PestStan/tree/0.1.4"
+                "source": "https://github.com/MrPunyapal/PestStan/tree/0.1.5"
             },
             "funding": [
                 {
@@ -9343,7 +9343,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-26T17:49:15+00:00"
+            "time": "2026-03-27T15:57:46+00:00"
         },
         {
             "name": "mrpunyapal/rector-pest",

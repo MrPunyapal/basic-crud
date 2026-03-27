@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 
 test('root redirects to posts', function (): void {
@@ -35,7 +36,7 @@ test('can only see published posts', function (): void {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertSessionHas('posts.index.previous.query', ['published' => true])
-        ->assertViewHas('posts', fn ($posts): bool => $posts->where('published_at', '>=', now())->count() === 0);
+        ->assertViewHas('posts', fn (Collection $posts): bool => $posts->where('published_at', '>=', now())->count() === 0);
 });
 
 test('can see posts sorted by title', function (string $direction): void {

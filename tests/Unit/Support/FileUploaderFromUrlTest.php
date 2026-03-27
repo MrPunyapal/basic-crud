@@ -14,8 +14,9 @@ test('invoke returns uploaded file', function (): void {
     $uploader = new FileUploaderFromUrl;
     $uploadedFile = $uploader('http://example.com/file.txt');
 
-    expect($uploadedFile)->toBeInstanceOf(UploadedFile::class)
-        ->and($uploadedFile->getClientOriginalName())->toBe('file.txt')
+    assert($uploadedFile instanceof UploadedFile);
+
+    expect($uploadedFile->getClientOriginalName())->toBe('file.txt')
         ->and($uploadedFile->getClientMimeType())->toBe('text/plain')
         ->and(file_get_contents($uploadedFile->getPathname()))->toBe('file content');
 });

@@ -10,7 +10,7 @@ test('it can create a post', function (): void {
     $category = Category::factory()->create();
     $postData = Post::factory()->make([
         'category_id' => $category->id,
-    ])->toArray();
+    ])->firstOrFail()->toArray();
 
     $post = (new CreatePostAction)->execute($postData);
 

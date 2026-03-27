@@ -9285,16 +9285,16 @@
         },
         {
             "name": "mrpunyapal/peststan",
-            "version": "0.1.3",
+            "version": "0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MrPunyapal/PestStan.git",
-                "reference": "96fbeeed07372e71cd71c168d915625b78f19fa0"
+                "reference": "0d82c35f33d461b20b7afb394e154c72d5d58db5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MrPunyapal/PestStan/zipball/96fbeeed07372e71cd71c168d915625b78f19fa0",
-                "reference": "96fbeeed07372e71cd71c168d915625b78f19fa0",
+                "url": "https://api.github.com/repos/MrPunyapal/PestStan/zipball/0d82c35f33d461b20b7afb394e154c72d5d58db5",
+                "reference": "0d82c35f33d461b20b7afb394e154c72d5d58db5",
                 "shasum": ""
             },
             "require": {
@@ -9335,7 +9335,7 @@
             ],
             "support": {
                 "issues": "https://github.com/MrPunyapal/PestStan/issues",
-                "source": "https://github.com/MrPunyapal/PestStan/tree/0.1.3"
+                "source": "https://github.com/MrPunyapal/PestStan/tree/0.1.4"
             },
             "funding": [
                 {
@@ -9343,7 +9343,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-25T17:37:31+00:00"
+            "time": "2026-03-26T17:49:15+00:00"
         },
         {
             "name": "mrpunyapal/rector-pest",

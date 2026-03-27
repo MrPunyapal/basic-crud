@@ -8,6 +8,7 @@ use App\Models\Post;
 
 test('it can create a post', function (): void {
     $category = Category::factory()->create();
+    /** @var array<string, mixed> $postData */
     $postData = Post::factory()->make([
         'category_id' => $category->id,
     ])->firstOrFail()->toArray();

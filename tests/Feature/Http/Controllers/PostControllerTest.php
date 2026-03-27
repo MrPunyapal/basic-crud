@@ -48,6 +48,7 @@ test('can see posts sorted by title', function (string $direction): void {
         )
         ->create();
 
+    /** @var list<string> $expectedSortedPosts */
     $expectedSortedPosts = ($direction === 'asc')
         ? $posts->pluck('title')->all()
         : $posts->pluck('title')->reverse()->all();
@@ -85,7 +86,7 @@ test('can search posts by title', function (): void {
     // Create test data
     [$postToSearch, $missingPost] = Post::factory(2)->create();
 
-    $searchTerm = $postToSearch->title;
+    $searchTerm = (string) $postToSearch?->title;
 
     // Execute the search
     $this->get(route('posts.index', ['search' => $searchTerm]))
@@ -100,7 +101,7 @@ test('can search posts by title', function (): void {
         // Check if the matching post is present in the view
         ->assertSeeText($searchTerm)
         // Check if non-matching posts are not present in the view
-        ->assertDontSeeText($missingPost->title);
+        ->assertDontSeeText((string) $missingPost?->title);
 });
 
 test('can see create post page', function (): void {

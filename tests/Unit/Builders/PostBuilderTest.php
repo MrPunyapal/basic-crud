@@ -26,15 +26,18 @@ beforeEach(function (): void {
 });
 
 test('filter builder can search posts by title', function (): void {
+    /** @var Fluent<string, mixed> $filters */
     $filters = new Fluent(['search' => 'Test']);
 
     $posts = Post::query()->filter($filters)->get();
 
     expect($posts)->toHaveCount(1)
-        ->and($posts->first()->id)->toBe($this->postA->id);
+        ->and($posts->firstOrFail()->id)
+        ->toBe($this->postA->id);
 });
 
 test('filter builder can filter published posts', function (): void {
+    /** @var Fluent<string, mixed> $filters */
     $filters = new Fluent(['published' => true]);
 
     $posts = Post::query()->filter($filters)->get();
@@ -45,6 +48,7 @@ test('filter builder can filter published posts', function (): void {
 });
 
 test('filter builder can sort posts by specified column and direction', function (): void {
+    /** @var Fluent<string, mixed> $filters */
     $filters = new Fluent([
         'sortBy' => 'created_at',
         'direction' => 'asc',
@@ -57,6 +61,7 @@ test('filter builder can sort posts by specified column and direction', function
 });
 
 test('filter builder defaults to latest ordering when sort column is invalid', function (): void {
+    /** @var Fluent<string, mixed> $filters */
     $filters = new Fluent([
         'sortBy' => 'invalid_column',
     ]);
@@ -69,6 +74,7 @@ test('filter builder defaults to latest ordering when sort column is invalid', f
 });
 
 test('filter builder can combine multiple filters', function (): void {
+    /** @var Fluent<string, mixed> $filters */
     $filters = new Fluent([
         'search' => 'Post',
         'published' => true,
@@ -77,5 +83,5 @@ test('filter builder can combine multiple filters', function (): void {
     $posts = Post::query()->filter($filters)->get();
 
     expect($posts)->toHaveCount(1)
-        ->and($posts->first()->id)->toBe($this->postA->id);
+        ->and($posts->firstOrFail()->id)->toBe($this->postA->id);
 });

@@ -11,7 +11,7 @@ test('it can create a post', function (): void {
     /** @var array<string, mixed> $postData */
     $postData = Post::factory()->make([
         'category_id' => $category->id,
-    ])->firstOrFail()->toArray();
+    ])->toArray();
 
     $post = (new CreatePostAction)->execute($postData);
 

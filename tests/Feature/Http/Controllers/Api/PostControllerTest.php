@@ -123,7 +123,7 @@ it('combines multiple filter parameters', function (): void {
         ->assertSuccessful();
 
     expect($response->json('data'))->toHaveCount(2)
-        ->and(collect($response->json('data'))->pluck('id')->toArray())
+        ->and($response->collect('data')->pluck('id')->toArray())
         ->toContain($postA->id, $postC->id)
         ->not->toContain($postB->id);
 });

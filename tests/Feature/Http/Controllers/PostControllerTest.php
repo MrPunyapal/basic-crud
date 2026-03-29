@@ -7,6 +7,7 @@ namespace Tests\Feature;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 test('root redirects to posts', function (): void {
     $this->get('/')
@@ -35,7 +36,7 @@ test('can only see published posts', function (): void {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertSessionHas('posts.index.previous.query', ['published' => true])
-        ->assertViewHas('posts', fn ($posts): bool => $posts->where('published_at', '>=', now())->count() === 0);
+        ->assertViewHas('posts', fn (LengthAwarePaginator $posts): bool => $posts->where('published_at', '>=', now())->count() === 0);
 });
 
 test('can see posts sorted by title', function (string $direction): void {
@@ -47,6 +48,7 @@ test('can see posts sorted by title', function (string $direction): void {
         )
         ->create();
 
+    /** @var list<string> $expectedSortedPosts */
     $expectedSortedPosts = ($direction === 'asc')
         ? $posts->pluck('title')->all()
         : $posts->pluck('title')->reverse()->all();
@@ -84,7 +86,7 @@ test('can search posts by title', function (): void {
     // Create test data
     [$postToSearch, $missingPost] = Post::factory(2)->create();
 
-    $searchTerm = $postToSearch->title;
+    $searchTerm = (string) $postToSearch?->title;
 
     // Execute the search
     $this->get(route('posts.index', ['search' => $searchTerm]))
@@ -99,7 +101,7 @@ test('can search posts by title', function (): void {
         // Check if the matching post is present in the view
         ->assertSeeText($searchTerm)
         // Check if non-matching posts are not present in the view
-        ->assertDontSeeText($missingPost->title);
+        ->assertDontSeeText((string) $missingPost?->title);
 });
 
 test('can see create post page', function (): void {

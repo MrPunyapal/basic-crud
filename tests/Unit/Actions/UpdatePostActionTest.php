@@ -16,6 +16,7 @@ test('it can update a post', function (): void {
 
     expect($result)->toBeTrue()
         ->and($post->fresh())
+        ->toBeInstanceOf(Post::class)
         ->title->toBe('Updated Title')
         ->content->toContain('Updated content');
 });

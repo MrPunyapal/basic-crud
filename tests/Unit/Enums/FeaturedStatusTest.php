@@ -75,7 +75,7 @@ it('returns the correct change button color for Featured', function (): void {
 });
 
 it('returns the correct button color', function (int $value, string $expected): void {
-    expect(FeaturedStatus::tryFrom($value)->buttonColor())->toBe($expected);
+    expect(FeaturedStatus::tryFrom($value)?->buttonColor())->toBe($expected);
 })
     ->with([
         FeaturedStatus::Featured->name => [

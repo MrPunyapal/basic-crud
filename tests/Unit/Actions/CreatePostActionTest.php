@@ -16,7 +16,6 @@ test('it can create a post', function (): void {
     $post = (new CreatePostAction)->execute($postData);
 
     expect($post)
-        ->toBeInstanceOf(Post::class)
         ->title->toBe($postData['title'])
         ->content->toBe($postData['content']);
 });

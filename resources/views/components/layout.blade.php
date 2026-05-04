@@ -41,6 +41,12 @@
                         <span>{{ __('posts.form.Create Post') }}</span>
                     </a>
 
+                    <!-- GitHub Button -->
+                    <a href="https://github.com/mr-punyapal/basic-crud" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-slate-600 hover:text-gray-900 transition-all duration-200 font-medium px-3 py-2 rounded-lg hover:bg-white/50">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+
                     <!-- Language Selector -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" class="flex items-center space-x-2 text-slate-600 hover:text-blue-600 transition-colors duration-200 font-medium px-3 py-2 rounded-lg hover:bg-white/50">

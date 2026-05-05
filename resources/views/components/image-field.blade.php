@@ -6,14 +6,14 @@
 @php
     $componentId = "image-field-$id";
 @endphp
-<div class="flex gap-x-4 items-center" id="{{ $componentId }}">
+<div class="flex flex-wrap items-center gap-4" id="{{ $componentId }}">
     <input {{ $attributes }} class="hidden" id="{{ $id }}" type="file" />
     <div
-        class="border flex items-center relative justify-center border-dashed border-zinc-950/10 bg-zinc-50 size-20 rounded-md"
+        class="relative grid size-24 place-items-center overflow-hidden rounded-3xl border border-dashed border-stone-300 bg-stone-50 text-stone-400"
         data-preview-container
     >
         <svg
-            class="fill-zinc-500"
+            class="size-6 fill-current"
             height="20"
             viewBox="0 0 512 512"
             width="20"
@@ -23,12 +23,17 @@
         </svg>
         @if ($value)
             <img
-                class="max-w-none rounded-md absolute size-[calc(100%+(--spacing(0.5)))] object-center object-cover -top-px -start-px"
+                class="absolute inset-0 size-full object-cover"
                 src="{{ $value }}"
             />
         @endif
     </div>
-    <button type="button">Upload</button>
+    <div class="space-y-2">
+        <button type="button" class="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-4 py-2 text-sm font-medium text-stone-700 shadow-sm transition hover:border-stone-400 hover:text-stone-950">
+            Upload image
+        </button>
+        <p class="text-sm text-stone-500">PNG, JPG, or WEBP. A preview appears here after selection.</p>
+    </div>
 </div>
 
 <script>
@@ -64,7 +69,7 @@
 
             const imageEl = document.createElement('img')
 
-            imageEl.className = 'max-w-none rounded-md absolute size-[calc(100%+(--spacing(0.5)))] object-center object-cover -top-px -start-px'
+            imageEl.className = 'absolute inset-0 size-full object-cover'
             imageEl.dataset.preview = ''
             imageEl.src = previewObjectURL
 

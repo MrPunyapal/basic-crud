@@ -29,7 +29,7 @@
         "laravel/framework": "^13.2",
         "laravel/sanctum": "^4.3.1",
         "laravel/tinker": "^3.0",
-        "mews/purifier": "dev-l13-compatibility"
+        "mews/purifier": "^3.4.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^4.2.1",
@@ -111,12 +111,6 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/laravel-shift/Purifier.git"
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

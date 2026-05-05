@@ -35,40 +35,37 @@
 
         <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
             <div class="overflow-x-auto">
-                <table class="w-full table-fixed divide-y divide-stone-200 text-sm">
-                    <thead class="bg-stone-50/80 text-left text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
+                <table class="w-full table-auto divide-y divide-stone-200 text-sm">
+                    <thead class="bg-stone-50 text-left text-sm font-semibold text-stone-600">
                         <tr>
                             <th class="w-16 px-4 py-4 sm:px-6">
                                 #
                             </th>
-                            <th class="w-[31%] px-4 py-4 sm:px-6">
+                            <th class="px-4 py-4 sm:px-6">
                                 <a class="inline-flex items-center gap-1 whitespace-nowrap transition hover:text-stone-950"
                                    href="{{ route('posts.index', $queryResolver->sortQuery('title')) }}">
                                     <span>{{ __('posts.form.Title') }}</span>
                                     {!! $queryResolver->sortArrow('title') !!}
                                 </a>
                             </th>
-                            <th class="w-28 px-4 py-4 sm:px-6">
+                            <th class="whitespace-nowrap px-4 py-4 sm:px-6">
                                 {{ __('posts.form.Category') }}
                             </th>
-                            <th class="w-28 px-4 py-4 sm:px-6">
+                            <th class="whitespace-nowrap px-4 py-4 sm:px-6">
                                 <a class="inline-flex items-center gap-1 whitespace-nowrap transition hover:text-stone-950"
                                    href="{{ route('posts.index', $queryResolver->sortQuery('is_featured')) }}">
                                     <span>Featured</span>
                                     {!! $queryResolver->sortArrow('is_featured') !!}
                                 </a>
                             </th>
-                            <th class="w-28 px-4 py-4 sm:px-6">
+                            <th class="whitespace-nowrap px-4 py-4 sm:px-6">
                                 <a class="inline-flex items-center gap-1 whitespace-nowrap transition hover:text-stone-950"
                                    href="{{ route('posts.index', $queryResolver->sortQuery('created_at')) }}">
-                                    <span>Created</span>
+                                    <span>Dates</span>
                                     {!! $queryResolver->sortArrow('created_at') !!}
                                 </a>
                             </th>
-                            <th class="w-28 px-4 py-4 whitespace-nowrap sm:px-6">
-                                Updated
-                            </th>
-                            <th class="w-40 px-4 py-4 whitespace-nowrap sm:px-6">
+                            <th class="w-[1%] whitespace-nowrap px-4 py-4 sm:px-6">
                                 {{ __('posts.form.Actions') }}
                             </th>
                         </tr>
@@ -81,7 +78,7 @@
                                         {{ $loop->index + $posts->firstItem() }}
                                     </div>
                                 </td>
-                                <td class="max-w-0 px-4 py-4 text-stone-900 sm:px-6">
+                                <td class="px-4 py-4 text-stone-900 sm:px-6">
                                     <div>
                                         <a href="{{ route('posts.show', ['post' => $post]) }}"
                                            class="block truncate text-base font-semibold leading-7 text-stone-950 transition hover:text-red-600">
@@ -105,15 +102,15 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td class="whitespace-nowrap px-4 py-4 text-stone-500 sm:px-6">
-                                    {{ $post->created_at->format('M d, Y') }}
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-4 text-stone-500 sm:px-6">
-                                    {{ $post->updated_at->since() }}
+                                <td class="px-4 py-4 sm:px-6">
+                                    <div class="min-w-[9rem] space-y-1 text-sm text-stone-500">
+                                        <div class="whitespace-nowrap">{{ $post->created_at->format('M d, Y') }}</div>
+                                        <div class="whitespace-nowrap text-xs text-stone-400">{{ $post->updated_at->since() }}</div>
+                                    </div>
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-4 sm:px-6">
-                                    <div class="flex items-center gap-2 whitespace-nowrap text-xs font-medium sm:text-sm">
-                                        <form action="{{ route('posts.featured', ['post' => $post]) }}" method="POST" class="inline">
+                                    <div class="inline-flex flex-nowrap items-center gap-3 whitespace-nowrap text-sm font-medium">
+                                        <form action="{{ route('posts.featured', ['post' => $post]) }}" method="POST" class="shrink-0">
                                             @csrf
                                             @method('PATCH')
                                             <button type="submit" class="transition hover:underline {{ $post->is_featured->value ? 'text-amber-700' : 'text-stone-700 hover:text-stone-950' }}" title="{{ $post->is_featured->changeBtnLabel() }}">
@@ -121,13 +118,17 @@
                                             </button>
                                         </form>
 
+                                        <span class="text-stone-300" aria-hidden="true">/</span>
+
                                         <a href="{{ route('posts.edit', ['post' => $post]) }}"
-                                           class="text-stone-700 transition hover:text-stone-950 hover:underline"
+                                           class="shrink-0 text-stone-700 transition hover:text-stone-950 hover:underline"
                                            title="{{ __('posts.show.Edit') }}">
                                             {{ __('posts.show.Edit') }}
                                         </a>
 
-                                        <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST" class="inline"
+                                        <span class="text-stone-300" aria-hidden="true">/</span>
+
+                                        <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST" class="shrink-0"
                                               onsubmit="return confirm('{{ __('posts.form.Are you sure you want to delete this post?') }}')">
                                             @csrf
                                             @method('DELETE')
@@ -140,7 +141,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-4 py-16 text-center sm:px-6">
+                                <td colspan="6" class="px-4 py-16 text-center sm:px-6">
                                     <div class="mx-auto max-w-md space-y-4">
                                         <h3 class="font-serif text-3xl tracking-tight text-stone-950">No posts found</h3>
                                         <p class="text-base leading-7 text-stone-600">Start the archive with a first post, then return here to sort, review, and refine it.</p>

@@ -25,6 +25,7 @@ zerops:
         - bootstrap
         - config
         - database
+        - lang
         - public
         - resources/views
         - routes

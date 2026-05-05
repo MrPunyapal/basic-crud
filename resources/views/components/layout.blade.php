@@ -17,7 +17,7 @@
 
 <body dir="{{ Settings::getDirection() }}" class="min-h-screen bg-stone-50 text-stone-950 antialiased">
     <header class="border-b border-stone-200 bg-white">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:justify-between">
                 <a href="{{ route('posts.index') }}" class="flex items-center gap-4">
                     <span class="grid size-10 place-items-center rounded-xl border border-stone-300 bg-white text-sm font-semibold text-red-600">L</span>
@@ -55,7 +55,7 @@
     </header>
 
     <main class="pb-16">
-        <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
             {{ $slot }}
         </div>
     </main>

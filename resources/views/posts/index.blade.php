@@ -35,40 +35,40 @@
 
         <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-stone-200 text-sm">
+                <table class="w-full table-fixed divide-y divide-stone-200 text-sm">
                     <thead class="bg-stone-50/80 text-left text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
                         <tr>
                             <th class="w-16 px-4 py-4 sm:px-6">
                                 #
                             </th>
-                            <th class="w-[34%] min-w-[16rem] px-4 py-4 sm:px-6">
+                            <th class="w-[31%] px-4 py-4 sm:px-6">
                                 <a class="inline-flex items-center gap-1 whitespace-nowrap transition hover:text-stone-950"
                                    href="{{ route('posts.index', $queryResolver->sortQuery('title')) }}">
                                     <span>{{ __('posts.form.Title') }}</span>
                                     {!! $queryResolver->sortArrow('title') !!}
                                 </a>
                             </th>
-                            <th class="w-32 px-4 py-4 sm:px-6">
+                            <th class="w-28 px-4 py-4 sm:px-6">
                                 {{ __('posts.form.Category') }}
                             </th>
-                            <th class="w-32 px-4 py-4 sm:px-6">
+                            <th class="w-28 px-4 py-4 sm:px-6">
                                 <a class="inline-flex items-center gap-1 whitespace-nowrap transition hover:text-stone-950"
                                    href="{{ route('posts.index', $queryResolver->sortQuery('is_featured')) }}">
                                     <span>Featured</span>
                                     {!! $queryResolver->sortArrow('is_featured') !!}
                                 </a>
                             </th>
-                            <th class="w-32 px-4 py-4 sm:px-6">
+                            <th class="w-28 px-4 py-4 sm:px-6">
                                 <a class="inline-flex items-center gap-1 whitespace-nowrap transition hover:text-stone-950"
                                    href="{{ route('posts.index', $queryResolver->sortQuery('created_at')) }}">
                                     <span>Created</span>
                                     {!! $queryResolver->sortArrow('created_at') !!}
                                 </a>
                             </th>
-                            <th class="w-32 px-4 py-4 whitespace-nowrap sm:px-6">
+                            <th class="w-28 px-4 py-4 whitespace-nowrap sm:px-6">
                                 Updated
                             </th>
-                            <th class="w-44 px-4 py-4 whitespace-nowrap sm:px-6">
+                            <th class="w-40 px-4 py-4 whitespace-nowrap sm:px-6">
                                 {{ __('posts.form.Actions') }}
                             </th>
                         </tr>
@@ -81,15 +81,12 @@
                                         {{ $loop->index + $posts->firstItem() }}
                                     </div>
                                 </td>
-                                <td class="min-w-[16rem] px-4 py-4 text-stone-900 sm:px-6">
-                                    <div class="space-y-1">
+                                <td class="max-w-0 px-4 py-4 text-stone-900 sm:px-6">
+                                    <div>
                                         <a href="{{ route('posts.show', ['post' => $post]) }}"
-                                           class="line-clamp-2 text-base font-semibold leading-7 text-stone-950 transition hover:text-red-600">
+                                           class="block truncate text-base font-semibold leading-7 text-stone-950 transition hover:text-red-600">
                                             {{ $post->title }}
                                         </a>
-                                        @if ($post->description)
-                                            <p class="hidden truncate text-sm leading-6 text-stone-500 2xl:block">{{ $post->description }}</p>
-                                        @endif
                                     </div>
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-4 text-stone-700 sm:px-6">
@@ -115,7 +112,7 @@
                                     {{ $post->updated_at->since() }}
                                 </td>
                                 <td class="whitespace-nowrap px-4 py-4 sm:px-6">
-                                    <div class="flex items-center gap-3 whitespace-nowrap text-xs font-medium sm:text-sm">
+                                    <div class="flex items-center gap-2 whitespace-nowrap text-xs font-medium sm:text-sm">
                                         <form action="{{ route('posts.featured', ['post' => $post]) }}" method="POST" class="inline">
                                             @csrf
                                             @method('PATCH')

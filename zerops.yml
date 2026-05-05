@@ -100,11 +100,111 @@ zerops:
         # sessions migration Laravel ships by default.
         SESSION_DRIVER: database
         CACHE_STORE: database
+  - setup: app
+    build:
+      # Multi-base build: PHP for Composer, Node for Vite asset
+      # compilation. Both runtimes are fully available on PATH
+      # during the build — no manual install needed.
+      base:
+        - php@8.4
+        - nodejs@22
+      buildCommands:
+        # Production Composer install — no dev packages, classmap
+        # optimized for faster autoloading in production.
+        - composer install --no-dev --optimize-autoloader
+        # Vite compiles Tailwind CSS and JS into content-hashed
+        # bundles in public/build/. These static assets are all
+        # the runtime container needs from the Node side.
+        - npm install
+        - npm run build
+      deployFiles:
+        # List each directory explicitly — deploying ./ would
+        # ship node_modules, .env.example, and other build-only
+        # artifacts the runtime container doesn't need.
+        - app
+        - bootstrap
+        - config
+        - database
+        - public
+        - resources/views
+        - routes
+        - storage
+        - vendor
+        - artisan
+        - composer.json
+      # Cache vendor/ and node_modules/ between builds so
+      # Composer and npm skip redundant network fetches.
+      cache:
+        - vendor
+        - node_modules
+
+    # Readiness check gates the traffic switch — new containers
+    # must answer HTTP 200 before the L7 balancer routes to them.
+    # This enables zero-downtime deploys.
+    deploy:
+      readinessCheck:
+        httpGet:
+          port: 80
+          path: /health
+
+    run:
+      # php-nginx serves via Nginx + PHP-FPM — no explicit start
+      # command needed; the base image handles both processes.
+      base: php-nginx@8.4
+      # Nginx serves static files from public/ and proxies PHP
+      # requests to FPM. Laravel expects this as its web root.
+      documentRoot: public
+      # Config, route, and view caches MUST be built at runtime.
+      # Build runs at /build/source/ but the app serves from
+      # /var/www/ — caching during build bakes wrong paths.
+      # Migrations run exactly once per deploy via zsc execOnce,
+      # regardless of how many containers start in parallel.
+      initCommands:
+        - zsc execOnce ${appVersionId} --retryUntilSuccessful -- php artisan migrate --force
+        - php artisan config:cache
+        - php artisan route:cache
+        - php artisan view:cache
+      # Health check restarts unresponsive containers after the
+      # 5-minute retry window expires — keeps production alive.
+      healthCheck:
+        httpGet:
+          port: 80
+          path: /health
+      envVariables:
+        APP_NAME: "Laravel Zerops"
+        # Production mode — stack traces hidden, error pages
+        # generic, optimizations enabled.
+        APP_ENV: production
+        APP_DEBUG: "false"
+        # APP_URL drives absolute URL generation for redirects,
+        # signed URLs, mail links, and CSRF origin validation.
+        # zeropsSubdomain is the platform-injected HTTPS URL.
+        APP_URL: ${zeropsSubdomain}
+        # syslog routes Laravel logs to the Zerops runtime log
+        # viewer via the local0 facility — no log files to
+        # manage or rotate, and app logs stay tagged separately
+        # from PHP-FPM/nginx system messages.
+        LOG_CHANNEL: syslog
+        LOG_SYSLOG_FACILITY: local0
+        LOG_LEVEL: warning
+        # Cross-service references resolve at deploy time.
+        # Pattern: ${hostname_varname} maps to the db service's
+        # auto-generated credentials.
+        DB_CONNECTION: pgsql
+        DB_HOST: ${db_hostname}
+        DB_PORT: ${db_port}
+        DB_DATABASE: ${db_dbName}
+        DB_USERNAME: ${db_user}
+        DB_PASSWORD: ${db_password}
+        # Database-backed sessions work out of the box with the
+        # sessions migration Laravel ships by default.
+        SESSION_DRIVER: database
+        CACHE_STORE: database
 
   # Dev — full source deployed for live editing via SSHFS.
   # PHP-FPM serves requests immediately; edit files in /var/www
   # and changes take effect on the next request — no restart.
-  - setup: app
+  - setup: dev
     build:
       # Same multi-base as prod — both PHP and Node available
       # during the build so Composer and npm can run.

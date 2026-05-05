@@ -1,10 +1,73 @@
 zerops:
-  - setup: basic-crud
+  - setup: app
     build:
-      base: php@8.4
-      deploy: ./
+      base:
+        - php@8.4
+      os: alpine
+      buildCommands:
+        - composer install --ignore-platform-reqs
+      deployFiles: ./
+      cache:
+        - vendor
+        - composer.lock
+    deploy:
+      readinessCheck:
+        httpGet:
+          port: 80
+          path: /up
     run:
-      documentRoot: public
-      ports:
-        - port: 80
-          httpSupport: true
+      base: php-nginx@8.4
+      os: alpine
+      siteConfigPath: site.conf.tmpl
+      envVariables:
+        APP_NAME: "Laravel Minimal X Zerops"
+        APP_LOCALE: en
+        APP_FAKER_LOCALE: en_US
+        APP_FALLBACK_LOCALE: en
+        APP_MAINTENANCE_DRIVER: file
+        APP_MAINTENANCE_STORE: database
+        APP_TIMEZONE: UTC
+        APP_URL: ${zeropsSubdomain}
+
+        DB_CONNECTION: pgsql
+        DB_DATABASE: db
+        DB_HOST: db
+        DB_USERNAME: ${db_user}
+        DB_PASSWORD: ${db_password}
+        DB_PORT: 5432
+
+        LOG_CHANNEL: syslog
+        LOG_LEVEL: debug
+        LOG_STACK: single
+
+        MAIL_MAILER: log
+        MAIL_HOST: 127.0.0.1
+        MAIL_PORT: 2525
+        MAIL_USERNAME: null
+        MAIL_PASSWORD: null
+        MAIL_ENCRYPTION: null
+        MAIL_FROM_ADDRESS: "hello@zerops.io"
+        MAIL_FROM_NAME: "${APP_NAME}"
+
+        SESSION_DRIVER: database
+        SESSION_LIFETIME: 120
+        SESSION_ENCRYPT: false
+        SESSION_PATH: /
+        SESSION_DOMAIN: null
+
+        BROADCAST_CONNECTION: log
+        FILESYSTEM_DISK: local
+        QUEUE_CONNECTION: database
+
+        CACHE_STORE: database
+
+      initCommands:
+        - php artisan view:cache
+        - php artisan config:cache
+        - php artisan route:cache
+        - sudo -E -u zerops -- zsc execOnce ${appVersionId} -- php artisan migrate --force
+        - php artisan optimize
+      healthCheck:
+        httpGet:
+          port: 80
+          path: /up

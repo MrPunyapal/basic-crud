@@ -1,56 +1,10 @@
 zerops:
-  # define hostname of your service
-  - setup: app
-    # ==== how to build your application ====
+  - setup: basic-crud
     build:
-      # REQUIRED. Set the base technology for the build environment:
-      base: php-nginx@8.3
-
-      # OPTIONAL. Set the operating system for the build environment.
-      # os: ubuntu
-
-      # OPTIONAL. Customize the build environment by installing additional packages
-      # or tools to the base build environment.
-      # prepareCommands:
-      #   - sudo apt-get something
-      #   - curl something else
-
-      # OPTIONAL. Build your application
-      buildCommands:
-        - composer install
-        - php artisan migrate
-
-      # REQUIRED. Select which files / folders to deploy after
-      # the build has successfully finished
-      deployFiles:
-        - vendor
-        - public
-
-      # OPTIONAL. Which files / folders you want to cache for the next build.
-      # Next builds will be faster when the cache is used.
-      # cache: vendor
-
-    # ==== how to run your application ====
+      base: php@8.4
+      deploy: ./
     run:
-      # OPTIONAL. Sets the base technology for the runtime environment:
-      base: php-nginx@8.3
-
-      # OPTIONAL. Customize the runtime PHP environment by installing additional
-      # dependencies to the base PHP runtime environment.
-      # prepareCommands:
-      #   - sudo apt-get something
-      #   - curl something else
-
-      # OPTIONAL. Run one or more commands each time a new runtime container
-      # is started or restarted. These commands are triggered before
-      # your PHP application is started.
-      # initCommands:
-      #  - rm -rf ./cache
-
-      # OPTIONAL. Customize the folder that will be used as the root of the publicly
-      # accessible web server content. Enter the path relative to the /var/www folder.
       documentRoot: public
-
-      # OPTIONAL. Sets the custom Nginx or Apache configuration. The file must be deployed in
-      # the runtime container. Enter the path to the file relative to the /var/www folder
-      # siteConfigPath: site_config.tmpl
+      ports:
+        - port: 80
+          httpSupport: true

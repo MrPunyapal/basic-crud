@@ -104,7 +104,7 @@ zerops:
   # Dev — full source deployed for live editing via SSHFS.
   # PHP-FPM serves requests immediately; edit files in /var/www
   # and changes take effect on the next request — no restart.
-  - setup: dev
+  - setup: app
     build:
       # Same multi-base as prod — both PHP and Node available
       # during the build so Composer and npm can run.

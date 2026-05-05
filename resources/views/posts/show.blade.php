@@ -1,107 +1,77 @@
-@use('App\Enums\FeaturedStatus')
 <x-layout :title="$post->title">
-    <div class="max-w-4xl mx-auto animate-fade-in">
-        <!-- Header Navigation -->
-        <div class="flex items-center justify-between mb-8">
-            <a href="{{ route('posts.index') }}" class="flex items-center space-x-2 text-slate-600 hover:text-blue-600 transition-colors duration-200 group">
-                <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform duration-200"></i>
-                <span>{{ __('posts.show.View All') }}</span>
-            </a>
+    <div class="mx-auto max-w-5xl space-y-8">
+        <div class="flex flex-col gap-6 border-b border-stone-200 pb-6 lg:flex-row lg:items-end lg:justify-between">
+            <div class="space-y-3">
+                <a href="{{ route('posts.index') }}" class="text-sm font-medium text-stone-500 transition hover:text-stone-950">{{ __('posts.show.View All') }}</a>
 
-            <!-- Action Buttons -->
-            <div class="flex items-center space-x-3">
+                <div class="flex flex-wrap items-center gap-3 text-sm text-stone-500">
+                    <span class="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 font-medium uppercase tracking-[0.16em] text-stone-600">{{ $post->category_title }}</span>
+                    <span class="rounded-full border px-3 py-1 font-medium {{ $post->is_featured->value ? 'border-red-200 bg-red-50 text-red-700' : 'border-stone-200 bg-white text-stone-600' }}">{{ $post->is_featured->label() }}</span>
+                    @if ($post->published_at)
+                        <span>Published {{ $post->published_at->format('M d, Y h:i a') }}</span>
+                    @endif
+                    <span>Updated {{ $post->updated_at->since() }}</span>
+                </div>
+
+                <div class="space-y-2">
+                    <h1 class="max-w-4xl font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl lg:text-6xl">{{ $post->title }}</h1>
+
+                    @if ($post->description)
+                        <p class="max-w-3xl text-lg leading-8 text-stone-600">{{ $post->description }}</p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
                 <form action="{{ route('posts.featured', ['post' => $post]) }}" method="POST" class="inline">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-200 hover:scale-105 {{ $post->is_featured->value ? 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200' : 'bg-slate-100 text-slate-700 hover:bg-slate-200' }}">
-                        <i class="fas {{ $post->is_featured->value ? 'fa-star' : 'fa-star-o' }}"></i>
-                        <span>{{ $post->is_featured->changeBtnLabel() }}</span>
+                    <button type="submit" class="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm font-medium transition {{ $post->is_featured->value ? 'border-amber-200 bg-amber-50 text-amber-800 hover:border-amber-300 hover:bg-amber-100' : 'border-stone-300 bg-white text-stone-700 hover:border-stone-400 hover:text-stone-950' }}">
+                        {{ $post->is_featured->changeBtnLabel() }}
                     </button>
                 </form>
-                <x-button color="blue" :href="route('posts.edit', ['post' => $post])" class="flex items-center space-x-2">
-                    <i class="fas fa-edit"></i>
-                    <span>{{ __('posts.show.Edit') }}</span>
-                </x-button>
+
+                <x-button color="blue" :href="route('posts.edit', ['post' => $post])">{{ __('posts.show.Edit') }}</x-button>
+
                 <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="POST" class="inline"
                       onsubmit="return confirm('{{ __('posts.form.Are you sure you want to delete this post?') }}')">
                     @csrf
                     @method('DELETE')
-                    <x-button color="red" type="submit" class="flex items-center space-x-2">
-                        <i class="fas fa-trash"></i>
-                        <span>{{ __('posts.show.Delete') }}</span>
-                    </x-button>
+                    <x-button color="red" type="submit">{{ __('posts.show.Delete') }}</x-button>
                 </form>
             </div>
         </div>
 
-        <!-- Main Content Card -->
-        <article class="glass rounded-2xl overflow-hidden border border-white/20 shadow-xl">
-            <!-- Featured Image -->
-            @if($post->image)
-                <div class="relative h-96 overflow-hidden">
+        <article class="overflow-hidden rounded-xl border border-stone-200 bg-white">
+            @if ($post->image)
+                <div class="overflow-hidden border-b border-stone-200 bg-stone-100" data-post-image>
                     <img src="{{ $post->image }}"
-                         class="w-full h-full object-cover"
+                         class="h-80 w-full object-cover sm:h-[28rem]"
+                         onerror="this.closest('[data-post-image]').remove()"
                          alt="{{ $post->title }}" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                    @if($post->is_featured->value)
-                        <div class="absolute top-6 right-6 bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg">
-                            <i class="fas fa-star"></i>
-                            <span>Featured</span>
-                        </div>
-                    @endif
                 </div>
             @endif
 
-            <!-- Content -->
-            <div class="p-8">
-                <!-- Post Header -->
-                <header class="mb-8">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                            {{ $post->category_title }}
-                        </div>
-                        <time class="text-slate-500 text-sm flex items-center space-x-1" datetime="{{ $post->published_at }}">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>{{ optional($post->published_at)->format('M d, Y h:i a') }}</span>
-                        </time>
-                    </div>
-
-                    <h1 class="text-4xl font-bold text-slate-800 leading-tight">
-                        {{ $post->title }}
-                    </h1>
-
-                    @if($post->description)
-                        <p class="text-xl text-slate-600 mt-4 leading-relaxed">
-                            {{ $post->description }}
-                        </p>
-                    @endif
-                </header>
-
-                <!-- Post Content -->
-                <div class="prose prose-lg max-w-none prose-headings:text-slate-800 prose-p:text-slate-700 prose-p:leading-relaxed prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-md">
+            <div class="px-6 py-8 sm:px-10 sm:py-10">
+                <div class="article-content max-w-none">
                     {!! $post->content !!}
                 </div>
             </div>
 
-            <!-- Footer -->
-            <footer class="bg-gradient-to-r from-slate-50 to-blue-50 px-8 py-6 border-t border-white/20">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <!-- Tags -->
+            <footer class="border-t border-stone-200 bg-stone-50 px-6 py-5 sm:px-10">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div class="flex flex-wrap gap-2">
                         @isset($post->tags)
                             @foreach ($post->tags as $tag)
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/70 text-slate-700 border border-slate-200 hover:bg-white/90 transition-colors duration-200">
-                                    <i class="fas fa-tag mr-1 text-xs"></i>
+                                <span class="inline-flex rounded-full border border-stone-200 bg-white px-3 py-1 text-sm font-medium text-stone-600">
                                     {{ $tag }}
                                 </span>
                             @endforeach
                         @endisset
                     </div>
 
-                    <!-- Status Badge -->
-                    <div class="flex items-center space-x-2">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium {{ $post->is_featured->value ? 'bg-gradient-to-r from-yellow-400 to-orange-400 text-white' : 'bg-slate-200 text-slate-700' }}">
-                            <i class="fas {{ $post->is_featured->value ? 'fa-star' : 'fa-file-alt' }} mr-1"></i>
+                    <div>
+                        <span class="inline-flex rounded-full border px-3 py-1 text-sm font-medium {{ $post->is_featured->value ? 'border-red-200 bg-red-50 text-red-700' : 'border-stone-200 bg-white text-stone-600' }}">
                             {{ $post->is_featured->label() }}
                         </span>
                     </div>

@@ -1,5 +1,5 @@
 <label
-    {{ $attributes->merge(['class' => 'text-sm/6 font-medium text-zinc-950']) }}
+    {{ $attributes->merge(['class' => 'text-sm font-medium text-stone-800']) }}
 >
     {{ $slot }}
 </label>

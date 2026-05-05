@@ -1,34 +1,21 @@
 <x-layout :title="__('posts.form.Create Post')">
-    <div class="max-w-4xl mx-auto">
-        <!-- Header -->
-        <div class="mb-8">
-            <div class="flex items-center space-x-3 mb-4">
-                <a href="{{ route('posts.index') }}" class="flex items-center space-x-2 text-slate-600 hover:text-blue-600 transition-colors duration-200">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Back to Posts</span>
-                </a>
+    <div class="mx-auto max-w-5xl space-y-8">
+        <div class="border-b border-stone-200 pb-6">
+            <a href="{{ route('posts.index') }}" class="text-sm font-medium text-stone-500 transition hover:text-stone-950">Back to posts</a>
+
+            <div class="mt-4">
+                <h1 class="font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl">{{ __('posts.form.Create Post') }}</h1>
             </div>
-            <h1 class="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                {{ __('posts.form.Create Post') }}
-            </h1>
-            <p class="text-slate-600 mt-2">Create a new blog post and share your thoughts</p>
         </div>
 
-        <!-- Form Card -->
-        <div class="glass rounded-2xl p-8 border border-white/20 animate-fade-in">
-            <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
+            <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8 p-6 sm:p-8">
                 @csrf
                 @include('posts._form', ['categories' => $categories, 'tags' => $tags])
 
-                <div class="flex items-center gap-4 pt-6 border-t border-white/20">
-                    <x-button color="green" class="flex items-center space-x-2">
-                        <i class="fas fa-save"></i>
-                        <span>{{ __('posts.form.Save Post') }}</span>
-                    </x-button>
-                    <x-button href="{{ route('posts.index') }}" color="zinc" class="flex items-center space-x-2">
-                        <i class="fas fa-times"></i>
-                        <span>{{ __('posts.form.Cancel') }}</span>
-                    </x-button>
+                <div class="flex flex-wrap items-center gap-3 border-t border-stone-200 pt-6">
+                    <x-button color="green">{{ __('posts.form.Save Post') }}</x-button>
+                    <x-button href="{{ route('posts.index') }}" color="zinc">{{ __('posts.form.Cancel') }}</x-button>
                 </div>
             </form>
         </div>

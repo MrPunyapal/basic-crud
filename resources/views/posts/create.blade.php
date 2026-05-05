@@ -3,14 +3,12 @@
         <div class="border-b border-stone-200 pb-6">
             <a href="{{ route('posts.index') }}" class="text-sm font-medium text-stone-500 transition hover:text-stone-950">Back to posts</a>
 
-            <div class="mt-4 space-y-3">
-                <p class="text-xs font-medium uppercase tracking-[0.24em] text-red-600">Publishing</p>
+            <div class="mt-4">
                 <h1 class="font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl">{{ __('posts.form.Create Post') }}</h1>
-                <p class="max-w-2xl text-base leading-7 text-stone-600">Create a new entry with a clear structure, concise metadata, and a headline that feels deliberate.</p>
             </div>
         </div>
 
-        <div class="overflow-hidden rounded-[2rem] border border-stone-200 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
             <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8 p-6 sm:p-8">
                 @csrf
                 @include('posts._form', ['categories' => $categories, 'tags' => $tags])

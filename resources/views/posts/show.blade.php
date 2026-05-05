@@ -1,7 +1,7 @@
 <x-layout :title="$post->title">
     <div class="mx-auto max-w-5xl space-y-8">
-        <div class="flex flex-col gap-6 border-b border-stone-200 pb-8 lg:flex-row lg:items-end lg:justify-between">
-            <div class="space-y-4">
+        <div class="flex flex-col gap-6 border-b border-stone-200 pb-6 lg:flex-row lg:items-end lg:justify-between">
+            <div class="space-y-3">
                 <a href="{{ route('posts.index') }}" class="text-sm font-medium text-stone-500 transition hover:text-stone-950">{{ __('posts.show.View All') }}</a>
 
                 <div class="flex flex-wrap items-center gap-3 text-sm text-stone-500">
@@ -13,7 +13,7 @@
                     <span>Updated {{ $post->updated_at->since() }}</span>
                 </div>
 
-                <div class="space-y-3">
+                <div class="space-y-2">
                     <h1 class="max-w-4xl font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl lg:text-6xl">{{ $post->title }}</h1>
 
                     @if ($post->description)
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <article class="overflow-hidden rounded-[2rem] border border-stone-200 bg-white shadow-sm">
+        <article class="overflow-hidden rounded-xl border border-stone-200 bg-white">
             @if ($post->image)
                 <div class="overflow-hidden border-b border-stone-200 bg-stone-100" data-post-image>
                     <img src="{{ $post->image }}"

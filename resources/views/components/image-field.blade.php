@@ -32,7 +32,6 @@
         <button type="button" class="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-4 py-2 text-sm font-medium text-stone-700 shadow-sm transition hover:border-stone-400 hover:text-stone-950">
             Upload image
         </button>
-        <p class="text-sm text-stone-500">PNG, JPG, or WEBP. A preview appears here after selection.</p>
     </div>
 </div>
 

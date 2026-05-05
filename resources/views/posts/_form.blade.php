@@ -1,10 +1,7 @@
 @use('App\Enums\FeaturedStatus')
 <div class="grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)]">
-    <section class="rounded-[1.75rem] border border-stone-200 bg-stone-50/70 p-5 sm:p-6">
-        <div class="space-y-1">
-            <h2 class="text-base font-semibold text-stone-950">Story</h2>
-            <p class="text-sm leading-6 text-stone-600">Set the headline, summary, and body copy for this post.</p>
-        </div>
+    <section class="rounded-xl border border-stone-200 bg-stone-50 p-5 sm:p-6">
+        <h2 class="text-base font-semibold text-stone-950">Story</h2>
 
         <div class="mt-6 space-y-5">
             <x-field>
@@ -13,7 +10,7 @@
                     id="title"
                     name="title"
                     :value="old('title', $post->title ?? null)"
-                    placeholder="A title worth opening"
+                    placeholder="Title"
                 />
                 @error('title')
                     <x-error-message>{{ $message }}</x-error-message>
@@ -39,7 +36,7 @@
                     id="description"
                     multiline
                     name="description"
-                    placeholder="A concise description that earns the scroll."
+                    placeholder="Description"
                 >{{ old('description', $post->description ?? null) }}</x-text-field>
                 @error('description')
                     <x-error-message>{{ $message }}</x-error-message>
@@ -60,11 +57,8 @@
     </section>
 
     <div class="space-y-6">
-        <section class="rounded-[1.75rem] border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
-            <div class="space-y-1">
-                <h2 class="text-base font-semibold text-stone-950">Publishing</h2>
-                <p class="text-sm leading-6 text-stone-600">Organize the post and decide how prominently it should appear.</p>
-            </div>
+        <section class="rounded-xl border border-stone-200 bg-white p-5 sm:p-6">
+            <h2 class="text-base font-semibold text-stone-950">Publishing</h2>
 
             <div class="mt-6 space-y-5">
                 <x-field>
@@ -106,10 +100,7 @@
                                     name="is_featured"
                                     value="{{ $featuredStatus->value }}"
                                     @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
-                                <span class="space-y-1">
-                                    <span class="block text-sm font-medium text-stone-900">{{ $featuredStatus->label() }}</span>
-                                    <span class="block text-sm leading-6 text-stone-500">{{ $featuredStatus->value ? 'Keep this post prominent in the archive and detail view.' : 'Show this post as a standard entry in the archive.' }}</span>
-                                </span>
+                                <span class="block text-sm font-medium text-stone-900">{{ $featuredStatus->label() }}</span>
                             </label>
                         @endforeach
                     </div>
@@ -131,7 +122,6 @@
                             @endif
                         @endforeach
                     </x-select>
-                    <p class="text-sm leading-6 text-stone-500">Hold Ctrl or Cmd to select multiple tags.</p>
                     @error('tags')
                         <x-error-message>{{ $message }}</x-error-message>
                     @enderror
@@ -139,11 +129,8 @@
             </div>
         </section>
 
-        <section class="rounded-[1.75rem] border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
-            <div class="space-y-1">
-                <h2 class="text-base font-semibold text-stone-950">Cover image</h2>
-                <p class="text-sm leading-6 text-stone-600">Upload an image that introduces the post without overpowering the copy.</p>
-            </div>
+        <section class="rounded-xl border border-stone-200 bg-white p-5 sm:p-6">
+            <h2 class="text-base font-semibold text-stone-950">Cover image</h2>
 
             <div class="mt-6">
                 <x-image-field id="image" name="image" :value="isset($post) ? $post->image : null" />

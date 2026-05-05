@@ -1,14 +1,9 @@
 @inject('queryResolver', 'App\Support\QueryResolver')
 <x-layout :title="__('posts.index.Posts')">
     <div class="space-y-8">
-        <section class="space-y-6 border-b border-stone-200 pb-8 lg:flex lg:items-end lg:justify-between lg:gap-8 lg:space-y-0">
-            <div class="space-y-4">
-                <p class="text-xs font-medium uppercase tracking-[0.24em] text-red-600">Content desk</p>
-                <div class="space-y-3">
-                    <h1 class="max-w-3xl font-serif text-5xl tracking-tight text-stone-950 sm:text-6xl">{{ __('posts.index.Posts') }}</h1>
-                    <p class="max-w-2xl text-base leading-7 text-stone-600">An editorial archive for every entry in your CRUD, designed with clearer hierarchy, calmer surfaces, and less visual noise.</p>
-                </div>
-                <p class="text-sm text-stone-500">{{ $posts->total() }} total entries in the archive.</p>
+        <section class="space-y-6 border-b border-stone-200 pb-6 lg:flex lg:items-end lg:justify-between lg:gap-8 lg:space-y-0">
+            <div>
+                <h1 class="font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl">{{ __('posts.index.Posts') }}</h1>
             </div>
 
             <div class="flex w-full flex-col gap-3 sm:flex-row sm:items-center lg:w-auto lg:justify-end">
@@ -38,17 +33,7 @@
             </div>
         @endsession
 
-        <div class="overflow-hidden rounded-[2rem] border border-stone-200 bg-white shadow-sm">
-            <div class="border-b border-stone-200 px-6 py-4 sm:px-8">
-                <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                        <h2 class="text-lg font-semibold text-stone-950">Archive</h2>
-                        <p class="text-sm text-stone-500">Sort by title, featured status, or created date from the table header.</p>
-                    </div>
-                    <a href="{{ route('posts.create') }}" class="text-sm font-medium text-red-600 transition hover:text-red-700">Create a new post</a>
-                </div>
-            </div>
-
+        <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-stone-200 text-sm">
                     <thead class="bg-stone-50/80 text-left text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
@@ -176,7 +161,7 @@
         </div>
 
         @if ($posts->hasPages())
-            <div class="rounded-[2rem] border border-stone-200 bg-white p-4 shadow-sm sm:p-6">
+            <div class="rounded-xl border border-stone-200 bg-white p-4 sm:p-6">
                 {{ $posts->links() }}
             </div>
         @endif

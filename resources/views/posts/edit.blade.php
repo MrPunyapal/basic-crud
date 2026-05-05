@@ -7,14 +7,12 @@
                 <a href="{{ route('posts.index') }}" class="transition hover:text-stone-950">All posts</a>
             </div>
 
-            <div class="mt-4 space-y-3">
-                <p class="text-xs font-medium uppercase tracking-[0.24em] text-red-600">Revision</p>
+            <div class="mt-4">
                 <h1 class="font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl">{{ __('posts.form.Edit Post') }}</h1>
-                <p class="max-w-2xl text-base leading-7 text-stone-600">Refine the structure, tighten the metadata, and adjust the final presentation before publishing.</p>
             </div>
         </div>
 
-        <div class="overflow-hidden rounded-[2rem] border border-stone-200 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
             <form action="{{ route('posts.update', [$post]) }}" method="POST" enctype="multipart/form-data" class="space-y-8 p-6 sm:p-8">
                 @csrf
                 @method('PUT')

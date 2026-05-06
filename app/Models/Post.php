@@ -18,6 +18,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Mews\Purifier\Casts\CleanHtmlInput;
+use App\Enums\PostStatus;
 use Override;
 
 /**
@@ -30,6 +31,7 @@ use Override;
  * @property UploadedFile|string|null $image
  * @property string $content
  * @property Carbon|null $published_at
+ * @property PostStatus $status
  * @property int $category_id
  * @property array<string>|null $tags
  * @property FeaturedStatus $is_featured
@@ -48,6 +50,7 @@ use Override;
     'image',
     'content',
     'published_at',
+    'status',
     'category_id',
     'tags',
     'is_featured',
@@ -125,6 +128,7 @@ final class Post extends Model
             'published_at' => 'datetime',
             'is_featured' => FeaturedStatus::class,
             'content' => CleanHtmlInput::class,
+            'status' => PostStatus::class,
         ];
     }
 }

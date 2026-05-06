@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Enums\PostStatus;
 use App\Traits\HasFileFromUrl;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 use Override;
 
 final class StorePostRequest extends FormRequest
@@ -35,6 +37,7 @@ final class StorePostRequest extends FormRequest
             'image' => ['required', 'image'],
             'content' => ['required'],
             'published_at' => ['nullable', 'date'],
+            'status' => ['required', 'string', new Enum(PostStatus::class)],
             'category_id' => [
                 'required',
                 'exists:categories,id',

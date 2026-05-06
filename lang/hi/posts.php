@@ -29,6 +29,10 @@ return [
         'Update Post' => 'पोस्ट अपडेट करें',
         'Cancel' => 'रद करना',
     ],
+    'status' => [
+        'Draft' => 'मसौदा',
+        'Published' => 'प्रकाशित',
+    ],
     'show' => [
         'Not Featured' => 'विशेष रुप से प्रदर्शित नहीं',
         'Featured' => 'विशेष रुप से प्रदर्शित',
@@ -50,5 +54,7 @@ return [
         'Post deleted successfully' => 'पोस्ट सफलतापूर्वक हटा दी गई।',
         'Post featured successfully' => 'पोस्ट सफलतापूर्वक विशेष रुप से प्रदर्शित की गई।',
         'Post unfeatured successfully' => 'पोस्ट सफलतापूर्वक विशेष रुप से प्रदर्शित नहीं की गई।',
+    ],
+];
     ],
 ];

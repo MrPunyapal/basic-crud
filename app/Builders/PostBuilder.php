@@ -24,13 +24,6 @@ final class PostBuilder extends Builder
         return $this;
     }
 
-    public function sortBy(string $column, SortDirection $direction = SortDirection::Ascending): static
-    {
-        $this->orderBy($column, $direction);
-
-        return $this;
-    }
-
     public function published(): static
     {
         $this->where('published_at', '<=', now());
@@ -50,7 +43,7 @@ final class PostBuilder extends Builder
         })->when(
             in_array($filters->get('sortBy'), PostSortColumnsEnum::columns(), true),
             function (PostBuilder $query) use ($filters): void {
-                $query->sortBy($filters->string('sortBy')->toString(), match ($filters->string('direction')->toString()) {
+                $query->orderBy($filters->string('sortBy')->toString(), match ($filters->string('direction')->toString()) {
                     'asc' => SortDirection::Ascending,
                     'desc' => SortDirection::Descending,
                     default => SortDirection::Ascending,

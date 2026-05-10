@@ -8,6 +8,7 @@ use App\Enums\PostSortColumnsEnum;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Fluent;
+use SortDirection;
 
 /**
  * @template TModelClass of \App\Models\Post
@@ -23,7 +24,7 @@ final class PostBuilder extends Builder
         return $this;
     }
 
-    public function sortBy(string $column, string $direction = 'asc'): static
+    public function sortBy(string $column, SortDirection $direction = SortDirection::Ascending): static
     {
         $this->orderBy($column, $direction);
 
@@ -49,7 +50,11 @@ final class PostBuilder extends Builder
         })->when(
             in_array($filters->get('sortBy'), PostSortColumnsEnum::columns(), true),
             function (PostBuilder $query) use ($filters): void {
-                $query->sortBy($filters->string('sortBy')->toString(), $filters->string('direction')->toString());
+                $query->sortBy($filters->string('sortBy')->toString(), match ($filters->string('direction')->toString()) {
+                    'asc' => SortDirection::Ascending,
+                    'desc' => SortDirection::Descending,
+                    default => SortDirection::Ascending,
+                });
             },
             function (PostBuilder $query): void {
                 $query->latest();

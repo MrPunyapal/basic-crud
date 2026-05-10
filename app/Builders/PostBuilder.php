@@ -19,7 +19,7 @@ final class PostBuilder extends Builder
 {
     public function search(string $search): static
     {
-        $this->where('title', 'like', '%'.$search.'%');
+        $this->whereLike('title', '%'.$search.'%');
 
         return $this;
     }

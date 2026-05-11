@@ -26,7 +26,7 @@ final class PostBuilder extends Builder
 
     public function published(): static
     {
-        $this->wherePast('published_at');
+        $this->whereNowOrPast('published_at');
 
         return $this;
     }

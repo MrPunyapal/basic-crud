@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Schema;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+// use Illuminate\Support\Facades\Schema;
 
 final class DatabaseSeeder extends Seeder
 {

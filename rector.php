@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Set\LaravelSetList;
+use RectorPest\Set\PestLevelSetList;
 use RectorPest\Set\PestSetList;
 
 return RectorConfig::configure()
@@ -37,6 +38,8 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_CONTAINER_STRING_TO_FULLY_QUALIFIED_NAME,
         LaravelSetList::LARAVEL_ARRAYACCESS_TO_METHOD_CALL,
         LaravelSetList::LARAVEL_COLLECTION,
+        PestLevelSetList::UP_TO_PEST_40,
         PestSetList::PEST_CODE_QUALITY,
+        PestSetList::PEST_CHAIN,
     ])
     ->withImportNames(importDocBlockNames: false);

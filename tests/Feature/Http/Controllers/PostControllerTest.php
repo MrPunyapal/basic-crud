@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Enums\PostStatus;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\UploadedFile;
@@ -111,6 +112,7 @@ test('can see create post page', function (): void {
         ->assertViewHasAll([
             'categories',
             'tags',
+            'statuses',
         ]);
 });
 
@@ -125,6 +127,7 @@ test('can create post', function (): void {
         'category_id' => $category->id,
         'description' => 'this is the description',
         'content' => 'this is the content',
+        'status' => PostStatus::Draft->value,
         'tags' => ['Eloquent'],
     ])
         ->assertRedirect(route('posts.index', ['published' => true]))
@@ -144,6 +147,7 @@ test('cannot create post with invalid data', function (): void {
             'category_id',
             'description',
             'content',
+            'status',
         ]);
 });
 
@@ -168,6 +172,7 @@ test('can see edit post page', function (): void {
             'post',
             'categories',
             'tags',
+            'statuses',
         ]);
 });
 
@@ -186,6 +191,7 @@ test('can edit post', function (): void {
         'category_id' => $CategoryId,
         'description' => 'this is the description',
         'content' => 'this is the content',
+        'status' => PostStatus::Published->value,
         'tags' => ['Eloquent'],
     ])
         ->assertRedirect(route('posts.index', ['sortBy' => 'title', 'direction' => 'asc']))

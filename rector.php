@@ -16,8 +16,8 @@ return RectorConfig::configure()
         __DIR__.'/public',
         __DIR__.'/tests',
     ])
-    ->withPhpSets(php83: true)
-    ->withPhpVersion(PhpVersion::PHP_83)
+    ->withPhpSets(php84: true)
+    ->withPhpVersion(PhpVersion::PHP_84)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,

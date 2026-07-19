@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
+use Pest\Rector\Set\PestSetList;
 use Rector\Config\RectorConfig;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Set\LaravelSetList;
-use RectorPest\Set\PestLevelSetList;
-use RectorPest\Set\PestSetList;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -17,8 +16,8 @@ return RectorConfig::configure()
         __DIR__.'/public',
         __DIR__.'/tests',
     ])
-    ->withPhpSets(php83: true)
-    ->withPhpVersion(PhpVersion::PHP_83)
+    ->withPhpSets(php84: true)
+    ->withPhpVersion(PhpVersion::PHP_84)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
@@ -38,8 +37,6 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_CONTAINER_STRING_TO_FULLY_QUALIFIED_NAME,
         LaravelSetList::LARAVEL_ARRAYACCESS_TO_METHOD_CALL,
         LaravelSetList::LARAVEL_COLLECTION,
-        PestLevelSetList::UP_TO_PEST_40,
-        PestSetList::PEST_CODE_QUALITY,
-        PestSetList::PEST_CHAIN,
+        PestSetList::CODING_STYLE,
     ])
     ->withImportNames(importDocBlockNames: false);

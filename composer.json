@@ -8,7 +8,7 @@
         "best practices",
         "example",
         "laravel",
-        "laravel 12",
+        "laravel 13",
         "phpstan",
         "pest",
         "pint",
@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "guzzlehttp/guzzle": "^7.10.4",
         "laravel/framework": "^13.11.2",
         "laravel/sanctum": "^4.3.2",
@@ -42,14 +42,14 @@
         "laravel/pint": "^1.29.1",
         "laravel/sail": "^1.60",
         "mockery/mockery": "^1.6.12",
-        "mrpunyapal/peststan": "^0.2.10",
-        "mrpunyapal/rector-pest": "^0.2.15",
         "nunomaduro/collision": "^8.9.4",
-        "pestphp/pest": "^4.7.0",
-        "pestphp/pest-plugin-laravel": "^4.1",
-        "pestphp/pest-plugin-type-coverage": "^4.0.4",
+        "pestphp/pest": "^5.0",
+        "pestphp/pest-plugin-laravel": "^5.0",
+        "pestphp/pest-plugin-type-coverage": "^5.0",
+        "pestphp/pest-plugin-rector": "^5.0",
+        "pestphp/pest-plugin-phpstan": "^5.0",
         "phpstan/phpstan": "^2.1.55",
-        "phpunit/phpunit": "^12.5.24",
+        "phpunit/phpunit": "^13.2.4",
         "rector/rector": "^2.4.4"
     },
     "autoload": {

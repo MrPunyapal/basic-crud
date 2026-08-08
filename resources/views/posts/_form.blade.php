@@ -6,12 +6,7 @@
         <div class="mt-6 space-y-5">
             <x-field>
                 <x-label for="title">{{ __('posts.form.Title') }}</x-label>
-                <x-text-field
-                    id="title"
-                    name="title"
-                    :value="old('title', $post->title ?? null)"
-                    placeholder="Title"
-                />
+                <x-text-field id="title" name="title" :value="old('title', $post->title ?? null)" placeholder="Title" />
                 @error('title')
                     <x-error-message>{{ $message }}</x-error-message>
                 @enderror
@@ -46,7 +41,12 @@
             <x-field>
                 <x-label for="content">{{ __('posts.form.Content') }}</x-label>
                 <div class="rounded-[1.5rem] border border-stone-300 bg-white p-4 shadow-sm focus-within:border-red-500 focus-within:ring-4 focus-within:ring-red-500/10">
-                    <input id="content" type="hidden" name="content" value="{{ old('content', $post->content ?? null) }}">
+                    <input
+                        id="content"
+                        type="hidden"
+                        name="content"
+                        value="{{ old('content', $post->content ?? null) }}"
+                    />
                     <trix-editor input="content" class="text-base leading-7 text-stone-800"></trix-editor>
                 </div>
                 @error('content')
@@ -66,7 +66,10 @@
                     <x-select id="category_id" name="category_id">
                         <option value="">{{ __('posts.form.Select a Category') }}</option>
                         @foreach ($categories as $key => $category)
-                            <option value="{{ $key }}" @selected(old('category_id', $post->category_id ?? null) == $key)>
+                            <option
+                                value="{{ $key }}"
+                                @selected(old('category_id', $post->category_id ?? null) === $key)
+                            >
                                 {{ $category }}
                             </option>
                         @endforeach
@@ -94,12 +97,14 @@
                     <div class="grid gap-3 sm:grid-cols-2">
                         @foreach (FeaturedStatus::cases() as $featuredStatus)
                             <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-stone-200 bg-stone-50 p-4 transition hover:border-stone-300 hover:bg-white">
-                                <input id="is_featured_{{ $featuredStatus->name }}"
+                                <input
+                                    id="is_featured_{{ $featuredStatus->name }}"
                                     class="mt-1 h-4 w-4 border-stone-300 text-red-600 focus:ring-red-500"
                                     type="radio"
                                     name="is_featured"
                                     value="{{ $featuredStatus->value }}"
-                                    @checked(old('is_featured', $post->is_featured->value ?? null) == $featuredStatus->value)>
+                                    @checked(old('is_featured', $post->is_featured->value ?? null) === $featuredStatus->value)
+                                />
                                 <span class="block text-sm font-medium text-stone-900">{{ $featuredStatus->label() }}</span>
                             </label>
                         @endforeach
@@ -110,15 +115,13 @@
                     <x-label for="tags">{{ __('posts.form.Tags') }}</x-label>
                     <x-select id="tags" name="tags[]" multiple size="8" class="min-h-40">
                         @foreach ($tags as $tag)
-                            <option value="{{ $tag }}" @selected(in_array($tag, old('tags', $post->tags ?? [])))>
+                            <option value="{{ $tag }}" @selected(in_array($tag, old('tags', $post->tags ?? []), true))>
                                 {{ $tag }}
                             </option>
                         @endforeach
                         @foreach (old('tags', $post->tags ?? []) as $tag)
-                            @if (!in_array($tag, $tags))
-                                <option value="{{ $tag }}" selected>
-                                    {{ $tag }}
-                                </option>
+                            @if (! in_array($tag, $tags, true))
+                                <option value="{{ $tag }}" selected>{{ $tag }}</option>
                             @endif
                         @endforeach
                     </x-select>
@@ -152,13 +155,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('#title').addEventListener('blur', function() {
+            document.querySelector('#title').addEventListener('blur', function () {
                 document.querySelector('#slug').value = slugify(this.value);
             });
         });
 
         function slugify(text) {
-            return text.toString().toLowerCase().trim()
+            return text
+                .toString()
+                .toLowerCase()
+                .trim()
                 .replace(/\s+/g, '-') // Replace spaces with -
                 .replace(/[^\w-]+/g, '') // Remove all non-word chars
                 .replace(/--+/g, '-') // Replace multiple - with single -

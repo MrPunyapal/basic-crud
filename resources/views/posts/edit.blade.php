@@ -8,12 +8,19 @@
             </div>
 
             <div class="mt-4">
-                <h1 class="font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl">{{ __('posts.form.Edit Post') }}</h1>
+                <h1 class="font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl">
+                    {{ __('posts.form.Edit Post') }}
+                </h1>
             </div>
         </div>
 
         <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
-            <form action="{{ route('posts.update', [$post]) }}" method="POST" enctype="multipart/form-data" class="space-y-8 p-6 sm:p-8">
+            <form
+                action="{{ route('posts.update', [$post]) }}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="space-y-8 p-6 sm:p-8"
+            >
                 @csrf
                 @method('PUT')
                 @include('posts._form', ['post' => $post, 'categories' => $categories, 'tags' => $tags])

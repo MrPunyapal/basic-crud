@@ -1,6 +1,7 @@
 {
     "preset": "laravel",
     "rules": {
+        "Pint/laravel_blade": true,
         "declare_strict_types": true,
         "strict_param": true,
         "strict_comparison": true,

@@ -19,60 +19,60 @@
             width="20"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <path d="M280 360c0 13.3-10.7 24-24 24s-24-10.7-24-24V81.9l-95 95c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L239 7c9.4-9.4 24.6-9.4 33.9 0L409 143c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-95-95V360zm32-8V304H448c35.3 0 64 28.7 64 64v80c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V368c0-35.3 28.7-64 64-64H200v48H64c-8.8 0-16 7.2-16 16v80c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V368c0-8.8-7.2-16-16-16H312zm72 56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/>
+            <path d="M280 360c0 13.3-10.7 24-24 24s-24-10.7-24-24V81.9l-95 95c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L239 7c9.4-9.4 24.6-9.4 33.9 0L409 143c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-95-95V360zm32-8V304H448c35.3 0 64 28.7 64 64v80c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V368c0-35.3 28.7-64 64-64H200v48H64c-8.8 0-16 7.2-16 16v80c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V368c0-8.8-7.2-16-16-16H312zm72 56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
         </svg>
         @if ($value)
-            <img
-                class="absolute inset-0 size-full object-cover"
-                src="{{ $value }}"
-            />
+            <img class="absolute inset-0 size-full object-cover" src="{{ $value }}" />
         @endif
     </div>
     <div class="space-y-2">
-        <button type="button" class="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-4 py-2 text-sm font-medium text-stone-700 shadow-sm transition hover:border-stone-400 hover:text-stone-950">
+        <button
+            type="button"
+            class="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-4 py-2 text-sm font-medium text-stone-700 shadow-sm transition hover:border-stone-400 hover:text-stone-950"
+        >
             Upload image
         </button>
     </div>
 </div>
 
 <script>
-    (function  () {
-        const scope = document.querySelector('#{{ $componentId }}')
+    (function () {
+        const scope = document.querySelector('#{{ $componentId }}');
 
-        const buttonEl = scope.querySelector('button')
-        const inputEl = scope.querySelector('input')
-        const previewContainerEl = scope.querySelector('[data-preview-container]')
+        const buttonEl = scope.querySelector('button');
+        const inputEl = scope.querySelector('input');
+        const previewContainerEl = scope.querySelector('[data-preview-container]');
 
         buttonEl.addEventListener('click', () => {
-            inputEl.click()
-        })
+            inputEl.click();
+        });
 
-        let previewObjectURL = null
+        let previewObjectURL = null;
 
         inputEl.addEventListener('change', (e) => {
             if (previewObjectURL !== null) {
-                previewContainerEl.querySelector('[data-preview]')?.remove()
+                previewContainerEl.querySelector('[data-preview]')?.remove();
 
-                URL.revokeObjectURL(previewObjectURL)
+                URL.revokeObjectURL(previewObjectURL);
 
-                previewObjectURL = null
+                previewObjectURL = null;
             }
 
-            const file = e.target.files[0]
+            const file = e.target.files[0];
 
             if (file === undefined) {
-                return
+                return;
             }
 
-            previewObjectURL = URL.createObjectURL(file)
+            previewObjectURL = URL.createObjectURL(file);
 
-            const imageEl = document.createElement('img')
+            const imageEl = document.createElement('img');
 
-            imageEl.className = 'absolute inset-0 size-full object-cover'
-            imageEl.dataset.preview = ''
-            imageEl.src = previewObjectURL
+            imageEl.className = 'absolute inset-0 size-full object-cover';
+            imageEl.dataset.preview = '';
+            imageEl.src = previewObjectURL;
 
-            previewContainerEl.appendChild(imageEl)
-        })
-    })()
+            previewContainerEl.appendChild(imageEl);
+        });
+    })();
 </script>

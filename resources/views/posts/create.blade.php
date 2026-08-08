@@ -1,15 +1,25 @@
 <x-layout :title="__('posts.form.Create Post')">
     <div class="mx-auto max-w-5xl space-y-8">
         <div class="border-b border-stone-200 pb-6">
-            <a href="{{ route('posts.index') }}" class="text-sm font-medium text-stone-500 transition hover:text-stone-950">Back to posts</a>
+            <a
+                href="{{ route('posts.index') }}"
+                class="text-sm font-medium text-stone-500 transition hover:text-stone-950"
+            >Back to posts</a>
 
             <div class="mt-4">
-                <h1 class="font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl">{{ __('posts.form.Create Post') }}</h1>
+                <h1 class="font-serif text-4xl tracking-tight text-stone-950 sm:text-5xl">
+                    {{ __('posts.form.Create Post') }}
+                </h1>
             </div>
         </div>
 
         <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
-            <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8 p-6 sm:p-8">
+            <form
+                action="{{ route('posts.store') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="space-y-8 p-6 sm:p-8"
+            >
                 @csrf
                 @include('posts._form', ['categories' => $categories, 'tags' => $tags])
 

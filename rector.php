@@ -23,6 +23,7 @@ return RectorConfig::configure()
         codeQuality: true,
         codingStyle: true,
         typeDeclarations: true,
+        typeDeclarationDocblocks: true,
         privatization: true,
         instanceOf: true,
         earlyReturn: true,
@@ -37,6 +38,7 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_CONTAINER_STRING_TO_FULLY_QUALIFIED_NAME,
         LaravelSetList::LARAVEL_ARRAYACCESS_TO_METHOD_CALL,
         LaravelSetList::LARAVEL_COLLECTION,
+        LaravelSetList::LARAVEL_TYPE_DECLARATIONS,
         PestSetList::CODING_STYLE,
     ])
     ->withImportNames(importDocBlockNames: false);

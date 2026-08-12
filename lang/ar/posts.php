@@ -10,6 +10,8 @@ return [
         'Image' => 'الصورة',
         'Category' => 'التصنيف',
         'Select a Category' => 'اختر التصنيف',
+        'Status' => 'الحالة',
+        'Select a Status' => 'اختر الحالة',
         'Description' => 'الوصف',
         'Tags' => 'الوسوم',
         'Featured' => 'مميز',
@@ -28,6 +30,10 @@ return [
         'Edit Post' => 'تعديل المقال',
         'Update Post' => 'تعديل المقال',
         'Cancel' => 'إلغاء',
+    ],
+    'status' => [
+        'Draft' => 'مسودة',
+        'Published' => 'منشور',
     ],
     'show' => [
         'Not Featured' => 'غير مميز',

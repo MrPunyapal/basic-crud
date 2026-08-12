@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Support\QueryResolver;
 use App\Support\Settings;
+use App\Enums\PostStatus;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -44,6 +45,7 @@ final class PostController
         return view('posts.create', [
             'categories' => Category::query()->pluck('title', 'id'),
             'tags' => Settings::getTags(),
+            'statuses' => PostStatus::cases(),
         ]);
     }
 
@@ -77,6 +79,7 @@ final class PostController
             'post' => $post,
             'categories' => Category::query()->pluck('title', 'id'),
             'tags' => Settings::getTags(),
+            'statuses' => PostStatus::cases(),
         ]);
     }
 

@@ -11,6 +11,8 @@ return [
         'Image' => 'છબી',
         'Category' => 'વર્ગ',
         'Select a Category' => 'એક વર્ગ પસંદ કરો',
+        'Status' => 'સ્થિતિ',
+        'Select a Status' => 'એક સ્થિતિ પસંદ કરો',
         'Description' => 'વર્ણન',
         'Tags' => 'ટેગ્સ',
         'Featured' => 'ફિચર્ડ',
@@ -29,6 +31,10 @@ return [
         'Edit Post' => 'પોસ્ટ સંપાદિત કરો',
         'Update Post' => 'પોસ્ટ અપડેટ કરો',
         'Cancel' => 'રદ કરો',
+    ],
+    'status' => [
+        'Draft' => 'ડ્રાફ્ટ',
+        'Published' => 'પ્રકાશિત',
     ],
     'show' => [
         'Not Featured' => 'ફિચર્ડ નથી',

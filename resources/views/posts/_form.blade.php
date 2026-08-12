@@ -62,6 +62,20 @@
 
             <div class="mt-6 space-y-5">
                 <x-field>
+                    <x-label for="status">{{ __('posts.form.Status') }}</x-label>
+                    <x-select id="status" name="status">
+                        <option value="">{{ __('posts.form.Select a Status') }}</option>
+                        @foreach ($statuses as $status)
+                            <option value="{{ $status->value }}" @selected(old('status', $post->status?->value ?? null) == $status->value)>
+                                {{ $status->label() }}
+                            </option>
+                        @endforeach
+                    </x-select>
+                    @error('status')
+                        <x-error-message>{{ $message }}</x-error-message>
+                    @enderror
+                </x-field>
+                <x-field>
                     <x-label for="category_id">{{ __('posts.form.Category') }}</x-label>
                     <x-select id="category_id" name="category_id">
                         <option value="">{{ __('posts.form.Select a Category') }}</option>

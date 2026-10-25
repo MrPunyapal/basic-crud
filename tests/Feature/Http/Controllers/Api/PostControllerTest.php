@@ -30,7 +30,7 @@ it('returns filtered posts based on search parameter', function (): void {
         'title' => 'Test Post A',
         'published_at' => now()->subDay(),
     ]);
-    $postB = Post::factory()->create([
+    Post::factory()->create([
         'title' => 'Another Post B',
         'published_at' => now()->addDay(),
     ]);
@@ -49,7 +49,7 @@ it('returns filtered posts based on published parameter', function (): void {
         'title' => 'Test Post A',
         'published_at' => now()->subDay(),
     ]);
-    $postB = Post::factory()->create([
+    Post::factory()->create([
         'title' => 'Another Post B',
         'published_at' => now()->addDay(),
     ]);
@@ -84,11 +84,11 @@ it('can sort posts by specified column and direction', function (): void {
 
 it('returns posts with default sorting when sort column is invalid', function (): void {
     $user = User::factory()->create();
-    $postA = Post::factory()->create([
+    Post::factory()->create([
         'title' => 'Test Post A',
         'published_at' => now()->subDay(),
     ]);
-    $postB = Post::factory()->create([
+    Post::factory()->create([
         'title' => 'Another Post B',
         'published_at' => now()->addDay(),
     ]);
@@ -129,14 +129,14 @@ it('combines multiple filter parameters', function (): void {
 });
 
 it('can create a new post', function (): void {
-    $data = Post::factory()->make()->toArray();
+    $post = Post::factory()->make();
 
-    $this->postJson(action([PostController::class, 'store']), $data)
+    $this->postJson(action([PostController::class, 'store']), $post->toArray())
         ->assertCreated();
 
     $this->assertDatabaseHas('posts', [
-        'title' => $data['title'],
-        'category_id' => $data['category_id'],
+        'title' => $post->title,
+        'category_id' => $post->category_id,
     ]);
 });
 
@@ -150,15 +150,15 @@ it('can show a specific post', function (): void {
 
 it('can update a post', function (): void {
     $post = Post::factory()->create();
-    $data = Post::factory()->make()->toArray();
+    $newPost = Post::factory()->make();
 
-    $this->putJson(action([PostController::class, 'update'], $post), $data)
+    $this->putJson(action([PostController::class, 'update'], $post), $newPost->toArray())
         ->assertOk();
 
     $this->assertDatabaseHas('posts', [
         'id' => $post->id,
-        'title' => $data['title'],
-        'category_id' => $data['category_id'],
+        'title' => $newPost->title,
+        'category_id' => $newPost->category_id,
     ]);
 });
 

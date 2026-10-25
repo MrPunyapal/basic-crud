@@ -36,7 +36,7 @@ test('can only see published posts', function (): void {
         ->assertOk()
         ->assertViewIs('posts.index')
         ->assertSessionHas('posts.index.previous.query', ['published' => true])
-        ->assertViewHas('posts', fn (LengthAwarePaginator $posts): bool => $posts->where('published_at', '>=', now())->count() === 0);
+        ->assertViewHas('posts', fn (LengthAwarePaginator $posts): bool => $posts->where('published_at', '>=', now())->isEmpty());
 });
 
 test('can see posts sorted by title', function (string $direction): void {

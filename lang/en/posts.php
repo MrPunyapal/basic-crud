@@ -10,6 +10,8 @@ return [
         'Image' => 'Image',
         'Category' => 'Category',
         'Select a Category' => 'Select a Category',
+        'Status' => 'Status',
+        'Select a Status' => 'Select a Status',
         'Description' => 'Description',
         'Tags' => 'Tags',
         'Featured' => 'Featured',
@@ -28,6 +30,10 @@ return [
         'Edit Post' => 'Edit Post',
         'Update Post' => 'Update Post',
         'Cancel' => 'Cancel',
+    ],
+    'status' => [
+        'Draft' => 'Draft',
+        'Published' => 'Published',
     ],
     'show' => [
         'Not Featured' => 'Not Featured',

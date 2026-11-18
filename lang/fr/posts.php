@@ -10,6 +10,8 @@ return [
         'Image' => 'Image',
         'Category' => 'Catégorie',
         'Select a Category' => 'Sélectionnez une catégorie',
+        'Status' => 'Statut',
+        'Select a Status' => 'Sélectionnez un statut',
         'Description' => 'Description',
         'Tags' => 'Tags',
         'Featured' => 'En vedette',
@@ -28,6 +30,10 @@ return [
         'Edit Post' => 'Modifier l\'article',
         'Update Post' => 'Mettre à jour l\'article',
         'Cancel' => 'Annuler',
+    ],
+    'status' => [
+        'Draft' => 'Brouillon',
+        'Published' => 'Publié',
     ],
     'show' => [
         'Not Featured' => 'Pas en vedette',
